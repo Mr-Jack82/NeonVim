@@ -95,7 +95,7 @@ check_requirements() {
     info "Checking requirements"
     if hash "nvim" >/dev/null; then
         info "Neovim version needs to be v0.5.0 or above"
-        print_with_color "$YELLOW" "Your Neovim version is: $(nvim --version | sed '1q' | awk '{print $2}')\n"
+        print_with_color "$YELLOW" "Your Neovim version is: $(nvim --version | sed '1q' | awk '{print $2}')"
     else
         error "Check requirements: nvim"
         exit 0
