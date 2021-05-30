@@ -22,7 +22,7 @@ warn() {
     printf "${BOLD}${YELLOW}[⚠] %s${NORMAL}\n" "$@" >&2
 }
 
-succces() {
+success() {
     printf "${BOLD}${GREEN}[✔] %s${NORMAL}\n" "$@" >&2
 }
 
@@ -41,7 +41,7 @@ install_packer() {
     info "Install packer.nvim"
     git clone https://github.com/wbthomason/packer.nvim \
         ~/.local/share/nvim/site/pack/packer/start/packer.nvim >/dev/null 2>&1
-    succces "packer.nvim installation done"
+    success "packer.nvim installation done"
 }
 
 backup_nvim() {
@@ -54,9 +54,11 @@ backup_nvim() {
 fetch_repo() {
     backup_nvim
     info "Cloning NeonVim configuration"
-    git clone https://github.com/rafamadriz/NeonVim.git "$HOME/.config/nvim" >/dev/null 2>&1
-    if ! $?; then
+    if git clone https://github.com/rafamadriz/NeonVim.git "$HOME/.config/nvim" >/dev/null 2>&1; then
         success "Successfully clone"
+        info "Installing plugins"
+        nvim --headless +PackerSyncc +qall
+        success "Plugins installed"
     else
         error "Failed to clone"
         exit 0
@@ -72,7 +74,7 @@ uninstall() {
         warn "Backup directory for old nvim configuration doesn't exist"
         while true; do
             # (1) prompt user, and read command line argument
-            print_with_color "%sDo you want to remove NeonVim configuration ?[y/n] ${NORMAL}" "${YELLOW}"
+            print_with_color "Do you want to remove NeonVim configuration ?[y/n] ${NORMAL}" "${YELLOW}"
             read -r answer
 
             # (2) handle the input we were given
@@ -99,17 +101,17 @@ check_requirements() {
         exit 0
     fi
     if hash "node" >/dev/null; then
-        succces "Check requirements : node"
+        success "Check requirements : node"
     else
         warn "Check requirements : node (optional, required to use LSP)"
     fi
     if hash "npm" >/dev/null; then
-        succces "Check requirements : npm"
+        success "Check requirements : npm"
     else
         warn "Check requirements : npm (optional, required to use LSP)"
     fi
     if hash "pip3" >/dev/null; then
-        succces "Check requirements : pip3"
+        success "Check requirements : pip3"
     else
         warn "Check requirements : pip3 (optional)"
     fi
