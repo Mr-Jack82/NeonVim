@@ -61,7 +61,7 @@ local opts = {
 local mappings = {
     ["<leader>"] = {
         ["<space>"] = "find file in project",
-        ["/"] = {"<cmd>Telescope live_grep<cr>", "search project"},
+        ["/"] = {"<cmd>Telescope live_grep theme=get_ivy<cr>", "search project"},
         ["e"] = "explorer",
         ["u"] = "undotree",
         h = {name = "help", v = "vim help", m = "man pages"},
