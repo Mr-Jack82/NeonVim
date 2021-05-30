@@ -124,12 +124,13 @@ main() {
             uninstall
             exit 0
             ;;
-        --checkRequirements | -c)
+        --check-requirements | -c)
             check_requirements
             exit 0
             ;;
         --install | -i)
             need_cmd 'git'
+            check_requirements
             install_packer
             fetch_repo
             exit 0
@@ -137,6 +138,7 @@ main() {
         esac
     else
         need_cmd 'git'
+        check_requirements
         install_packer
         fetch_repo
     fi
