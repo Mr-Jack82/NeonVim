@@ -27,7 +27,7 @@ success() {
 }
 
 print_with_color() {
-    printf '%b\n' "$1$2$NORMAL"
+    printf '%b' "$1$2$NORMAL"
 }
 
 need_cmd() {
