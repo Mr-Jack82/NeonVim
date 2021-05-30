@@ -57,7 +57,7 @@ fetch_repo() {
     if git clone https://github.com/rafamadriz/NeonVim.git "$HOME/.config/nvim" >/dev/null 2>&1; then
         success "Successfully clone"
         info "Installing plugins"
-        nvim --headless +PackerSyncc +qall
+        nvim --headless +PackerSync +qall
         success "Plugins installed"
     else
         error "Failed to clone"
@@ -73,8 +73,8 @@ uninstall() {
     else
         warn "Backup directory for old nvim configuration doesn't exist"
         while true; do
-            # (1) prompt user, and read command line argument
             print_with_color "Do you want to remove NeonVim configuration ?[y/n] ${NORMAL}" "${YELLOW}"
+            # (1) prompt user, and read command line argument
             read -r answer
 
             # (2) handle the input we were given
