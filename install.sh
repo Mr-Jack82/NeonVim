@@ -62,9 +62,7 @@ install() {
     info "Cloning NeonVim configuration"
     if git clone https://github.com/rafamadriz/NeonVim.git "$HOME/.config/nvim" >/dev/null 2>&1; then
         success "Successfully clone"
-        info "Installing plugins"
-        nvim --headless +PackerSync +qall
-        success "Plugins installed"
+        nvim +PackerSync
     else
         error "Failed to clone"
         exit 0
