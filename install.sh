@@ -48,15 +48,17 @@ install_packer() {
     fi
 }
 
-backup_nvim() {
+check_nvim_config() {
     if [ -d "$HOME/.config/nvim" ]; then
-        info "Backing up nvim config"
-        mv "$HOME/.config/nvim" "$HOME/.config/nvim_back"
+        error "First backup your nvim folder located at $HOME/.config/nvim"
+        info "You can backup your nvim configuration by executing the following command:"
+        print_with_color "$YELLOW" "\tmv ~/.config/nvim ~/.config/nvim_back"
+        exit 0
     fi
 }
 
 install() {
-    backup_nvim
+    check_nvim_config
     info "Cloning NeonVim configuration"
     if git clone https://github.com/rafamadriz/NeonVim.git "$HOME/.config/nvim" >/dev/null 2>&1; then
         success "Successfully clone"
@@ -66,32 +68,6 @@ install() {
     else
         error "Failed to clone"
         exit 0
-    fi
-}
-
-uninstall() {
-    if [ -d "$HOME/.config/nvim_back" ]; then
-        rm -rf "$HOME/.config/nvim" >/dev/null
-        mv "$HOME/.config/nvim_back" "$HOME/.config/nvim"
-        success "Uninstall NeonVim"
-    else
-        warn "Backup directory for old nvim configuration doesn't exist"
-        while true; do
-            printf "%sDo you want to remove NeonVim configuration ?[y/n] ${NORMAL}" "${YELLOW}"
-            # (1) prompt user, and read command line argument
-            read -r answer
-
-            # (2) handle the input we were given
-            case $answer in
-            [yY]*)
-                rm -rf "$HOME/.config/nvim" >/dev/null
-                success "Uninstall NeonVim"
-                break
-                ;;
-            [nN]*) exit 0 ;;
-            *) error "Dude, just enter Y or N, please." ;;
-            esac
-        done
     fi
 }
 
@@ -105,29 +81,25 @@ check_requirements() {
         exit 0
     fi
     if hash "node" >/dev/null; then
-        success "Check requirements : node"
+        success "Check requirements: node"
     else
-        warn "Check requirements : node (optional, required to use LSP)"
+        warn "Check requirements: node (optional, required to use LSP)"
     fi
     if hash "npm" >/dev/null; then
-        success "Check requirements : npm"
+        success "Check requirements: npm"
     else
-        warn "Check requirements : npm (optional, required to use LSP)"
+        warn "Check requirements: npm (optional, required to use LSP)"
     fi
     if hash "pip3" >/dev/null; then
-        success "Check requirements : pip3"
+        success "Check requirements: pip3"
     else
-        warn "Check requirements : pip3 (optional)"
+        warn "Check requirements: pip3 (optional)"
     fi
 }
 
 main() {
     if [ $# -gt 0 ]; then
         case $1 in
-        --uninstall | -u)
-            uninstall
-            exit 0
-            ;;
         --check-requirements | -c)
             check_requirements
             exit 0
