@@ -39,9 +39,13 @@ need_cmd() {
 
 install_packer() {
     info "Install packer.nvim"
-    git clone https://github.com/wbthomason/packer.nvim \
-        ~/.local/share/nvim/site/pack/packer/start/packer.nvim >/dev/null 2>&1
-    success "packer.nvim installation done"
+    pack_path="$HOME/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    if [ ! -d "$pack_path" ]; then
+        git clone https://github.com/wbthomason/packer.nvim "$pack_path" >/dev/null 2>&1
+        success "packer.nvim installation done"
+    else
+        info "packer.nvim is already installed"
+    fi
 }
 
 backup_nvim() {
@@ -73,7 +77,7 @@ uninstall() {
     else
         warn "Backup directory for old nvim configuration doesn't exist"
         while true; do
-            print_with_color "Do you want to remove NeonVim configuration ?[y/n] ${NORMAL}" "${YELLOW}"
+            printf "%sDo you want to remove NeonVim configuration ?[y/n] ${NORMAL}" "${YELLOW}"
             # (1) prompt user, and read command line argument
             read -r answer
 
