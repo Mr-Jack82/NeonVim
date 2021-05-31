@@ -47,11 +47,11 @@ install_packer() {
 backup_nvim() {
     if [ -d "$HOME/.config/nvim" ]; then
         info "Backing up nvim config"
-        mv "$HOME/.config/nvim" "$HOME/.config/nvim_bak"
+        mv "$HOME/.config/nvim" "$HOME/.config/nvim_back"
     fi
 }
 
-fetch_repo() {
+install() {
     backup_nvim
     info "Cloning NeonVim configuration"
     if git clone https://github.com/rafamadriz/NeonVim.git "$HOME/.config/nvim" >/dev/null 2>&1; then
@@ -132,7 +132,7 @@ main() {
             need_cmd 'git'
             check_requirements
             install_packer
-            fetch_repo
+            install
             exit 0
             ;;
         esac
@@ -140,7 +140,7 @@ main() {
         need_cmd 'git'
         check_requirements
         install_packer
-        fetch_repo
+        install
     fi
 }
 

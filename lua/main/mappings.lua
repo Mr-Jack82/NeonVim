@@ -95,6 +95,7 @@ as.map("n", "<leader>w+", ":resize +15<CR>") -- increase height
 
 -- Git
 as.map("n", "<F5>", ":lua require('utils.extra').lazygit_toggle()<CR>") -- lazygit
+as.map("n", "<leader>gg", ":Git<CR>") -- Git
 as.map("n", "<leader>ga", ":Git add %<CR>") -- add current file
 as.map("n", "<leader>gd", ":Git diff %<CR>") -- show diff
 as.map("n", "<leader>gC", ":Git commit %<CR>") -- commit

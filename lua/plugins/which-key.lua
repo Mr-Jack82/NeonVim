@@ -119,6 +119,7 @@ local mappings = {
             name = "git",
             ["]"] = "next hunk",
             ["["] = "previous hunk",
+            g = "Git",
             a = "add current file",
             d = "diff show",
             C = "commit changes",
