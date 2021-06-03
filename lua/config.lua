@@ -27,7 +27,6 @@ g.neon_colorscheme = "neon"
 g.neon_colorscheme_style = "doom"
 g.neon_statusline = "classic"
 g.neon_statusline_color = "neon"
-g.neon_rainbow_parentheses = true
 
 -- ================
 ---     LSP     ---
@@ -52,6 +51,7 @@ g.neon_compe_sources_blacklist = {}
 --- Treesitter ---
 -- ===============
 g.neon_treesitter_enabled = true
+g.neon_rainbow_parentheses = true
 g.neon_treesitter_parsers = {
     "javascript",
     "typescript",
