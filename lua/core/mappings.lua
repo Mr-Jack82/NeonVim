@@ -66,7 +66,7 @@ as.map("n", "S", ":HopChar2<CR>", { noremap = false, silent = false })
 -----------------------------------------------------------------------------//
 -- File manager {{{1
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>e", ":NvimTreeToggle<CR>")
+as.map("n", "<leader>n", ":NvimTreeToggle<CR>")
 -- change directory to current file
 as.map(
     "n",
@@ -225,7 +225,7 @@ as.map("n", "<leader>r.", ":NvimTreeFindFile<CR>")
 as.map("n", "<leader>rf", ":Format<CR>")
 as.map("v", "<leader>f", ":Format<CR>")
 as.map("n", "<leader>re", ":NvimTreetoggle<CR>")
-as.map("n", "<leader>ru", ":UndotreeToggle<CR>")
+as.map("n", "<leader>u", ":UndotreeToggle<CR>")
 as.map("n", "<leader>rn", ":vsp ~/.config/nvim/lua/config.lua<CR>")
 as.map("n", "<leader>rca", ":ColorizerAttachToBuffer<CR>")
 as.map("n", "<leader>rct", ":ColorizerToggle<CR>")
