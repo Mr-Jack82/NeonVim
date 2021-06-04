@@ -99,9 +99,9 @@ as.map("n", "<leader>bS", ":silent! wa<CR>") -- save all buffers
 as.map("n", "<leader>bq", ":lua require'core.util'.delete_buffer()<CR>") -- quit buffer
 as.map("n", "<leader>bQ", [[<cmd>w <bar> %bd <bar> e#<CR>]]) -- quit all buffers but current
 as.map("n", "<leader>b%", ":luafile %<CR>", { silent = false }) -- source buffer
-as.map("n", "<leader>bh", ":noh<CR>") -- No highlight
-as.map("n", "<leader>b]", ":bn<CR>") -- buffer next
-as.map("n", "<leader>b[", ":bp<CR>") -- buffer previous
+as.map("n", "<Esc>", ":nohlsearch<CR>") -- No highlight
+as.map("n", "<leader>b]", ":bnext<CR>") -- buffer next
+as.map("n", "<leader>b[", ":bprevious<CR>") -- buffer previous
 as.map("n", "<leader>bn", [[:enew<CR>]], { silent = false }) -- new buffer
 as.map("n", "<leader>bf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], { silent = false }) -- new file
 as.map("n", "<leader>bv", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], { silent = false }) -- new split
