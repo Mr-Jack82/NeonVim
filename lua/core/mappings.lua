@@ -13,7 +13,12 @@ NOTE: https://github.com/monkoose/neovim-setup/blob/779fe63f3fb435e8845258908032
 TODO: Refactor whenever https://github.com/neovim/neovim/pull/13823 gets merged
 ]]
 -----------------------------------------------------------------------------//
-vim.g.mapleader = " "
+-- Set mapleader to comma ','
+vim.g.mapleader = ","
+
+-- Repeat letest f, t, F or T in opposite direction
+as.map("n", "'", ",")
+
 -----------------------------------------------------------------------------//
 -- Basics {{{1
 -----------------------------------------------------------------------------//
