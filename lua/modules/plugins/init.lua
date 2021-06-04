@@ -206,6 +206,15 @@ local pack_use = function()
             require("modules.plugins.statusline").config()
         end,
     }
+    use "rafamadriz/themes.nvim"
+    use { "kevinhwang91/nvim-bqf", ft = "qf" }
+    use {
+        "airblade/vim-rooter",
+        event = "BufRead",
+        config = "vim.g.rooter_silent_chdir = 1",
+    }
+    use "morhetz/gruvbox"
+    use { "dracula/vim", as = "dracula" }
     use {
         "goolord/alpha-nvim",
         config = function()
