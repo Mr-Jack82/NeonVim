@@ -214,4 +214,8 @@ as.nvim_set_au(
 )
 as.check_and_set(vim.g.code_format_on_save, "BufWritePost", "*", "silent FormatWrite")
 -- }}}
+
+-- Fix spelling errors
+vim.cmd("iabbrev cosnt const")
+
 -- vim:foldmethod=marker
