@@ -252,6 +252,32 @@ local pack_use = function()
         end,
     }
     use {
+        "lukas-reineke/indent-blankline.nvim",
+        cond = function()
+            return as._default(vim.g.neon_indent_guides)
+        end,
+        config = function()
+            require "plugins.indent-guides"
+        end,
+    }
+    -----------------------------------------------------------------------------//
+    -- my plugins
+    -----------------------------------------------------------------------------//
+    use {
+        "junegunn/vim-easy-align",
+        "editorconfig/editorconfig-vim",
+        "tpope/vim-unimpaired",
+        "tpope/vim-surround",
+        "tpope/vim-repeat",
+        "easymotion/vim-easymotion",
+        "907th/vim-auto-save",
+        {
+        "andymass/vim-matchup",
+        ft = {'html', 'javascript', 'json', 'xml'}
+        }
+    }
+
+    use {
         "mbbill/undotree",
         cmd = "UndotreeToggle",
         config = "vim.g.undotree_WindowLayout = 2",
