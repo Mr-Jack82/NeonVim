@@ -43,6 +43,10 @@ as.map("n", "j", 'v:count == 0 ? "gj" : "j"', { expr = true })
 -- same for visual mode
 as.map("x", "k", '(v:count == 0 && mode() !=# "V") ? "gk" : "k"', { expr = true })
 as.map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', { expr = true })
+
+-- Packer.nvim shortcut to update all plugins
+vim.cmd[[command! PU PackerUpdate]]
+
 -- Automatically jump to the end of pasted text
 as.map("v", "y", "y`]")
 as.map("v", "p", "p`]")
