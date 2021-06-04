@@ -218,4 +218,7 @@ as.check_and_set(vim.g.code_format_on_save, "BufWritePost", "*", "silent FormatW
 -- Fix spelling errors
 vim.cmd("iabbrev cosnt const")
 
+-- Enable syntax highlight for Lua in .vim files
+vim.g.vimsyn_embed = "l"
+
 -- vim:foldmethod=marker
