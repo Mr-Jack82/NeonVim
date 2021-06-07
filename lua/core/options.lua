@@ -63,6 +63,7 @@ vim.opt.confirm = true -- make vim prompt to save before doing destructive thing
 vim.opt.fileencoding = "utf-8"
 vim.opt.showmode = false
 vim.opt.textwidth = 80
+vim.opt.colorcolumn = "81"
 -- }}}
 -----------------------------------------------------------------------------//
 -- List Chars {{{1
