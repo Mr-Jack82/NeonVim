@@ -63,6 +63,43 @@ as.map("v", ">", ">gv")
 as.map("n", "c.", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- Hop
 as.map("n", "S", ":HopChar2<CR>", { noremap = false, silent = false })
+
+-- Allows you to save files you opened without write permissions via sudo
+vim.cmd[[cabbrev w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!]]
+
+-- Enable soft wraping text
+vim.cmd[[command! -nargs=* Wrap set wrap linebreak nolist]]
+
+-- easy expansion of the active file directory
+as.map("c", "%%", "<C-r>=fnameescape(expand('%:h')).'/'<CR>", {silent = false})
+as.map("", "<leader>ew", ":e %%", {noremap = false, silent = false})
+as.map("", "<leader>es", ":sp %%", {noremap = false, silent = false})
+as.map("", "<leader>ev", ":vsp %%", {noremap = false, silent = false})
+as.map("", "<leader>et", ":tabe %%", {noremap = false, silent = false})
+
+-- Set working directory to the current buffer's directory
+as.map("n", "cd", ":lcd %:p:h<bar>pwd<CR>", {silent = false})
+as.map("n", "cu", "..<bar>pwd<CR>", {silent = false})
+
+-- Make {motion} text uppercase in INSERT mode.
+as.map("!", "<C-f>", "<Esc>gUiw`]a", {noremap = false})
+
+-- Easier way to use of :ls command
+as.map("n", "<leader>l", ":ls<CR>:b<Space>", {silent = false})
+
+-- Automatically jump to the end of pasted text
+as.map("v", "y", "y`]")
+as.map("v", "p", "p`]")
+as.map("n", "p", "p`]")
+
+-- Keep the flags from the previous substitute command for normal and visual mode
+as.map("n", "&", ":&&<CR>", {silent = false})
+as.map("x", "&", ":&&<CR>", {silent = false})
+
+-- Search mappings: These will make it so that going to the next one in a
+-- search will center on the line it's found in.
+as.map("n", "n", "nzzzv")
+as.map("n", "N", "Nzzzv")
 -----------------------------------------------------------------------------//
 -- File manager {{{1
 -----------------------------------------------------------------------------//
