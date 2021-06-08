@@ -1,4 +1,0 @@
--- undotree
--- vim.g.undotree_WindowLayout = 2
--- Colorizer
--- Git signs
