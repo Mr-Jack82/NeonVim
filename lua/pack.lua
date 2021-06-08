@@ -3,7 +3,9 @@ local pack_use = function()
     use "wbthomason/packer.nvim"
     -- Themes
     use "rafamadriz/themes.nvim"
+    -----------------------------------------------------------------------------//
     -- LSP, Autocomplete and snippets
+    -----------------------------------------------------------------------------//
     use "kabouzeid/nvim-lspinstall"
     use {"neovim/nvim-lspconfig", config = "require('lsp')"}
     use {"rafamadriz/friendly-snippets", after = "vim-vsnip"}
@@ -19,7 +21,9 @@ local pack_use = function()
         event = "InsertEnter *",
         config = "require('plugins.completion')"
     }
+    -----------------------------------------------------------------------------//
     -- Telescope
+    -----------------------------------------------------------------------------//
     use {
         "nvim-telescope/telescope.nvim",
         requires = {
@@ -29,7 +33,9 @@ local pack_use = function()
         },
         config = "require('plugins.telescope')"
     }
+    -----------------------------------------------------------------------------//
     -- Utils
+    -----------------------------------------------------------------------------//
     use {
         "tpope/vim-fugitive",
         "kevinhwang91/nvim-bqf",
@@ -38,7 +44,9 @@ local pack_use = function()
         {"folke/which-key.nvim", config = "require('plugins.which-key')"},
         {"kyazdani42/nvim-tree.lua", config = "require('plugins.nvim-tree')"}
     }
+    -----------------------------------------------------------------------------//
     -- General plugins
+    -----------------------------------------------------------------------------//
     use {
         "sbdchd/neoformat",
         "kyazdani42/nvim-web-devicons",
@@ -71,7 +79,9 @@ local pack_use = function()
         branch = "lua",
         config = "require('plugins.indent-guides')"
     }
+    -----------------------------------------------------------------------------//
     -- plugins with config
+    -----------------------------------------------------------------------------//
     use {
         "mbbill/undotree",
         cmd = "UndotreeToggle",
