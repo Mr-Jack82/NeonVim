@@ -59,4 +59,4 @@ g.neon_compe_sources_blacklist = {}
 -----------------------------------------------------------------------------//
 g.neon_treesitter_enabled = true
 g.neon_rainbow_parentheses = true
-g.neon_treesitter_parsers = {"all"}
+g.neon_treesitter_parsers = "all"
