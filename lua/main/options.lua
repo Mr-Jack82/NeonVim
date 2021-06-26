@@ -58,10 +58,9 @@ vim.opt.fileencoding = "utf-8"
 vim.opt.showmode = false
 -- }}}
 -- List Chars {{{
-vim.opt.list = true
-vim.opt.listchars = {trail = "•"}
 if as._default(vim.g.neon_listchars, false) == true then
-    vim.opt.listchars = {eol = "↴", tab = "│⋅", extends = "❯", precedes = "❮", nbsp = "_", space = "⋅"}
+    vim.opt.list = true
+    vim.opt.listchars = {trail = "•", eol = "↴", tab = "│⋅", extends = "❯", precedes = "❮", nbsp = "_", space = " "}
 end
 -- }}}
 -- Indentation {{{
