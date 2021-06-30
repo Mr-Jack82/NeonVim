@@ -7,7 +7,6 @@ end
 
 as.nvim_set_au("BufWritePost", "pack.lua", "PackerCompile")
 as.nvim_set_au("BufNewFile,BufRead", "*.ejs", "set filetype=html")
-as.nvim_set_au("FileType", "markdown", "setlocal wrap spell")
 as.nvim_set_au("FileType", "*", "setlocal formatoptions-=c formatoptions-=r formatoptions-=o")
 as.nvim_set_au("FileType", "toggleterm", "setlocal nonumber norelativenumber")
 as.nvim_set_au("TermOpen", "*", [[tnoremap <buffer> <Esc> <c-\><c-n>]])

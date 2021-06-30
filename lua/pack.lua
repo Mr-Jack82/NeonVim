@@ -40,7 +40,6 @@ local pack_use = function()
         "tpope/vim-fugitive",
         "kevinhwang91/nvim-bqf",
         "machakann/vim-sandwich",
-        {"b3nj5m1n/kommentary", keys = {"gcc", "gc"}},
         {"folke/which-key.nvim", config = "require('plugins.which-key')"},
         {"kyazdani42/nvim-tree.lua", config = "require('plugins.nvim-tree')"}
     }
@@ -86,6 +85,18 @@ local pack_use = function()
         "mbbill/undotree",
         cmd = "UndotreeToggle",
         config = "vim.g.undotree_WindowLayout = 2"
+    }
+    use {
+        "b3nj5m1n/kommentary",
+        keys = {"gcc", "gc"},
+        config = function()
+            require("kommentary.config").configure_language(
+                "default",
+                {
+                    prefer_single_line_comments = true
+                }
+            )
+        end
     }
     use {
         "folke/zen-mode.nvim",
