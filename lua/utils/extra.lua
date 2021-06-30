@@ -29,6 +29,15 @@ function M.search_nvim()
     )
 end
 
+-- automatically creates missing directories on saving a file
+function M.mkdir()
+    local dir = vim.fn.expand("%:p:h")
+
+    if vim.fn.isdirectory(dir) == 0 then
+        vim.fn.mkdir(dir, "p")
+    end
+end
+
 -- LSP
 local t = require("telescope.themes")
 local a = require("telescope.builtin")
