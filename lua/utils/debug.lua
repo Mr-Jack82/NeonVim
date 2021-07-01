@@ -12,7 +12,7 @@ local function load_plugins()
         {
             function()
                 use "wbthomason/packer.nvim"
-                -- Put plugins to debug here:
+                -- Put plugins to install here:
             end,
             config = {package_root = "/tmp/nvim/site/pack"}
         }
