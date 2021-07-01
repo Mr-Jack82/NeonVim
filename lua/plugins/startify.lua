@@ -27,7 +27,7 @@ vim.g.startify_padding_left = 3
 -- Sort sessions by modification time
 vim.g.startify_session_sort = 1
 -- Header
-local posi = vim.g.startify_header_position
+local posi = vim.g.startify_header_position or "center"
 if vim.g.startify_header_ascii == "cowsay" then
     vim.g.startify_custom_header = "startify#" .. posi .. "(startify#fortune#cowsay())"
 else
