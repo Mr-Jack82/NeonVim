@@ -12,6 +12,7 @@ vim.g.nvim_tree_lsp_diagnostics = 1
 vim.g.nvim_tree_quit_on_open = 0
 vim.g.nvim_tree_tab_open = 0
 vim.g.nvim_tree_update_cwd = 1
+vim.g.nvim_tree_disable_window_picker = 1
 
 vim.g.nvim_tree_icons = {
     git = {unstaged = "✗", staged = "✓", unmerged = "", renamed = "➜", untracked = "", ignored = "◌"},
