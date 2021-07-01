@@ -27,4 +27,3 @@ check_and_set(
     "*",
     [[try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry]]
 )
-as.nvim_set_au("BufWritePre", "*", "lua require'utils.extra'.mkdir()")
