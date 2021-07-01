@@ -1,14 +1,5 @@
-vim.g.header_ascii = {
-    "     ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗ ",
-    "     ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║ ",
-    "     ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║ ",
-    "     ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║ ",
-    "     ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║ ",
-    "     ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝ "
-}
-
 vim.api.nvim_exec(
-    "let startify_lists = [ { 'type': 'files',     'header': ['   Files'] }, { 'type': 'sessions',  'header': ['   Sessions'] },    { 'type': 'bookmarks', 'header': ['   Bookmarks'] },                                                                   ]",
+    "let startify_lists = [ { 'type': 'sessions',  'header': ['   Sessions'] }, { 'type': 'files', 'header': ['   Recent Files'] }, { 'type': 'bookmarks', 'header': ['   Bookmarks'] }]",
     true
 )
 
@@ -17,9 +8,7 @@ vim.api.nvim_exec(
     true
 )
 
-vim.g.startify_session_dir = vim.fn.stdpath("data") .. "/startify_session"
-
--- start Vim in a directory that contains a Session.vim, that session will be loaded automatically
+-- if start neovim in a directory that contains a Session.vim, that session will be loaded automatically
 vim.g.startify_session_autoload = 1
 -- Let Startify take care of buffers
 vim.g.startify_session_delete_buffers = 1
@@ -32,8 +21,15 @@ vim.g.startify_session_persistence = 1
 -- Get rid of empy buffer on quit
 vim.g.startify_enable_special = 0
 -- The number of files to list.
-vim.g.startify_files_number = 16
+vim.g.startify_files_number = 10
 -- The number of spaces used for left padding.
-vim.g.startify_padding_left = 6
+vim.g.startify_padding_left = 3
+-- Sort sessions by modification time
+vim.g.startify_session_sort = 1
 -- Header
-vim.g.startify_custom_header = "startify#center(g:header_ascii)"
+local posi = vim.g.startify_header_position
+if vim.g.startify_header_ascii == "cowsay" then
+    vim.g.startify_custom_header = "startify#" .. posi .. "(startify#fortune#cowsay())"
+else
+    vim.g.startify_custom_header = "startify#" .. posi .. "(g:startify_header_ascii)"
+end

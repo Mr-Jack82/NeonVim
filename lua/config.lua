@@ -60,3 +60,17 @@ g.neon_compe_sources_blacklist = {}
 g.neon_treesitter_enabled = true
 g.neon_rainbow_parentheses = true
 g.neon_treesitter_parsers = "all"
+
+-----------------------------------------------------------------------------//
+-- Startify
+-----------------------------------------------------------------------------//
+-- options: center, pad
+g.startify_header_position = "center"
+-- g.startify_header_ascii = "cowsay" for random quote and cow.
+g.startify_header_ascii = {
+    "Y88b Y88                           Y8b Y88888P ,e,            ",
+    " Y88b Y8  ,e e,   e88 88e  888 8e   Y8b Y888P   '  888 888 8e ",
+    "b Y88b Y d88 88b d888 888b 888 88b   Y8b Y8P   888 888 888 88b",
+    "8b Y88b  888   , Y888 888P 888 888    Y8b Y    888 888 888 888",
+    "88b Y88b  'YeeP'  '88 88'  888 888     Y8P     888 888 888 888"
+}
