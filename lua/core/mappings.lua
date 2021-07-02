@@ -44,10 +44,6 @@ as.map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', { expr = true 
 -- Packer.nvim shortcut to update all plugins
 vim.cmd[[command! PU PackerUpdate]]
 
--- Automatically jump to the end of pasted text
-as.map("v", "y", "y`]")
-as.map("v", "p", "p`]")
-as.map("n", "p", "p`]")
 -- Select last pasted text
 as.map("n", "gp", "'`[' . strpart(getregtype(), 0, 1) . '`]'", { expr = true })
 -- Beginning and end of line in `:` command mode
