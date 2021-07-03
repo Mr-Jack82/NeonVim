@@ -1,63 +1,197 @@
 local pack_use = function()
     local use = require("packer").use
     use "wbthomason/packer.nvim"
-    -- Themes
-    use "rafamadriz/themes.nvim"
+    -----------------------------------------------------------------------------//
+    -- Required by others
+    -----------------------------------------------------------------------------//
+    use {"nvim-lua/plenary.nvim", module = "plenary"}
+    use {"nvim-lua/popup.nvim", module = "popup"}
+    use {
+        "kyazdani42/nvim-web-devicons",
+        module = "nvim-web-devicons",
+        config = function()
+            require("nvim-web-devicons").setup({default = true})
+        end
+    }
     -----------------------------------------------------------------------------//
     -- LSP, Autocomplete and snippets
     -----------------------------------------------------------------------------//
-    use "kabouzeid/nvim-lspinstall"
-    use {"neovim/nvim-lspconfig", config = "require('lsp')"}
-    use {"rafamadriz/friendly-snippets", after = "vim-vsnip"}
+    use {
+        "neovim/nvim-lspconfig",
+        requires = "kabouzeid/nvim-lspinstall",
+        config = function()
+            require "lsp"
+        end
+    }
     use {
         "hrsh7th/nvim-compe",
-        opt = true,
-        event = "InsertEnter *",
-        config = "require('plugins.compe')"
+        event = "InsertEnter",
+        config = function()
+            require "plugins.completion".compe_config()
+        end
     }
     use {
         "hrsh7th/vim-vsnip",
-        opt = true,
-        event = "InsertEnter *",
-        config = "require('plugins.completion')"
+        event = "InsertEnter",
+        requires = {"rafamadriz/friendly-snippets", after = "vim-vsnip"},
+        config = function()
+            require "plugins.completion".vsnip_config()
+        end
+    }
+    use {
+        "windwp/nvim-autopairs",
+        after = "nvim-compe",
+        config = function()
+            require "plugins.completion".autopairs_config()
+        end
     }
     -----------------------------------------------------------------------------//
     -- Telescope
     -----------------------------------------------------------------------------//
     use {
         "nvim-telescope/telescope.nvim",
+        wants = {"plenary.nvim", "popup.nvim", "telescope-fzf-native.nvim"},
+        cmd = "Telescope",
         requires = {
-            "nvim-lua/popup.nvim",
-            "nvim-lua/plenary.nvim",
-            {"nvim-telescope/telescope-fzf-native.nvim", run = "make"}
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                opt = true,
+                run = "make"
+            }
         },
-        config = "require('plugins.telescope')"
+        config = function()
+            require "plugins.telescope"
+        end
+    }
+    -----------------------------------------------------------------------------//
+    -- Treesitter
+    -----------------------------------------------------------------------------//
+    use {
+        "nvim-treesitter/nvim-treesitter",
+        event = "BufRead",
+        run = ":TSUpdate",
+        config = function()
+            require "plugins.treesitter"
+        end
     }
     -----------------------------------------------------------------------------//
     -- Utils
     -----------------------------------------------------------------------------//
     use {
-        "tpope/vim-fugitive",
-        "kevinhwang91/nvim-bqf",
-        "machakann/vim-sandwich",
-        {"folke/which-key.nvim", config = "require('plugins.which-key')"},
-        {"kyazdani42/nvim-tree.lua", config = "require('plugins.nvim-tree')"}
+        "kyazdani42/nvim-tree.lua",
+        wants = "nvim-web-devicons",
+        cmd = {"NvimTreeToggle", "NvimTreeFindFile"},
+        config = function()
+            require "plugins.tree"
+        end
+    }
+    use {
+        "folke/which-key.nvim",
+        config = function()
+            require "plugins.which-key"
+        end
+    }
+    -----------------------------------------------------------------------------//
+    -- Comments and Surround
+    -----------------------------------------------------------------------------//
+    use {"machakann/vim-sandwich", keys = "s"}
+    use {
+        "b3nj5m1n/kommentary",
+        keys = {"gcc", "gc"},
+        config = function()
+            require("kommentary.config").configure_language(
+                "default",
+                {
+                    prefer_single_line_comments = true
+                }
+            )
+        end
+    }
+    -----------------------------------------------------------------------------//
+    -- Git
+    -----------------------------------------------------------------------------//
+    use {
+        "sindrets/diffview.nvim",
+        opt = true,
+        after = "neogit",
+        cmd = "DiffviewOpen",
+        config = function()
+            require "diffview".setup {
+                key_bindings = {
+                    disable_defaults = false, -- Disable the default key bindings
+                    view = {
+                        ["q"] = ":DiffviewClose<cr>"
+                    },
+                    file_panel = {
+                        ["q"] = ":DiffviewClose<cr>"
+                    }
+                }
+            }
+        end
+    }
+    use {
+        "TimUntersberger/neogit",
+        cmd = "Neogit",
+        wants = {"plenary.nvim", "diffview.nvim"},
+        config = function()
+            require "neogit".setup {
+                disable_context_highlighting = true,
+                integrations = {diffview = true},
+                signs = {
+                    -- { CLOSED, OPENED }
+                    section = {"", ""},
+                    item = {"", ""},
+                    hunk = {"", ""}
+                }
+            }
+        end
+    }
+    use {
+        "lewis6991/gitsigns.nvim",
+        event = "BufRead",
+        wants = "plenary.nvim",
+        config = function()
+            require("gitsigns").setup {
+                signs = {
+                    add = {hl = "GitSignsAdd", text = "┃"},
+                    change = {hl = "GitSignsChange", text = "┃"},
+                    delete = {hl = "GitSignsDelete", text = "契"},
+                    topdelete = {hl = "GitSignsDelete", text = "契"},
+                    changedelete = {hl = "GitSignsChange", text = "~"}
+                },
+                keymaps = {
+                    noremap = true,
+                    buffer = true
+                }
+            }
+        end
+    }
+    use {
+        "ruifm/gitlinker.nvim",
+        opt = true,
+        wants = "plenary.nvim",
+        keys = "<leader>gy",
+        config = function()
+            require "gitlinker".setup()
+        end
     }
     -----------------------------------------------------------------------------//
     -- General plugins
     -----------------------------------------------------------------------------//
+    use "rafamadriz/themes.nvim"
+    use {"sbdchd/neoformat", event = "BufRead"}
+    use {"kevinhwang91/nvim-bqf", ft = "qf"}
     use {
-        "sbdchd/neoformat",
-        "kyazdani42/nvim-web-devicons",
-        {"windwp/nvim-autopairs", opt = true},
-        {"p00f/nvim-ts-rainbow", after = "nvim-treesitter"},
-        {"mhinz/vim-startify", config = "require('plugins.startify')"},
-        {"rafamadriz/statusline", config = "require('plugins.statusline')"}
+        "mhinz/vim-startify",
+        config = function()
+            require "plugins.startify"
+        end
     }
     use {
-        "nvim-treesitter/nvim-treesitter",
-        run = ":TSUpdate",
-        config = "require('plugins.treesitter')"
+        "rafamadriz/statusline",
+        config = function()
+            require "plugins.statusline"
+        end
     }
     use {
         "turbio/bracey.vim",
@@ -75,31 +209,19 @@ local pack_use = function()
     }
     use {
         "lukas-reineke/indent-blankline.nvim",
-        branch = "lua",
-        config = "require('plugins.indent-guides')"
+        event = "BufReadPre",
+        config = function()
+            require "plugins.indent-guides"
+        end
     }
-    -----------------------------------------------------------------------------//
-    -- plugins with config
-    -----------------------------------------------------------------------------//
     use {
         "mbbill/undotree",
         cmd = "UndotreeToggle",
         config = "vim.g.undotree_WindowLayout = 2"
     }
     use {
-        "b3nj5m1n/kommentary",
-        keys = {"gcc", "gc"},
-        config = function()
-            require("kommentary.config").configure_language(
-                "default",
-                {
-                    prefer_single_line_comments = true
-                }
-            )
-        end
-    }
-    use {
         "folke/zen-mode.nvim",
+        cmd = "ZenMode",
         config = function()
             require("zen-mode").setup {
                 plugins = {
@@ -110,6 +232,7 @@ local pack_use = function()
     }
     use {
         "norcalli/nvim-colorizer.lua",
+        event = "BufRead",
         config = function()
             require "colorizer".setup(
                 {"*"},
@@ -125,56 +248,24 @@ local pack_use = function()
     }
     use {
         "akinsho/nvim-toggleterm.lua",
+        keys = "<A-t>",
+        cmd = "ToggleTerm",
         config = function()
             require "toggleterm".setup {
-                size = 20,
-                open_mapping = [[<a-t>]],
-                shade_filetypes = {},
-                shade_terminals = true,
-                shading_factor = "1",
-                start_in_insert = true,
-                persist_size = true,
-                direction = "horizontal"
-            }
-        end
-    }
-    use {
-        "lewis6991/gitsigns.nvim",
-        config = function()
-            require("gitsigns").setup {
-                signs = {
-                    add = {hl = "GitSignsAdd", text = "┃"},
-                    change = {hl = "GitSignsChange", text = "┃"},
-                    delete = {hl = "GitSignsDelete", text = "契"},
-                    topdelete = {hl = "GitSignsDelete", text = "契"},
-                    changedelete = {hl = "GitSignsChange", text = "~"}
-                },
-                numhl = false,
-                linehl = false,
-                keymaps = {
-                    noremap = true,
-                    buffer = true
-                },
-                watch_index = {
-                    interval = 1000
-                },
-                sign_priority = 6,
-                update_debounce = 200,
-                status_formatter = nil,
-                use_decoration_api = false
+                size = 16,
+                direction = "horizontal",
+                open_mapping = [[<a-t>]]
             }
         end
     }
 end
 
 local function load_plugins()
-    require("packer").startup(
-        {
-            function()
-                pack_use()
-            end
-        }
-    )
+    require("packer").startup {
+        function()
+            pack_use()
+        end
+    }
 end
 
 local fn = vim.fn

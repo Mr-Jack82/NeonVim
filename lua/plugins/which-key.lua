@@ -9,7 +9,7 @@ require("which-key").setup {
             suggestions = 20 -- how many suggestions should be shown in the list?
         },
         presets = {
-            operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+            operators = false, -- adds help for operators like d, y, ... and registers them for motion / text object completion
             motions = true, -- adds help for motions
             text_objects = true, -- help for text objects triggered after entering an operator
             windows = true, -- default bindings on <c-w>
@@ -61,10 +61,25 @@ local opts = {
 local mappings = {
     ["<leader>"] = {
         ["<space>"] = "find file in project",
-        ["/"] = {"<cmd>Telescope live_grep theme=get_ivy<cr>", "search project"},
+        ["/"] = "search in project",
         ["e"] = "explorer",
         ["u"] = "undotree",
-        h = {name = "help", v = "vim help", m = "man pages"},
+        h = {
+            name = "help",
+            v = "vim help",
+            m = "man pages",
+            t = "theme",
+            p = {
+                name = "plugins",
+                u = "update",
+                i = "install",
+                S = "sync",
+                c = "clean",
+                C = "compile",
+                s = "status",
+                h = "help packer"
+            }
+        },
         b = {
             name = "buffers",
             h = "no highlight",
@@ -73,9 +88,20 @@ local mappings = {
             S = "save all buffers",
             q = "quit buffer",
             Q = "quit all buffers but current",
+            n = "new buffer",
+            f = "new file",
+            v = "new file in split",
             ["]"] = "next buffer",
             ["["] = "previous buffer",
             ["%"] = "source file"
+        },
+        t = {
+            name = "tabs",
+            q = "quit tab",
+            n = "new tab",
+            f = "file in new tab",
+            ["["] = "previous tab",
+            ["]"] = "next tab"
         },
         w = {
             name = "windows",
@@ -102,43 +128,30 @@ local mappings = {
             C = "command history",
             c = "commands",
             s = "search history",
-            t = "theme",
             f = "file",
             g = "grep text",
             n = "nvim dotfiles",
             r = "recent files"
         },
-        n = {
-            name = "new",
-            f = "new file",
-            b = "new buffer",
-            s = "new file in a split",
-            t = "new file in tab"
-        },
         g = {
             name = "git",
             ["]"] = "next hunk",
             ["["] = "previous hunk",
-            g = "Git",
-            a = "add current file",
+            g = "Neogit",
             d = "diff show",
-            C = "commit changes",
-            i = "init",
-            l = "log",
-            b = "branches",
-            c = "commits",
+            L = "Neogit log",
+            b = "show branches",
+            c = "show commits",
             f = "files",
-            s = "status",
             p = "preview hunk",
-            L = "line blame",
-            B = "blame sidebar",
+            l = "blame toggle",
+            B = "blame line",
             r = "reset hunk",
             R = "reset buffer",
-            I = "reset buffer index",
-            t = "stage hunk",
-            T = "stage buffer",
+            s = "stage hunk",
+            S = "stage buffer",
             u = "undo last stage hunk",
-            P = "push"
+            y = "copy permalink"
         },
         l = {
             name = "LSP",
@@ -147,30 +160,26 @@ local mappings = {
         },
         s = {
             name = "session",
-            s = {"<cmd>SSave<cr>", "session save"},
-            c = {"<cmd>SClose<cr>", "session close"},
-            d = {"<cmd>SDelete<cr>", "session delete"},
-            l = {"<cmd>SLoad<cr>", "session load"},
-            r = {"<cmd>lua require('utils.extra').Reload()<cr>", "session reload"}
+            s = "session save",
+            q = "session quit",
+            d = "session delete",
+            l = "session load",
+            r = "session reload"
         },
         o = {
-            name = "open",
-            H = {"<cmd>Startify<cr>", "Home"},
-            t = {"<cmd>ToggleTerm<cr>", "terminal"},
-            f = {"<cmd>Telescope file_browser<cr>", "file browser"},
-            F = {"<cmd>NvimTreeFindFile<cr>", "find current file"},
-            e = {"<cmd>NvimTreetoggle<cr>", "explorer"},
-            u = {"<cmd>UndotreeToggle<cr>", "undotree"},
-            c = {"<cmd>vsp ~/.config/nvim/lua/config.lua<cr>", "neovim config"}
-        },
-        p = {
-            name = "plugins",
-            u = {"<cmd>PackerUpdate<cr>", "update"},
-            i = {"<cmd>PackerInstall<cr>", "install"},
-            S = {"<cmd>PackerSync<cr>", "sync"},
-            c = {"<cmd>PackerClean<cr>", "clean"},
-            C = {"<cmd>PackerCompile<cr>", "compile"},
-            s = {"<cmd>PackerStatus<cr>", "status"}
+            name = "open/run",
+            [","] = "Home",
+            t = "terminal",
+            b = "file browser",
+            f = "find current file",
+            e = "explorer",
+            u = "undotree",
+            n = "neovim config",
+            c = {
+                name = "colorizer",
+                a = "attach to buffer",
+                t = "toggle"
+            }
         },
         z = {
             name = "zen mode",
@@ -178,20 +187,13 @@ local mappings = {
             c = "centered",
             m = "minimalist",
             a = "ataraxis",
-            q = {"<cmd>close<cr>", "quit zen mode"}
+            q = "quit zen mode"
         }
     },
     ["g"] = {
         ["p"] = "select last pasted text",
         ["c"] = "comment text",
         ["cc"] = "comment line"
-    },
-    ["s"] = {
-        a = "add surrounding",
-        d = "delete surrounding",
-        db = "automatically seearch and delete",
-        r = "replace surrounding",
-        rb = "automatically search and select to replace"
     }
 }
 

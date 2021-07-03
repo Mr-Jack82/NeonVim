@@ -47,8 +47,8 @@ local function common_on_attach(client, bufnr)
     as.map("n", "<leader>lgh", ":lua vim.lsp.buf.hover()<CR>")
     as.map("n", "<leader>lgk", ":lua vim.lsp.buf.signature_help()<CR>")
     as.map("n", "<leader>lgi", ":lua vim.lsp.buf.implementation()<CR>")
-    as.map("n", "<leader>la", ":lua require('utils.extra').code_actions()<CR>")
-    as.map("n", "<leader>lA", ":lua require('utils.extra').range_code_actions()<CR>")
+    as.map("n", "<leader>la", ":Telescope lsp_code_actions theme=get_dropdown<CR>")
+    as.map("n", "<leader>lA", ":Telescope lsp_range_code_actions theme=get_dropdown<CR>")
     as.map("n", "<leader>ld", ":Telescope lsp_document_diagnostics<CR>")
     as.map("n", "<leader>lD", ":Telescope lsp_workspace_diagnostics<CR>")
     as.map("n", "<leader>lr", ":lua vim.lsp.buf.rename()<CR>")
@@ -71,7 +71,7 @@ local function common_on_attach(client, bufnr)
         "<c-n>",
         ":lua vim.lsp.diagnostic.goto_next({popup_opts = {border = as._lsp_borders(vim.g.neon_lsp_win_borders)}})<CR>"
     )
-    as.map("n", "<leader>l.s", [[:LspStop <C-R>=<CR>]], {silent = false})
+    as.map("n", "<leader>l,s", [[:LspStop <C-R>=<CR>]], {silent = false})
 
     as.nvim_set_au(
         "InsertLeave,BufWrite,BufEnter",
@@ -102,9 +102,9 @@ local function common_on_attach(client, bufnr)
                 gh = "documentation",
                 gk = "signature help",
                 gi = "implementation",
-                ["."] = {"LSP stop"},
-                [".a"] = {"<cmd>LspStop<cr>", "stop all"},
-                [".s"] = {"select"}
+                [","] = {"LSP stop"},
+                [",a"] = {"<cmd>LspStop<cr>", "stop all"},
+                [",s"] = {"select"}
             }
         },
         ["g"] = {

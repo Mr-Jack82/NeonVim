@@ -90,6 +90,18 @@ vim.opt.foldmethod = "marker"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = "a"
 -- }}}
+-- Disable some builtin plugins {{{
+vim.g.loaded_gzip = 1
+vim.g.loaded_tar = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_spec = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_matchit = 1
+-- vim.g.loaded_matchparen = 1
+-- }}}
 -- BACKUP AND SWAP {{{
 vim.opt.swapfile = false
 vim.opt.undofile = true
@@ -144,4 +156,20 @@ vim.opt.wildignore = {
     "._*",
     "tags.lock"
 }
+-- }}}
+-- Autocommands {{{
+as.check_and_set(vim.g.neon_trim_trailing_space, "BufWritePre", "*", [[%s/\s\+$//e]])
+as.check_and_set(vim.g.neon_trim_trailing_space, "BufWritePre", "*", [[%s/\n\+\%$//e]])
+as.check_and_set(
+    vim.g.neon_preserve_cursor,
+    "BufReadPost",
+    "*",
+    [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
+)
+as.check_and_set(
+    vim.g.neon_format_on_save,
+    "BufWritePre",
+    "*",
+    [[try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry]]
+)
 -- }}}

@@ -21,6 +21,12 @@ function as.nvim_set_au(au_type, where, dispatch)
     vim.cmd(string.format("au! %s %s %s", au_type, where, dispatch))
 end
 
+function as.check_and_set(option, au_type, where, dispatch, boolean)
+    if as._default(option, boolean) == true then
+        as.nvim_set_au(au_type, where, dispatch)
+    end
+end
+
 -- default option
 function as._default(option, boolean)
     if option == true or option == nil and boolean == nil then

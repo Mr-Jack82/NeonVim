@@ -3,45 +3,7 @@ local M = {}
 local cmd = vim.cmd
 local fn = vim.fn
 
--- Terminal
-local Terminal = require("toggleterm.terminal").Terminal
-
-local lazygit =
-    Terminal:new(
-    {
-        cmd = "lazygit",
-        direction = "float",
-        hidden = true
-    }
-)
-
-function M.lazygit_toggle()
-    lazygit:toggle()
-end
-
--- Telescope
-function M.search_nvim()
-    require("telescope.builtin").find_files(
-        {
-            prompt_title = "Neovim Config",
-            cwd = "$HOME/.config/nvim/lua"
-        }
-    )
-end
-
--- LSP
-local t = require("telescope.themes")
-local a = require("telescope.builtin")
-local options = {width = 55, results_height = 10}
-local theme = t.get_dropdown(options)
-
-function M.code_actions()
-    a.lsp_code_actions(theme)
-end
-function M.range_code_actions()
-    a.lsp_range_code_actions(theme)
-end
-
+-- LSP function to preview definition
 local function preview_location_callback(_, _, result)
     local borders = as._lsp_borders(vim.g.neon_lsp_win_borders)
     if result == nil or vim.tbl_isempty(result) then
@@ -56,17 +18,39 @@ function M.PeekDefinition()
 end
 
 -- zen mode
-local zen = require("zen-mode")
 local nu = {number = false, relativenumber = false}
+local ata = {window = {width = .70, options = nu}}
+local foc = {window = {width = 1}}
+local cen = {window = {width = .70}}
 local min = {window = {width = 1, options = nu}}
-local ata = {window = {width = .75, options = nu}}
-
-function M.minimal()
-    zen.toggle(min)
-end
 
 function M.ataraxis()
-    zen.toggle(ata)
+    vim.cmd "packadd zen-mode.nvim"
+    require("zen-mode").toggle(ata)
+end
+
+function M.focus()
+    vim.cmd "packadd zen-mode.nvim"
+    require("zen-mode").toggle(foc)
+end
+
+function M.centered()
+    vim.cmd "packadd zen-mode.nvim"
+    require("zen-mode").toggle(cen)
+end
+
+function M.minimal()
+    vim.cmd "packadd zen-mode.nvim"
+    require("zen-mode").toggle(min)
+end
+
+-- automatically creates missing directories when saving a file
+function M.mkdir()
+    local dir = vim.fn.expand("%:p:h")
+
+    if vim.fn.isdirectory(dir) == 0 then
+        vim.fn.mkdir(dir, "p")
+    end
 end
 
 -- Reload

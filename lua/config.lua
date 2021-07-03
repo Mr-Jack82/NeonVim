@@ -30,9 +30,9 @@ g.themes_italic_keyword = true
 g.themes_italic_boolean = true
 g.themes_italic_function = true
 g.themes_italic_variable = false
--- options: classic, arrow, slant
+-- @options: classic, arrow, slant
 g.neon_statusline = "classic"
--- options: gruvbox, neon, nord, wombat
+-- @options: gruvbox, neon, nord, wombat
 g.neon_statusline_color = "neon"
 
 -----------------------------------------------------------------------------//
@@ -58,15 +58,14 @@ g.neon_compe_sources_blacklist = {}
 --- Treesitter
 -----------------------------------------------------------------------------//
 g.neon_treesitter_enabled = true
-g.neon_rainbow_parentheses = true
 g.neon_treesitter_parsers = "all"
 
 -----------------------------------------------------------------------------//
 -- Startify
 -----------------------------------------------------------------------------//
--- options: center, pad
+-- @options: center, pad
 g.startify_header_position = "center"
--- g.startify_header_ascii = "cowsay" for random quote and cow.
+-- set g.startify_header_ascii = "cowsay" for random quote and cow.
 g.startify_header_ascii = {
     "Y88b Y88                           Y8b Y88888P ,e,            ",
     " Y88b Y8  ,e e,   e88 88e  888 8e   Y8b Y888P   '  888 888 8e ",

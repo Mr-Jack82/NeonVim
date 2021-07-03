@@ -17,8 +17,7 @@ as.map("n", "Q", "<Nop>")
 as.map("i", "jk", "<ESC>")
 as.map("n", "<BS>", "<C-^>")
 as.map("t", "<C-o>", [[<C-\><C-n>]])
-as.map("n", "<A-t>", ":ToggleTerm<CR>")
-as.map("t", "<A-t>", [[<C-\><C-n>:ToggleTerm<CR>]])
+-- toggles between first column and the first character
 as.map("n", "0", "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", {expr = true})
 -- Move selected line / block of text in visual mode
 as.map("x", "K", ":move '<-2<CR>gv=gv")
@@ -55,18 +54,18 @@ as.map("n", "<leader>e", ":NvimTreeToggle<CR>")
 as.map("n", "<leader>u", ":UndotreeToggle<CR>")
 
 -----------------------------------------------------------------------------//
--- new files
------------------------------------------------------------------------------//
-as.map("n", "<leader>nb", [[:enew<CR>]], {silent = false})
-as.map("n", "<leader>nf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
-as.map("n", "<leader>ns", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
-as.map("n", "<leader>nt", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false})
-
------------------------------------------------------------------------------//
 -- help
 -----------------------------------------------------------------------------//
 as.map("n", "<leader>hv", ":Telescope help_tags<CR>")
 as.map("n", "<leader>hm", ":Telescope man_pages<CR>")
+as.map("n", "<leader>ht", ":Telescope colorscheme<CR>")
+as.map("n", "<leader>hpi", ":PackerInstall<CR>")
+as.map("n", "<leader>hpu", ":PackerUpdate<CR>")
+as.map("n", "<leader>hps", ":PackerStatus<CR>")
+as.map("n", "<leader>hpS", ":PackerSync<CR>")
+as.map("n", "<leader>hpc", ":PackerCompile<CR>")
+as.map("n", "<leader>hpC", ":PackerClean<CR>")
+as.map("n", "<leader>hph", ":help packer.txt<CR>")
 
 -----------------------------------------------------------------------------//
 -- buffers
@@ -82,6 +81,18 @@ as.map("n", "<leader>b%", ":luafile %<CR>", {silent = false}) -- source buffer
 as.map("n", "<leader>bh", ":noh<CR>") -- No highlight
 as.map("n", "<leader>b]", ":bn<CR>") -- buffer next
 as.map("n", "<leader>b[", ":bp<CR>") -- buffer previous
+as.map("n", "<leader>bn", [[:enew<CR>]], {silent = false}) -- new buffer
+as.map("n", "<leader>bf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}) -- new file
+as.map("n", "<leader>bv", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}) -- new split
+
+-----------------------------------------------------------------------------//
+-- tabs
+-----------------------------------------------------------------------------//
+as.map("n", "<leader>tq", [[:tabclose<CR>]], {silent = false}) -- tab close
+as.map("n", "<leader>t[", [[:tabprevious<CR>]]) -- tab previous
+as.map("n", "<leader>t]", [[:tabnext<CR>]]) -- tab previous
+as.map("n", "<leader>tf", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}) -- new file
+as.map("n", "<leader>tn", [[:tabnew<CR>]], {silent = false}) -- new tab
 
 -----------------------------------------------------------------------------//
 -- windows
@@ -106,27 +117,20 @@ as.map("n", "<leader>w+", ":resize +15<CR>") -- increase height
 -----------------------------------------------------------------------------//
 -- Git
 -----------------------------------------------------------------------------//
-as.map("n", "<F5>", ":lua require('utils.extra').lazygit_toggle()<CR>") -- lazygit
-as.map("n", "<leader>gg", ":Git<CR>") -- Git
-as.map("n", "<leader>ga", ":Git add %<CR>") -- add current file
-as.map("n", "<leader>gd", ":Git diff %<CR>") -- show diff
-as.map("n", "<leader>gC", ":Git commit %<CR>") -- commit
-as.map("n", "<leader>gl", ":Git log %<CR>") -- log
+as.map("n", "<leader>gg", ":Neogit<CR>") -- Git
+as.map("n", "<leader>gd", ":DiffviewOpen<CR>") -- show diff
+as.map("n", "<leader>gL", ":Neogit log<CR>") -- log
+as.map("n", "<leader>gb", ":Telescope git_branches<CR>") -- git branches
 as.map("n", "<leader>gf", ":Telescope git_files<CR>") -- git files
 as.map("n", "<leader>gc", ":Telescope git_commits<CR>") -- git commits
-as.map("n", "<leader>gb", ":Telescope git_branches<CR>") -- git branches
-as.map("n", "<leader>gs", ":Telescope git_status<CR>") -- git status
 as.map("n", "<leader>gp", ":Gitsigns preview_hunk<CR>") -- preview hunk
-as.map("n", "<leader>gL", ":Gitsigns toggle_current_line_blame<CR>") -- toggle line blame
-as.map("n", "<leader>gB", ":Git blame<CR>") -- git blame
+as.map("n", "<leader>gl", ":Gitsigns toggle_current_line_blame<CR>") -- toggle line blame
+as.map("n", "<leader>gB", ":Gitsigns blame_line<CR>") -- git blame
 as.map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>") -- reset hunk
 as.map("n", "<leader>gR", ":Gitsigns reset_buffer<CR>") -- reset buffer
 as.map("n", "<leader>gu", ":Gitsigns undo_stage_hunk<CR>") -- undo last stage hunk
-as.map("n", "<leader>gI", ":Gitsigns reset_buffer_index<CR>") -- reset buffer index
-as.map("n", "<leader>gP", ":Git push<CR>") -- push
-as.map("n", "<leader>gi", ":Git init<CR>") -- init
-as.map("n", "<leader>gt", ":Gitsigns stage_hunk<CR>") -- git stage hunk
-as.map("n", "<leader>gT", ":Gitsigns stage_buffer<CR>") -- git stage buffer
+as.map("n", "<leader>gs", ":Gitsigns stage_hunk<CR>") -- git stage hunk
+as.map("n", "<leader>gS", ":Gitsigns stage_buffer<CR>") -- git stage buffer
 as.map("n", "<leader>g[", ":Gitsigns prev_hunk<CR>") -- previous hunk
 as.map("n", "<leader>g]", ":Gitsigns next_hunk<CR>") -- next hunk
 
@@ -134,20 +138,43 @@ as.map("n", "<leader>g]", ":Gitsigns next_hunk<CR>") -- next hunk
 -- Telescope
 -----------------------------------------------------------------------------//
 as.map("n", "<leader><space>", ":Telescope find_files<CR>")
+as.map("n", "<leader>/", ":Telescope live_grep theme=get_ivy<CR>")
 as.map("n", "<leader>ff", ":Telescope find_files<CR>")
 as.map("n", "<leader>fr", ":Telescope oldfiles<CR>")
 as.map("n", "<leader>fg", ":Telescope live_grep theme=get_ivy<CR>")
 as.map("n", "<leader>fb", ":Telescope current_buffer_fuzzy_find theme=get_ivy<CR>")
-as.map("n", "<leader>ft", ":Telescope colorscheme<CR>")
 as.map("n", "<leader>fC", ":Telescope command_history<CR>")
 as.map("n", "<leader>fc", ":Telescope commands<CR>")
 as.map("n", "<leader>fs", ":Telescope search_history<CR>")
-as.map("n", "<leader>fn", ":lua require('utils.extra').search_nvim()<CR>")
+as.map("n", "<leader>fn", ":Telescope fd cwd=$HOME/.config/nvim/<CR>")
 
 -----------------------------------------------------------------------------//
 -- Zen Mode
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>zf", [[:lua require("zen-mode").toggle({window = {width = 1}})<CR>]])
-as.map("n", "<leader>zc", [[:lua require("zen-mode").toggle({window = {width = .75}})<CR>]])
+as.map("n", "<leader>zf", [[:lua require("utils.extra").focus()<CR>]])
+as.map("n", "<leader>zc", [[:lua require("utils.extra").centered()<CR>]])
 as.map("n", "<leader>zm", [[:lua require('utils.extra').minimal()<CR>]])
 as.map("n", "<leader>za", [[:lua require('utils.extra').ataraxis()<CR>]])
+as.map("n", "<leader>zq", ":close<CR>")
+
+-----------------------------------------------------------------------------//
+-- Session
+-----------------------------------------------------------------------------//
+as.map("n", "<leader>ss", ":SSave<CR>")
+as.map("n", "<leader>sq", ":SClose<CR>")
+as.map("n", "<leader>sd", ":SDelete<CR>")
+as.map("n", "<leader>sl", ":SLoad<CR>")
+as.map("n", "<leader>sr", ":lua require('utils.extra').Reload()<CR>")
+
+-----------------------------------------------------------------------------//
+-- Open/Run
+-----------------------------------------------------------------------------//
+as.map("n", "<leader>o,", ":Startify<CR>")
+as.map("n", "<leader>ot", ":ToggleTerm<CR>")
+as.map("n", "<leader>ob", ":Telescope file_browser<CR>")
+as.map("n", "<leader>of", ":NvimTreeFindFile<CR>")
+as.map("n", "<leader>oe", ":NvimTreetoggle<CR>")
+as.map("n", "<leader>ou", ":UndotreeToggle<CR>")
+as.map("n", "<leader>on", ":vsp ~/.config/nvim/lua/config.lua<CR>")
+as.map("n", "<leader>oca", ":ColorizerAttachToBuffer<CR>")
+as.map("n", "<leader>oct", ":ColorizerToggle<CR>")
