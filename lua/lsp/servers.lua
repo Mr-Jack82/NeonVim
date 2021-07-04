@@ -4,8 +4,8 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {
         "documentation",
         "detail",
-        "additionalTextEdits"
-    }
+        "additionalTextEdits",
+    },
 }
 
 local function documentHighlight(client, bufnr)
@@ -71,7 +71,7 @@ local function common_on_attach(client, bufnr)
         "<c-n>",
         ":lua vim.lsp.diagnostic.goto_next({popup_opts = {border = as._lsp_borders(vim.g.neon_lsp_win_borders)}})<CR>"
     )
-    as.map("n", "<leader>l,s", [[:LspStop <C-R>=<CR>]], {silent = false})
+    as.map("n", "<leader>l,s", [[:LspStop <C-R>=<CR>]], { silent = false })
 
     as.nvim_set_au(
         "InsertLeave,BufWrite,BufEnter",
@@ -83,18 +83,18 @@ local function common_on_attach(client, bufnr)
         ["<leader>"] = {
             l = {
                 name = "LSP",
-                a = {"code action"},
-                A = {"range code action"},
-                d = {"document diagnostics"},
-                D = {"workspace diagnostics"},
-                l = {"line diagnostics"},
-                i = {"LSP info"},
-                f = {"format"},
-                r = {"rename"},
-                p = {"peek definition"},
-                s = {"document symbols"},
-                S = {"workspace symbols"},
-                g = {name = "go to"},
+                a = { "code action" },
+                A = { "range code action" },
+                d = { "document diagnostics" },
+                D = { "workspace diagnostics" },
+                l = { "line diagnostics" },
+                i = { "LSP info" },
+                f = { "format" },
+                r = { "rename" },
+                p = { "peek definition" },
+                s = { "document symbols" },
+                S = { "workspace symbols" },
+                g = { name = "go to" },
                 gd = "definition",
                 gD = "declaration",
                 gy = "type definition",
@@ -102,10 +102,10 @@ local function common_on_attach(client, bufnr)
                 gh = "documentation",
                 gk = "signature help",
                 gi = "implementation",
-                [","] = {"LSP stop"},
-                [",a"] = {"<cmd>LspStop<cr>", "stop all"},
-                [",s"] = {"select"}
-            }
+                [","] = { "LSP stop" },
+                [",a"] = { "<cmd>LspStop<cr>", "stop all" },
+                [",s"] = { "select" },
+            },
         },
         ["g"] = {
             ["d"] = "LSP definition",
@@ -114,11 +114,11 @@ local function common_on_attach(client, bufnr)
             ["r"] = "LSP references",
             ["y"] = "LSP type definition",
             ["h"] = "LSP documentation",
-            ["i"] = "LSP implementation"
-        }
+            ["i"] = "LSP implementation",
+        },
     }
 
-    local wk = require("which-key")
+    local wk = require "which-key"
     wk.register(mappings)
 end
 
@@ -132,7 +132,7 @@ local lua_settings = {
             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
             version = "LuaJIT",
             -- Setup your lua path
-            path = path
+            path = path,
         },
         diagnostics = {
             -- Get the language server to recognize the `vim` global
@@ -141,22 +141,22 @@ local lua_settings = {
                 "as",
                 "DATA_PATH",
                 "use",
-                "run"
-            }
+                "run",
+            },
         },
         workspace = {
             -- Make the server aware of Neovim runtime files
             library = {
-                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-                [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
+                [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+                [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
             },
             maxPreload = 10000,
-            preloadFileSize = 50000
+            preloadFileSize = 50000,
         },
         telemetry = {
-            enable = false
-        }
-    }
+            enable = false,
+        },
+    },
 }
 
 local function make_config()
@@ -164,16 +164,16 @@ local function make_config()
         -- enable snippet support
         capabilities = capabilities,
         -- map buffer local keybindings when the language server attaches
-        on_attach = common_on_attach
+        on_attach = common_on_attach,
     }
 end
 
 -- lsp-install
 local function setup_servers()
-    require "lspinstall".setup()
+    require("lspinstall").setup()
 
     -- get all installed servers
-    local servers = require "lspinstall".installed_servers()
+    local servers = require("lspinstall").installed_servers()
 
     for _, server in pairs(servers) do
         local config = make_config()
@@ -188,20 +188,20 @@ local function setup_servers()
                 "javascript.jsx",
                 "typescript",
                 "typescriptreact",
-                "typescript.tsx"
+                "typescript.tsx",
             }
         end
         if server == "bash" then
-            config.filetypes = {"sh", "zsh"}
+            config.filetypes = { "sh", "zsh" }
         end
         if server == "lua" then
             config.settings = lua_settings
         end
         if server == "cpp" then
-            config.filetypes = {"c", "cpp"}
+            config.filetypes = { "c", "cpp" }
         end
 
-        require "lspconfig"[server].setup(config)
+        require("lspconfig")[server].setup(config)
     end
 end
 
@@ -213,20 +213,20 @@ local configs = require "lspconfig/configs"
 if not lspconfig.emmet_ls then
     configs.emmet_ls = {
         default_config = {
-            autostart = as._lsp_auto("emmet"),
-            cmd = {"emmet-ls", "--stdio"},
-            filetypes = {"html", "css"},
+            autostart = as._lsp_auto "emmet",
+            cmd = { "emmet-ls", "--stdio" },
+            filetypes = { "html", "css" },
             root_dir = function()
                 return vim.loop.cwd()
             end,
-            settings = {}
-        }
+            settings = {},
+        },
     }
 end
-lspconfig.emmet_ls.setup {capabilities = capabilities}
+lspconfig.emmet_ls.setup { capabilities = capabilities }
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require "lspinstall".post_install_hook = function()
+require("lspinstall").post_install_hook = function()
     setup_servers() -- reload installed servers
-    vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+    vim.cmd "bufdo e"
 end

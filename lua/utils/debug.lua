@@ -8,15 +8,13 @@ vim.cmd [[set packpath=/tmp/nvim/site]]
 
 local function load_plugins()
     local use = require("packer").use
-    require("packer").startup(
-        {
-            function()
-                use "wbthomason/packer.nvim"
-                -- Put plugins to install here:
-            end,
-            config = {package_root = "/tmp/nvim/site/pack"}
-        }
-    )
+    require("packer").startup {
+        function()
+            use "wbthomason/packer.nvim"
+            -- Put plugins to install here:
+        end,
+        config = { package_root = "/tmp/nvim/site/pack" },
+    }
 end
 
 _G.load_config = function()
@@ -25,7 +23,7 @@ end
 
 if fn.isdirectory(install_path) == 0 then
     -- install packer
-    fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path})
+    fn.system { "git", "clone", "https://github.com/wbthomason/packer.nvim", install_path }
     load_plugins()
     require("packer").sync()
     vim.cmd "autocmd User PackerComplete ++once lua load_config()"

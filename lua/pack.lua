@@ -4,14 +4,14 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- Required by others
     -----------------------------------------------------------------------------//
-    use {"nvim-lua/plenary.nvim", module = "plenary"}
-    use {"nvim-lua/popup.nvim", module = "popup"}
+    use { "nvim-lua/plenary.nvim", module = "plenary" }
+    use { "nvim-lua/popup.nvim", module = "popup" }
     use {
         "kyazdani42/nvim-web-devicons",
         module = "nvim-web-devicons",
         config = function()
-            require("nvim-web-devicons").setup({default = true})
-        end
+            require("nvim-web-devicons").setup { default = true }
+        end,
     }
     -----------------------------------------------------------------------------//
     -- LSP, Autocomplete and snippets
@@ -21,47 +21,47 @@ local pack_use = function()
         requires = "kabouzeid/nvim-lspinstall",
         config = function()
             require "lsp"
-        end
+        end,
     }
     use {
         "hrsh7th/nvim-compe",
         event = "InsertEnter",
         config = function()
-            require "plugins.completion".compe_config()
-        end
+            require("plugins.completion").compe_config()
+        end,
     }
     use {
         "hrsh7th/vim-vsnip",
         event = "InsertEnter",
-        requires = {"rafamadriz/friendly-snippets", after = "vim-vsnip"},
+        requires = { "rafamadriz/friendly-snippets", after = "vim-vsnip" },
         config = function()
-            require "plugins.completion".vsnip_config()
-        end
+            require("plugins.completion").vsnip_config()
+        end,
     }
     use {
         "windwp/nvim-autopairs",
         after = "nvim-compe",
         config = function()
-            require "plugins.completion".autopairs_config()
-        end
+            require("plugins.completion").autopairs_config()
+        end,
     }
     -----------------------------------------------------------------------------//
     -- Telescope
     -----------------------------------------------------------------------------//
     use {
         "nvim-telescope/telescope.nvim",
-        wants = {"plenary.nvim", "popup.nvim", "telescope-fzf-native.nvim"},
+        wants = { "plenary.nvim", "popup.nvim", "telescope-fzf-native.nvim" },
         cmd = "Telescope",
         requires = {
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 opt = true,
-                run = "make"
-            }
+                run = "make",
+            },
         },
         config = function()
             require "plugins.telescope"
-        end
+        end,
     }
     -----------------------------------------------------------------------------//
     -- Treesitter
@@ -72,7 +72,7 @@ local pack_use = function()
         run = ":TSUpdate",
         config = function()
             require "plugins.treesitter"
-        end
+        end,
     }
     -----------------------------------------------------------------------------//
     -- Utils
@@ -80,32 +80,29 @@ local pack_use = function()
     use {
         "kyazdani42/nvim-tree.lua",
         wants = "nvim-web-devicons",
-        cmd = {"NvimTreeToggle", "NvimTreeFindFile"},
+        cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
         config = function()
             require "plugins.tree"
-        end
+        end,
     }
     use {
         "folke/which-key.nvim",
         config = function()
             require "plugins.which-key"
-        end
+        end,
     }
     -----------------------------------------------------------------------------//
     -- Comments and Surround
     -----------------------------------------------------------------------------//
-    use {"machakann/vim-sandwich", keys = "s"}
+    use { "machakann/vim-sandwich", keys = "s" }
     use {
         "b3nj5m1n/kommentary",
-        keys = {"gcc", "gc"},
+        keys = { "gcc", "gc" },
         config = function()
-            require("kommentary.config").configure_language(
-                "default",
-                {
-                    prefer_single_line_comments = true
-                }
-            )
-        end
+            require("kommentary.config").configure_language("default", {
+                prefer_single_line_comments = true,
+            })
+        end,
     }
     -----------------------------------------------------------------------------//
     -- Git
@@ -116,35 +113,35 @@ local pack_use = function()
         after = "neogit",
         cmd = "DiffviewOpen",
         config = function()
-            require "diffview".setup {
+            require("diffview").setup {
                 key_bindings = {
                     disable_defaults = false, -- Disable the default key bindings
                     view = {
-                        ["q"] = ":DiffviewClose<cr>"
+                        ["q"] = ":DiffviewClose<cr>",
                     },
                     file_panel = {
-                        ["q"] = ":DiffviewClose<cr>"
-                    }
-                }
+                        ["q"] = ":DiffviewClose<cr>",
+                    },
+                },
             }
-        end
+        end,
     }
     use {
         "TimUntersberger/neogit",
         cmd = "Neogit",
-        wants = {"plenary.nvim", "diffview.nvim"},
+        wants = { "plenary.nvim", "diffview.nvim" },
         config = function()
-            require "neogit".setup {
+            require("neogit").setup {
                 disable_context_highlighting = true,
-                integrations = {diffview = true},
+                integrations = { diffview = true },
                 signs = {
                     -- { CLOSED, OPENED }
-                    section = {"", ""},
-                    item = {"", ""},
-                    hunk = {"", ""}
-                }
+                    section = { "", "" },
+                    item = { "", "" },
+                    hunk = { "", "" },
+                },
             }
-        end
+        end,
     }
     use {
         "lewis6991/gitsigns.nvim",
@@ -153,18 +150,18 @@ local pack_use = function()
         config = function()
             require("gitsigns").setup {
                 signs = {
-                    add = {hl = "GitSignsAdd", text = "┃"},
-                    change = {hl = "GitSignsChange", text = "┃"},
-                    delete = {hl = "GitSignsDelete", text = "契"},
-                    topdelete = {hl = "GitSignsDelete", text = "契"},
-                    changedelete = {hl = "GitSignsChange", text = "~"}
+                    add = { hl = "GitSignsAdd", text = "┃" },
+                    change = { hl = "GitSignsChange", text = "┃" },
+                    delete = { hl = "GitSignsDelete", text = "契" },
+                    topdelete = { hl = "GitSignsDelete", text = "契" },
+                    changedelete = { hl = "GitSignsChange", text = "~" },
                 },
                 keymaps = {
                     noremap = true,
-                    buffer = true
-                }
+                    buffer = true,
+                },
             }
-        end
+        end,
     }
     use {
         "ruifm/gitlinker.nvim",
@@ -172,32 +169,32 @@ local pack_use = function()
         wants = "plenary.nvim",
         keys = "<leader>gy",
         config = function()
-            require "gitlinker".setup()
-        end
+            require("gitlinker").setup()
+        end,
     }
     -----------------------------------------------------------------------------//
     -- General plugins
     -----------------------------------------------------------------------------//
     use "rafamadriz/themes.nvim"
-    use {"sbdchd/neoformat", event = "BufRead"}
-    use {"kevinhwang91/nvim-bqf", ft = "qf"}
+    use { "sbdchd/neoformat", event = "BufRead" }
+    use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
         "mhinz/vim-startify",
         config = function()
             require "plugins.startify"
-        end
+        end,
     }
     use {
         "rafamadriz/statusline",
         config = function()
             require "plugins.statusline"
-        end
+        end,
     }
     use {
         "turbio/bracey.vim",
         opt = true,
         ft = "html",
-        run = "npm install --prefix server"
+        run = "npm install --prefix server",
     }
     use {
         "iamcco/markdown-preview.nvim",
@@ -205,19 +202,19 @@ local pack_use = function()
         ft = "markdown",
         run = function()
             vim.fn["mkdp#util#install"]()
-        end
+        end,
     }
     use {
         "lukas-reineke/indent-blankline.nvim",
         event = "BufReadPre",
         config = function()
             require "plugins.indent-guides"
-        end
+        end,
     }
     use {
         "mbbill/undotree",
         cmd = "UndotreeToggle",
-        config = "vim.g.undotree_WindowLayout = 2"
+        config = "vim.g.undotree_WindowLayout = 2",
     }
     use {
         "folke/zen-mode.nvim",
@@ -225,38 +222,35 @@ local pack_use = function()
         config = function()
             require("zen-mode").setup {
                 plugins = {
-                    gitsigns = {enabled = true}
-                }
+                    gitsigns = { enabled = true },
+                },
             }
-        end
+        end,
     }
     use {
         "norcalli/nvim-colorizer.lua",
         event = "BufRead",
         config = function()
-            require "colorizer".setup(
-                {"*"},
-                {
-                    RRGGBBAA = true,
-                    rgb_fn = true,
-                    hsl_fn = true,
-                    css = true,
-                    css_fn = true
-                }
-            )
-        end
+            require("colorizer").setup({ "*" }, {
+                RRGGBBAA = true,
+                rgb_fn = true,
+                hsl_fn = true,
+                css = true,
+                css_fn = true,
+            })
+        end,
     }
     use {
         "akinsho/nvim-toggleterm.lua",
         keys = "<A-t>",
         cmd = "ToggleTerm",
         config = function()
-            require "toggleterm".setup {
+            require("toggleterm").setup {
                 size = 16,
                 direction = "horizontal",
-                open_mapping = [[<a-t>]]
+                open_mapping = [[<a-t>]],
             }
-        end
+        end,
     }
 end
 
@@ -264,13 +258,13 @@ local function load_plugins()
     require("packer").startup {
         function()
             pack_use()
-        end
+        end,
     }
 end
 
 local fn = vim.fn
 local execute = vim.api.nvim_command
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
     execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)

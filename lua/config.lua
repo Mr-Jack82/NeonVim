@@ -13,7 +13,7 @@ g.neon_word_wrap = false
 g.neon_preserve_cursor = true
 g.neon_highlight_yank = true
 g.neon_listchars = false
-g.neon_indent_guides = true
+g.neon_indent_guides = false
 g.neon_explorer_side = "right"
 g.neon_format_on_save = true
 g.neon_trim_trailing_space = true
@@ -23,7 +23,7 @@ g.neon_indent_size = 4
 --- Colors/Style
 -----------------------------------------------------------------------------//
 -- Press <space>ft to see all available themes
-g.neon_colorscheme = "neon"
+g.neon_colorscheme = "darcula"
 -- See :h themes-nvim for help
 g.themes_italic_comment = true
 g.themes_italic_keyword = true
@@ -31,9 +31,9 @@ g.themes_italic_boolean = true
 g.themes_italic_function = true
 g.themes_italic_variable = false
 -- @options: classic, arrow, slant
-g.neon_statusline = "classic"
+g.neon_statusline = "arrow"
 -- @options: gruvbox, neon, nord, wombat
-g.neon_statusline_color = "neon"
+g.neon_statusline_color = "wombat"
 
 -----------------------------------------------------------------------------//
 --- LSP
@@ -44,7 +44,7 @@ g.neon_lsp_win_borders = "double"
 g.neon_lsp_diagnostic_signs = true
 g.neon_lsp_document_highlight = false
 g.neon_lsp_diagnostic_underline = true
-g.neon_lsp_autostart_blacklist = {"lua"}
+g.neon_lsp_autostart_blacklist = { "lua" }
 
 -----------------------------------------------------------------------------//
 --- Completion
@@ -71,5 +71,5 @@ g.startify_header_ascii = {
     " Y88b Y8  ,e e,   e88 88e  888 8e   Y8b Y888P   '  888 888 8e ",
     "b Y88b Y d88 88b d888 888b 888 88b   Y8b Y8P   888 888 888 88b",
     "8b Y88b  888   , Y888 888P 888 888    Y8b Y    888 888 888 888",
-    "88b Y88b  'YeeP'  '88 88'  888 888     Y8P     888 888 888 888"
+    "88b Y88b  'YeeP'  '88 88'  888 888     Y8P     888 888 888 888",
 }
