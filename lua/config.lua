@@ -23,7 +23,7 @@ g.neon_indent_size = 4
 --- Colors/Style
 -----------------------------------------------------------------------------//
 -- Press <space>ft to see all available themes
-g.neon_colorscheme = "neon"
+g.neon_colorscheme = "darcula"
 -- See :h themes-nvim for help
 g.themes_italic_comment = true
 g.themes_italic_keyword = true
@@ -31,9 +31,9 @@ g.themes_italic_boolean = true
 g.themes_italic_function = true
 g.themes_italic_variable = false
 -- @options: classic, arrow, slant
-g.neon_statusline = "classic"
+g.neon_statusline = "arrow"
 -- @options: gruvbox, neon, nord, wombat
-g.neon_statusline_color = "neon"
+g.neon_statusline_color = "wombat"
 
 -----------------------------------------------------------------------------//
 --- LSP
