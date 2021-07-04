@@ -143,7 +143,6 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use { "wellle/targets.vim", event = { "BufEnter" } }
     use { "tommcdo/vim-exchange", keys = { { "n", "cx" }, { "v", "X" } } }
-    use { "machakann/vim-sandwich", event = { "BufRead", "InsertLeave" } }
     use {
         "windwp/nvim-autopairs",
         after = "nvim-cmp",
