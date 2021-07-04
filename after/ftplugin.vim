@@ -1,8 +1,3 @@
-lua << EOF
--- check if option to set autocommand
-as.check_and_set(vim.g.neon_highlight_yank, "TextYankPost", "*", 'lua require"vim.highlight".on_yank{timeout = 250}')
-EOF
-
 " Set filetypes
 augroup Filetypes
   au!

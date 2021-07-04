@@ -169,6 +169,12 @@ vim.opt.wildignore = {
 as.check_and_set(vim.g.neon_trim_trailing_space, "BufWritePre", "*", [[%s/\s\+$//e]])
 as.check_and_set(vim.g.neon_trim_trailing_space, "BufWritePre", "*", [[%s/\n\+\%$//e]])
 as.check_and_set(
+    vim.g.neon_highlight_yank,
+    "TextYankPost",
+    "*",
+    'lua require"vim.highlight".on_yank{timeout = 250}'
+)
+as.check_and_set(
     vim.g.neon_preserve_cursor,
     "BufReadPost",
     "*",
