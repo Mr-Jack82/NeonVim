@@ -272,11 +272,12 @@ local pack_use = function()
     -- my plugins
     -----------------------------------------------------------------------------//
     use {
+        "tpope/vim-surround",
+        "tpope/vim-repeat",
+        "tpope/vim-fugitive",
         "junegunn/vim-easy-align",
         "editorconfig/editorconfig-vim",
         "tpope/vim-unimpaired",
-        "tpope/vim-surround",
-        "tpope/vim-repeat",
         "easymotion/vim-easymotion",
         "907th/vim-auto-save",
         {
