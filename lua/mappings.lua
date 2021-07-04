@@ -18,22 +18,22 @@ as.map("i", "jk", "<ESC>")
 as.map("n", "<BS>", "<C-^>")
 as.map("t", "<C-o>", [[<C-\><C-n>]])
 -- toggles between first column and the first character
-as.map("n", "0", "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", {expr = true})
+as.map("n", "0", "getline('.')[0 : col('.') - 2] =~# '^\\s\\+$' ? '0' : '^'", { expr = true })
 -- Move selected line / block of text in visual mode
 as.map("x", "K", ":move '<-2<CR>gv=gv")
 as.map("x", "J", ":move '>+1<CR>gv=gv")
 -- Remap for dealing with word wrap in Normal mode
-as.map("n", "k", 'v:count == 0 ? "gk" : "k"', {expr = true})
-as.map("n", "j", 'v:count == 0 ? "gj" : "j"', {expr = true})
+as.map("n", "k", 'v:count == 0 ? "gk" : "k"', { expr = true })
+as.map("n", "j", 'v:count == 0 ? "gj" : "j"', { expr = true })
 -- same for visual mode
-as.map("x", "k", '(v:count == 0 && mode() !=# "V") ? "gk" : "k"', {expr = true})
-as.map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', {expr = true})
+as.map("x", "k", '(v:count == 0 && mode() !=# "V") ? "gk" : "k"', { expr = true })
+as.map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', { expr = true })
 -- Automatically jump to the end of pasted text
 as.map("v", "y", "y`]")
 as.map("v", "p", "p`]")
 as.map("n", "p", "p`]")
 -- Select last pasted text
-as.map("n", "gp", "'`[' . strpart(getregtype(), 0, 1) . '`]'", {expr = true})
+as.map("n", "gp", "'`[' . strpart(getregtype(), 0, 1) . '`]'", { expr = true })
 
 -----------------------------------------------------------------------------//
 -- Windows
@@ -77,22 +77,22 @@ as.map("n", "<leader>bs", ":update<CR>") -- save buffer
 as.map("n", "<leader>bS", ":silent! wa<CR>") -- save all buffers
 as.map("n", "<leader>bq", ":update | bdelete<CR>") -- quit buffer
 as.map("n", "<leader>bQ", [[<cmd>w <bar> %bd <bar> e#<CR>]]) -- quit all buffers but current
-as.map("n", "<leader>b%", ":luafile %<CR>", {silent = false}) -- source buffer
+as.map("n", "<leader>b%", ":luafile %<CR>", { silent = false }) -- source buffer
 as.map("n", "<leader>bh", ":noh<CR>") -- No highlight
 as.map("n", "<leader>b]", ":bn<CR>") -- buffer next
 as.map("n", "<leader>b[", ":bp<CR>") -- buffer previous
-as.map("n", "<leader>bn", [[:enew<CR>]], {silent = false}) -- new buffer
-as.map("n", "<leader>bf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}) -- new file
-as.map("n", "<leader>bv", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}) -- new split
+as.map("n", "<leader>bn", [[:enew<CR>]], { silent = false }) -- new buffer
+as.map("n", "<leader>bf", [[:e <C-R>=expand("%:p:h") . "/" <CR>]], { silent = false }) -- new file
+as.map("n", "<leader>bv", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], { silent = false }) -- new split
 
 -----------------------------------------------------------------------------//
 -- tabs
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>tq", [[:tabclose<CR>]], {silent = false}) -- tab close
+as.map("n", "<leader>tq", [[:tabclose<CR>]], { silent = false }) -- tab close
 as.map("n", "<leader>t[", [[:tabprevious<CR>]]) -- tab previous
 as.map("n", "<leader>t]", [[:tabnext<CR>]]) -- tab previous
-as.map("n", "<leader>tf", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], {silent = false}) -- new file
-as.map("n", "<leader>tn", [[:tabnew<CR>]], {silent = false}) -- new tab
+as.map("n", "<leader>tf", [[:tabedit <C-R>=expand("%:p:h") . "/" <CR>]], { silent = false }) -- new file
+as.map("n", "<leader>tn", [[:tabnew<CR>]], { silent = false }) -- new tab
 
 -----------------------------------------------------------------------------//
 -- windows

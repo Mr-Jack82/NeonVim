@@ -1,15 +1,15 @@
 -- idea from https://github.com/akinsho/dotfiles
 --- store all callbacks in one global table so they are able to survive re-requiring this file
 _AsGlobalCallbacks = _AsGlobalCallbacks or {}
-DATA_PATH = vim.fn.stdpath("data")
+DATA_PATH = vim.fn.stdpath "data"
 
 _G.as = {
-    _store = _AsGlobalCallbacks
+    _store = _AsGlobalCallbacks,
 }
 
 -- mappings
 function as.map(mode, key, result, opts)
-    local options = {noremap = true, silent = true}
+    local options = { noremap = true, silent = true }
     if opts then
         options = vim.tbl_extend("force", options, opts)
     end
@@ -58,7 +58,7 @@ function as._lsp_auto(server)
 end
 
 function as._lsp_borders(value)
-    local opt = {"single", "double"}
+    local opt = { "single", "double" }
     if value ~= nil then
         for _, v in pairs(opt) do
             if value == v then

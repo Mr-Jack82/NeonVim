@@ -9,7 +9,7 @@ local function preview_location_callback(_, _, result)
     if result == nil or vim.tbl_isempty(result) then
         return nil
     end
-    vim.lsp.util.preview_location(result[1], {border = borders})
+    vim.lsp.util.preview_location(result[1], { border = borders })
 end
 
 function M.PeekDefinition()
@@ -18,11 +18,11 @@ function M.PeekDefinition()
 end
 
 -- zen mode
-local nu = {number = false, relativenumber = false}
-local ata = {window = {width = .70, options = nu}}
-local foc = {window = {width = 1}}
-local cen = {window = {width = .70}}
-local min = {window = {width = 1, options = nu}}
+local nu = { number = false, relativenumber = false }
+local ata = { window = { width = 0.70, options = nu } }
+local foc = { window = { width = 1 } }
+local cen = { window = { width = 0.70 } }
+local min = { window = { width = 1, options = nu } }
 
 function M.ataraxis()
     vim.cmd "packadd zen-mode.nvim"
@@ -46,7 +46,7 @@ end
 
 -- automatically creates missing directories when saving a file
 function M.mkdir()
-    local dir = vim.fn.expand("%:p:h")
+    local dir = vim.fn.expand "%:p:h"
 
     if vim.fn.isdirectory(dir) == 0 then
         vim.fn.mkdir(dir, "p")
@@ -56,14 +56,14 @@ end
 -- Reload
 -- NOTE: taken from https://github.com/famiu/nvim-reload
 -- ======================================
-local Path = require("plenary.path")
+local Path = require "plenary.path"
 local scan_dir = require("plenary.scandir").scan_dir
 
 -- Paths to unload Lua modules from
-M.lua_reload_dirs = {fn.stdpath("config")}
+M.lua_reload_dirs = { fn.stdpath "config" }
 
 -- Paths to reload Vim files from
-M.vim_reload_dirs = {fn.stdpath("config"), fn.stdpath("data") .. "/site/pack/*/start/*"}
+M.vim_reload_dirs = { fn.stdpath "config", fn.stdpath "data" .. "/site/pack/*/start/*" }
 
 -- External files outside the runtimepaths to source
 M.files_reload_external = {}
@@ -80,7 +80,7 @@ local viml_subdirs = {
     "doc",
     "keymap",
     "syntax",
-    "plugin"
+    "plugin",
 }
 
 -- Escape lua string
@@ -97,7 +97,7 @@ local function escape_str(str)
         "%*",
         "%+",
         "%-",
-        "%?"
+        "%?",
     }
 
     return string.gsub(str, string.format("([%s])", table.concat(patterns_to_escape)), "%%%1")
@@ -121,7 +121,7 @@ local function get_runtime_files_in_path(runtimepath)
         local viml_path = string.format("%s/%s", runtimepath, subdir)
 
         if path_exists(viml_path) then
-            local files = scan_dir(viml_path, {search_pattern = "%.n?vim$", hidden = true})
+            local files = scan_dir(viml_path, { search_pattern = "%.n?vim$", hidden = true })
 
             for _, file in ipairs(files) do
                 runtime_files[#runtime_files + 1] = file
@@ -140,7 +140,7 @@ local function get_lua_modules_in_path(runtimepath)
     end
 
     -- Search lua directory of runtimepath for modules
-    local modules = scan_dir(luapath, {search_pattern = "%.lua$", hidden = true})
+    local modules = scan_dir(luapath, { search_pattern = "%.lua$", hidden = true })
 
     for i, module in ipairs(modules) do
         -- asemove runtimepath and file extension from module path
@@ -208,21 +208,21 @@ function M.Reload()
     end
 
     -- Clear highlights
-    cmd("highlight clear")
+    cmd "highlight clear"
 
     -- Stop LSP if it's configured
-    if fn.exists(":LspStop") ~= 0 then
-        cmd("LspStop")
+    if fn.exists ":LspStop" ~= 0 then
+        cmd "LspStop"
     end
 
     -- Unload all already loaded modules
     unload_lua_modules()
 
     -- Source init file
-    if string.match(fn.expand("$MYVIMRC"), "%.lua$") then
-        cmd("luafile $MYVIMRC")
+    if string.match(fn.expand "$MYVIMRC", "%.lua$") then
+        cmd "luafile $MYVIMRC"
     else
-        cmd("source $MYVIMRC")
+        cmd "source $MYVIMRC"
     end
 
     -- aseload start plugins

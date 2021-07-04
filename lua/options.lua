@@ -19,7 +19,7 @@ vim.opt.fillchars = {
     msgsep = "‾",
     foldopen = "▾",
     foldsep = "│",
-    foldclose = "▸"
+    foldclose = "▸",
 }
 -- }}}
 -- Diff {{{
@@ -30,16 +30,16 @@ vim.opt.diffopt:append {
     "foldcolumn:0",
     "context:4",
     "algorithm:histogram",
-    "indent-heuristic"
+    "indent-heuristic",
 }
 -- }}}
 -- Grep program {{{
-if vim.fn.executable("rg") == 1 then
+if vim.fn.executable "rg" == 1 then
     vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 end
 -- }}}
 -- Display {{{
-vim.opt.colorcolumn = {as._default_num(vim.g.neon_colorcolumn, 0)}
+vim.opt.colorcolumn = { as._default_num(vim.g.neon_colorcolumn, 0) }
 vim.opt.cmdheight = as._default_num(vim.g.neon_cmdheight, 2)
 vim.opt.scrolloff = as._default_num(vim.g.neon_scrolloff, 10)
 vim.opt.conceallevel = 0
@@ -60,7 +60,15 @@ vim.opt.showmode = false
 -- List Chars {{{
 if as._default(vim.g.neon_listchars, false) == true then
     vim.opt.list = true
-    vim.opt.listchars = {trail = "•", eol = "↴", tab = "│⋅", extends = "❯", precedes = "❮", nbsp = "_", space = " "}
+    vim.opt.listchars = {
+        trail = "•",
+        eol = "↴",
+        tab = "│⋅",
+        extends = "❯",
+        precedes = "❮",
+        nbsp = "_",
+        space = " ",
+    }
 end
 -- }}}
 -- Indentation {{{
@@ -83,9 +91,9 @@ vim.opt.pumheight = as._default_num(vim.g.neon_compe_items, 10)
 vim.opt.completeopt = "menuone,noinsert,noselect"
 -- }}}
 -- Utils {{{
-vim.opt.shortmess:append("c")
-vim.opt.iskeyword:append("-")
-vim.opt.path:append(".,**")
+vim.opt.shortmess:append "c"
+vim.opt.iskeyword:append "-"
+vim.opt.path:append ".,**"
 vim.opt.foldmethod = "marker"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = "a"
@@ -154,7 +162,7 @@ vim.opt.wildignore = {
     ".lock",
     ".DS_Store",
     "._*",
-    "tags.lock"
+    "tags.lock",
 }
 -- }}}
 -- Autocommands {{{
