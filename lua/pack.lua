@@ -133,6 +133,7 @@ local pack_use = function()
         config = function()
             require("neogit").setup {
                 disable_context_highlighting = true,
+                disable_commit_confirmation = true,
                 integrations = { diffview = true },
                 signs = {
                     -- { CLOSED, OPENED }
@@ -176,7 +177,7 @@ local pack_use = function()
     -- General plugins
     -----------------------------------------------------------------------------//
     use "rafamadriz/themes.nvim"
-    use { "sbdchd/neoformat", event = "BufRead" }
+    use { "sbdchd/neoformat", event = "BufEnter" }
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
         "mhinz/vim-startify",
