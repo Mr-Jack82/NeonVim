@@ -1,6 +1,7 @@
 local pack_use = function()
     local use = require("packer").use
-    use "wbthomason/packer.nvim"
+    use { "wbthomason/packer.nvim", branch = "fix/no-overwrite-commands" }
+    -- use "dstein64/vim-startuptime"
     -----------------------------------------------------------------------------//
     -- Required by others
     -----------------------------------------------------------------------------//
@@ -27,22 +28,27 @@ local pack_use = function()
         "hrsh7th/nvim-compe",
         event = "InsertEnter",
         config = function()
-            require("plugins.completion").compe_config()
+            require "plugins.completion"
         end,
     }
     use {
-        "hrsh7th/vim-vsnip",
-        event = "InsertEnter",
-        requires = { "rafamadriz/friendly-snippets", after = "vim-vsnip" },
-        config = function()
-            require("plugins.completion").vsnip_config()
-        end,
+        { "rafamadriz/friendly-snippets", after = "vim-vsnip" },
+        {
+            "hrsh7th/vim-vsnip",
+            event = "InsertEnter",
+        },
     }
     use {
         "windwp/nvim-autopairs",
         after = "nvim-compe",
         config = function()
-            require("plugins.completion").autopairs_config()
+            if as._default(vim.g.neon_compe_autopairs) then
+                require("nvim-autopairs").setup { check_ts = true }
+                require("nvim-autopairs.completion.compe").setup {
+                    map_cr = true, --  map <CR> on insert mode
+                    map_complete = true, -- it will auto insert `(` after select function or method item
+                }
+            end
         end,
     }
     -----------------------------------------------------------------------------//
@@ -92,9 +98,9 @@ local pack_use = function()
         end,
     }
     -----------------------------------------------------------------------------//
-    -- Comments and Surround
+    -- Text Objects and Editing
     -----------------------------------------------------------------------------//
-    use { "machakann/vim-sandwich", keys = "s" }
+    use { "machakann/vim-sandwich", keys = { { "n", "s" }, { "v", "s" } } }
     use {
         "b3nj5m1n/kommentary",
         keys = { "gcc", "gc" },
@@ -132,7 +138,7 @@ local pack_use = function()
         wants = { "plenary.nvim", "diffview.nvim" },
         config = function()
             require("neogit").setup {
-                disable_context_highlighting = true,
+                disable_context_highlighting = false,
                 disable_commit_confirmation = true,
                 integrations = { diffview = true },
                 signs = {
@@ -168,7 +174,7 @@ local pack_use = function()
         "ruifm/gitlinker.nvim",
         opt = true,
         wants = "plenary.nvim",
-        keys = "<leader>gy",
+        keys = { "<leader>gy" },
         config = function()
             require("gitlinker").setup()
         end,
@@ -181,6 +187,7 @@ local pack_use = function()
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
         "mhinz/vim-startify",
+        event = "VimEnter",
         config = function()
             require "plugins.startify"
         end,
@@ -257,7 +264,7 @@ end
 
 local fn, execute = vim.fn, vim.api.nvim_command
 local install_path = DATA_PATH .. "/site/pack/packer/start/packer.nvim"
-local compile_path = install_path .. "/plugin/packer_compiled.vim"
+local compile_path = install_path .. "/plugin/packer_compiled.lua"
 
 local function load_plugins()
     local pack = require "packer"

@@ -50,6 +50,7 @@ g.neon_lsp_autostart_blacklist = { "lua" }
 --- Completion
 -----------------------------------------------------------------------------//
 g.neon_compe_enabled = true
+g.neon_compe_doc_window = "single"
 g.neon_compe_autopairs = true
 g.neon_compe_items = 10
 g.neon_compe_sources_blacklist = {}
@@ -58,7 +59,8 @@ g.neon_compe_sources_blacklist = {}
 --- Treesitter
 -----------------------------------------------------------------------------//
 g.neon_treesitter_enabled = true
-g.neon_treesitter_parsers = "maintained"
+g.neon_treesitter_parsers_install = "maintained"
+g.neon_treesitter_parsers_ignore = { "turtle", "verilog", "beancount" }
 
 -----------------------------------------------------------------------------//
 -- Startify

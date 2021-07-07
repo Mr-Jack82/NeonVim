@@ -3,12 +3,15 @@
 
 local fn = vim.fn
 local install_path = "/tmp/nvim/site/pack/packer/start/packer.nvim"
+local compile_path = install_path .. "/plugin/packer_compiled.lua"
 
 vim.cmd [[set packpath=/tmp/nvim/site]]
 
 local function load_plugins()
-    local use = require("packer").use
-    require("packer").startup {
+    local pack = require "packer"
+    local use = pack.use
+    pack.init { compile_path = compile_path }
+    pack.startup {
         function()
             use "wbthomason/packer.nvim"
             -- Put plugins to install here:

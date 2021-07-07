@@ -3,9 +3,11 @@ vim.opt.timeoutlen = as._default_num(vim.g.neon_timeoutlen, 500)
 vim.opt.updatetime = as._default_num(vim.g.neon_updatetime, 300)
 vim.opt.ttimeoutlen = 10
 -- }}}
+-----------------------------------------------------------------------------//
 -- Theme {{{
 vim.cmd("colorscheme " .. as.select_theme(vim.g.neon_colorscheme))
 -- }}}
+-----------------------------------------------------------------------------//
 -- Window splitting and buffers {{{
 vim.opt.hidden = true
 vim.opt.splitbelow = true
@@ -22,6 +24,7 @@ vim.opt.fillchars = {
     foldclose = "▸",
 }
 -- }}}
+-----------------------------------------------------------------------------//
 -- Diff {{{
 vim.opt.diffopt:append {
     "vertical",
@@ -33,11 +36,13 @@ vim.opt.diffopt:append {
     "indent-heuristic",
 }
 -- }}}
+-----------------------------------------------------------------------------//
 -- Grep program {{{
 if vim.fn.executable "rg" == 1 then
     vim.opt.grepprg = "rg --vimgrep --no-heading --smart-case"
 end
 -- }}}
+-----------------------------------------------------------------------------//
 -- Display {{{
 vim.opt.colorcolumn = { as._default_num(vim.g.neon_colorcolumn, 0) }
 vim.opt.cmdheight = as._default_num(vim.g.neon_cmdheight, 2)
@@ -57,6 +62,7 @@ vim.opt.confirm = true -- make vim prompt to save before doing destructive thing
 vim.opt.fileencoding = "utf-8"
 vim.opt.showmode = false
 -- }}}
+-----------------------------------------------------------------------------//
 -- List Chars {{{
 if as._default(vim.g.neon_listchars, false) == true then
     vim.opt.list = true
@@ -71,6 +77,7 @@ if as._default(vim.g.neon_listchars, false) == true then
     }
 end
 -- }}}
+-----------------------------------------------------------------------------//
 -- Indentation {{{
 local indent = as._default_num(vim.g.neon_indent_size, 2)
 vim.opt.wrap = as._default(vim.g.neon_word_wrap, false)
@@ -82,6 +89,7 @@ vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.smarttab = true
 -- }}}
+-----------------------------------------------------------------------------//
 -- Search and Complete {{{
 vim.opt.incsearch = true
 vim.opt.ignorecase = true
@@ -90,14 +98,21 @@ vim.opt.inccommand = "nosplit"
 vim.opt.pumheight = as._default_num(vim.g.neon_compe_items, 10)
 vim.opt.completeopt = "menuone,noinsert,noselect"
 -- }}}
+-----------------------------------------------------------------------------//
 -- Utils {{{
 vim.opt.shortmess:append "c"
 vim.opt.iskeyword:append "-"
 vim.opt.path:append ".,**"
-vim.opt.foldmethod = "marker"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = "a"
 -- }}}
+-----------------------------------------------------------------------------//
+-- Folds {{{
+vim.opt.foldlevelstart = 3
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "expr"
+-- }}}
+-----------------------------------------------------------------------------//
 -- Disable some builtin plugins {{{
 vim.g.loaded_gzip = 1
 vim.g.loaded_tar = 1
@@ -110,12 +125,14 @@ vim.g.loaded_spec = 1
 -- vim.g.loaded_matchit = 1
 -- vim.g.loaded_matchparen = 1
 -- }}}
+-----------------------------------------------------------------------------//
 -- BACKUP AND SWAP {{{
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.backup = false
 vim.opt.writebackup = false
 -- }}}
+-----------------------------------------------------------------------------//
 -- Wild and file globbing stuff in command mode {{{
 vim.opt.wildignorecase = true -- Ignore case when completing file names and directories
 vim.opt.wildmode = "full"
@@ -165,7 +182,8 @@ vim.opt.wildignore = {
     "tags.lock",
 }
 -- }}}
--- Autocommands {{{
+-----------------------------------------------------------------------------//
+-- Autocommands {{{1
 as.check_and_set(vim.g.neon_trim_trailing_space, "BufWritePre", "*", [[%s/\s\+$//e]])
 as.check_and_set(vim.g.neon_trim_trailing_space, "BufWritePre", "*", [[%s/\n\+\%$//e]])
 as.check_and_set(
@@ -187,3 +205,4 @@ as.check_and_set(
     [[try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry]]
 )
 -- }}}
+-- vim:foldmethod=marker

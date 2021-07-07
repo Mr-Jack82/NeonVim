@@ -2,6 +2,7 @@
 augroup Filetypes
   au!
   au BufNewFile,BufRead *.ejs,*.hbs set filetype=html
+  au BufWritePost config.lua PackerCompile
 augroup END
 
 " Terminal
