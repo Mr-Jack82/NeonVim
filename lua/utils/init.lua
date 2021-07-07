@@ -1,4 +1,3 @@
--- idea from https://github.com/akinsho/dotfiles
 --- store all callbacks in one global table so they are able to survive re-requiring this file
 _AsGlobalCallbacks = _AsGlobalCallbacks or {}
 DATA_PATH = vim.fn.stdpath "data"

@@ -22,3 +22,9 @@ augroup Mkdir
     au!
     au BufWritePre * lua require'utils.extra'.mkdir()
 augroup END
+
+" exit LspInfo window with q"
+augroup LspInfo
+    au!
+    au FileType lspinfo nnoremap <silent> <buffer> q :q<CR>
+augroup END

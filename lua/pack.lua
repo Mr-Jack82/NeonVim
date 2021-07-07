@@ -68,8 +68,8 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use {
         "nvim-treesitter/nvim-treesitter",
-        event = "BufRead",
         run = ":TSUpdate",
+        event = "BufRead",
         config = function()
             require "plugins.treesitter"
         end,
@@ -255,17 +255,19 @@ local pack_use = function()
     }
 end
 
+local fn, execute = vim.fn, vim.api.nvim_command
+local install_path = DATA_PATH .. "/site/pack/packer/start/packer.nvim"
+local compile_path = install_path .. "/plugin/packer_compiled.vim"
+
 local function load_plugins()
-    require("packer").startup {
+    local pack = require "packer"
+    pack.init { compile_path = compile_path }
+    pack.startup {
         function()
             pack_use()
         end,
     }
 end
-
-local fn = vim.fn
-local execute = vim.api.nvim_command
-local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
 
 if fn.empty(fn.glob(install_path)) > 0 then
     execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)

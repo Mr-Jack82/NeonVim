@@ -63,7 +63,7 @@ if as._default(vim.g.neon_listchars, false) == true then
     vim.opt.listchars = {
         trail = "•",
         eol = "↴",
-        tab = "│⋅",
+        tab = "» ",
         extends = "❯",
         precedes = "❮",
         nbsp = "_",

@@ -1,4 +1,4 @@
-if as._default(vim.g.neon_treesitter_enabled) == true then
+if as._default(vim.g.neon_treesitter_enabled) then
     require("nvim-treesitter.configs").setup {
         ensure_installed = vim.g.neon_treesitter_parsers or "all",
         highlight = {
@@ -6,5 +6,13 @@ if as._default(vim.g.neon_treesitter_enabled) == true then
             use_languagetree = true,
         },
         indent = { enable = true },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "<C-n>",
+                node_incremental = "<C-n>",
+                scope_incremental = "<C-s>",
+            },
+        },
     }
 end

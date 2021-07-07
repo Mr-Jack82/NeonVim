@@ -40,9 +40,9 @@ require("which-key").setup {
         padding = { 1, 1, 1, 1 }, -- extra window padding [top, right, bottom, left]
     },
     layout = {
-        height = { min = 4, max = 25 }, -- min and max height of the columns
-        width = { min = 20, max = 50 }, -- min and max width of the columns
-        spacing = 5, -- spacing between columns
+        height = { min = 3, max = 25 }, -- min and max height of the columns
+        width = { min = 10, max = 40 }, -- min and max width of the columns
+        spacing = 3, -- spacing between columns
     },
     hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
     show_help = true, -- show help message on the command line when the popup is visible
@@ -60,22 +60,23 @@ local opts = {
 
 local mappings = {
     ["<leader>"] = {
-        ["<space>"] = "find file in project",
+        ["<space>"] = "file in project",
         ["/"] = "search in project",
         ["e"] = "explorer",
         ["u"] = "undotree",
         h = {
             name = "help",
-            v = "vim help",
+            h = "help tags",
             m = "man pages",
+            o = "options nvim",
             t = "theme",
             p = {
                 name = "plugins",
                 u = "update",
                 i = "install",
                 S = "sync",
-                c = "clean",
-                C = "compile",
+                c = "compile",
+                C = "clean",
                 s = "status",
                 h = "help packer",
             },
@@ -87,13 +88,14 @@ local mappings = {
             s = "save buffer",
             S = "save all buffers",
             q = "quit buffer",
-            Q = "quit all buffers but current",
+            Q = "quit all other buffers",
             n = "new buffer",
             f = "new file",
             v = "new file in split",
             ["]"] = "next buffer",
             ["["] = "previous buffer",
             ["%"] = "source file",
+            ["<C-t>"] = "focus in new tab",
         },
         t = {
             name = "tabs",
@@ -120,18 +122,21 @@ local mappings = {
             ["-"] = "decrease height",
             [">"] = "increase width",
             ["<"] = "decrease width",
-            ["="] = "equally high and width",
+            ["="] = "normalize split layout",
         },
         f = {
             name = "find",
-            b = "buffer fuzzy finder",
+            b = "grep buffer",
             C = "command history",
             c = "commands",
             s = "search history",
             f = "file",
-            g = "grep text",
+            g = "grep project",
             n = "nvim dotfiles",
             r = "recent files",
+            R = "registers",
+            q = "quickfix",
+            l = "loclist",
         },
         g = {
             name = "git",
@@ -166,15 +171,20 @@ local mappings = {
             l = "session load",
             r = "session reload",
         },
-        o = {
-            name = "open/run",
-            [","] = "Home",
+        r = {
+            name = "run/open",
+            ["|"] = "toggle color column",
+            ["'"] = "Home",
+            r = "repeat last command",
+            i = "indent guides toggle",
             t = "terminal",
             b = "file browser",
             f = "find current file",
             e = "explorer",
             u = "undotree",
             n = "neovim config",
+            K = "append line up",
+            J = "append line down",
             c = {
                 name = "colorizer",
                 a = "attach to buffer",
@@ -194,6 +204,18 @@ local mappings = {
         ["p"] = "select last pasted text",
         ["c"] = "comment text",
         ["cc"] = "comment line",
+    },
+    ["["] = {
+        l = "location prev",
+        L = "location first",
+        q = "quickfix prev",
+        Q = "quickfix first",
+    },
+    ["]"] = {
+        l = "location next",
+        L = "location last",
+        q = "quickfix next",
+        Q = "quickfix last",
     },
 }
 

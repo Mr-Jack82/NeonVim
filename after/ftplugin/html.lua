@@ -5,7 +5,7 @@ vim.opt_local.softtabstop = 2
 
 local mappings = {
     ["<leader>"] = {
-        o = {
+        r = {
             l = "live server",
             ll = { "<cmd>Bracey<cr>", "live start" },
             ls = { "<cmd>BraceyStop<cr>", "stop" },

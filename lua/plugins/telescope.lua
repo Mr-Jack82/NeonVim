@@ -11,7 +11,7 @@ require("telescope").setup {
             "--smart-case",
         },
         prompt_prefix = "  ",
-        selection_caret = " ",
+        selection_caret = "❯ ",
         sorting_strategy = "descending",
         layout_strategy = "horizontal",
         layout_config = { height = 0.75, width = 0.8 },

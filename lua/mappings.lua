@@ -5,6 +5,8 @@ In telescope use <C-q> to send all results to quickfix and <M-q> or
 
  You can use a regex pattern as part of a range in command mode, E.g.
  :3,/stop/s/hello/world/g ]]
+
+-- TODO: Refactor whenever https://github.com/neovim/neovim/pull/13823 gets merged
 -----------------------------------------------------------------------------//
 
 vim.g.mapleader = " "
@@ -13,6 +15,7 @@ vim.g.mapleader = " "
 -- Basics
 -----------------------------------------------------------------------------//
 as.map("n", "Y", "y$")
+as.map("v", "Y", "<ESC>y$gv")
 as.map("n", "Q", "<Nop>")
 as.map("i", "jk", "<ESC>")
 as.map("n", "<BS>", "<C-^>")
@@ -34,18 +37,14 @@ as.map("v", "p", "p`]")
 as.map("n", "p", "p`]")
 -- Select last pasted text
 as.map("n", "gp", "'`[' . strpart(getregtype(), 0, 1) . '`]'", { expr = true })
-
------------------------------------------------------------------------------//
--- Windows
------------------------------------------------------------------------------//
-as.map("n", "<C-h>", "<C-w>h")
-as.map("n", "<C-j>", "<C-w>j")
-as.map("n", "<C-k>", "<C-w>k")
-as.map("n", "<C-l>", "<C-w>l")
-as.map("n", "<S-k>", ":resize -2<CR>")
-as.map("n", "<S-j>", ":resize +2<CR>")
-as.map("n", "<S-h>", ":vertical resize -2<CR>")
-as.map("n", "<S-l>", ":vertical resize +2<CR>")
+-- Beginning and end of line in `:` command mode
+as.map("c", "<C-a>", "<home>")
+as.map("c", "<C-e>", "<end>")
+-- Keep visual selection when indenting
+as.map("v", "<", "<gv")
+as.map("v", ">", ">gv")
+-- Search and replace
+as.map("n", "c.", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 
 -----------------------------------------------------------------------------//
 -- File manager, undotree
@@ -56,9 +55,10 @@ as.map("n", "<leader>u", ":UndotreeToggle<CR>")
 -----------------------------------------------------------------------------//
 -- help
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>hv", ":Telescope help_tags<CR>")
+as.map("n", "<leader>hh", ":Telescope help_tags<CR>")
 as.map("n", "<leader>hm", ":Telescope man_pages<CR>")
 as.map("n", "<leader>ht", ":Telescope colorscheme<CR>")
+as.map("n", "<leader>ho", ":Telescope vim_options<CR>")
 as.map("n", "<leader>hpi", ":PackerInstall<CR>")
 as.map("n", "<leader>hpu", ":PackerUpdate<CR>")
 as.map("n", "<leader>hps", ":PackerStatus<CR>")
@@ -72,8 +72,10 @@ as.map("n", "<leader>hph", ":help packer.txt<CR>")
 -----------------------------------------------------------------------------//
 as.map("n", "<TAB>", ":bnext<CR>") -- buffer next
 as.map("n", "<S-TAB>", ":bprevious<CR>") -- buffer previous
+as.map("n", "<leader>b<C-t>", ":lua require'utils.extra'.buf_to_tab()<CR>") -- focus in new tab
 as.map("n", "<leader>bb", ":Telescope buffers theme=get_dropdown<CR>") -- all buffers
 as.map("n", "<leader>bs", ":update<CR>") -- save buffer
+as.map("v", "<leader>bs", "<ESC>:update<CR>") -- save buffer
 as.map("n", "<leader>bS", ":silent! wa<CR>") -- save all buffers
 as.map("n", "<leader>bq", ":update | bdelete<CR>") -- quit buffer
 as.map("n", "<leader>bQ", [[<cmd>w <bar> %bd <bar> e#<CR>]]) -- quit all buffers but current
@@ -97,6 +99,14 @@ as.map("n", "<leader>tn", [[:tabnew<CR>]], { silent = false }) -- new tab
 -----------------------------------------------------------------------------//
 -- windows
 -----------------------------------------------------------------------------//
+as.map("n", "<C-h>", "<C-w>h")
+as.map("n", "<C-j>", "<C-w>j")
+as.map("n", "<C-k>", "<C-w>k")
+as.map("n", "<C-l>", "<C-w>l")
+as.map("n", "<S-Up>", ":lua require'utils.extra'.resize(false, -2)<CR>")
+as.map("n", "<S-Down>", ":lua require'utils.extra'.resize(false, 2)<CR>")
+as.map("n", "<S-Left>", ":lua require'utils.extra'.resize(true, -2)<CR>")
+as.map("n", "<S-Right>", ":lua require'utils.extra'.resize(true, 2)<CR>")
 as.map("n", "<leader>ww", "<C-w>q") -- cycle through window
 as.map("n", "<leader>wq", "<C-w>q") -- quit window
 as.map("n", "<leader>ws", "<C-w>s") -- split window
@@ -113,6 +123,18 @@ as.map("n", "<leader>w<", ":vertical resize -10<CR>") -- decrease width
 as.map("n", "<leader>w>", ":vertical resize +10<CR>") -- increase width
 as.map("n", "<leader>w-", ":resize -15<CR>") -- decrease height
 as.map("n", "<leader>w+", ":resize +15<CR>") -- increase height
+
+-----------------------------------------------------------------------------//
+-- Quickfix list mappings
+-----------------------------------------------------------------------------//
+as.map("n", "[q", ":cprevious<CR>")
+as.map("n", "]q", ":cnext<CR>")
+as.map("n", "[Q", ":cfirst<CR>")
+as.map("n", "]Q", ":clast<CR>")
+as.map("n", "[l", ":lprevious<CR>")
+as.map("n", "]l", ":lnext<CR>")
+as.map("n", "[L", ":lfirst<CR>")
+as.map("n", "]L", ":llast<CR>")
 
 -----------------------------------------------------------------------------//
 -- Git
@@ -140,12 +162,15 @@ as.map("n", "<leader>g]", ":Gitsigns next_hunk<CR>") -- next hunk
 as.map("n", "<leader><space>", ":Telescope find_files<CR>")
 as.map("n", "<leader>/", ":Telescope live_grep theme=get_ivy<CR>")
 as.map("n", "<leader>ff", ":Telescope find_files<CR>")
+as.map("n", "<leader>fR", ":Telescope registers<CR>")
 as.map("n", "<leader>fr", ":Telescope oldfiles<CR>")
 as.map("n", "<leader>fg", ":Telescope live_grep theme=get_ivy<CR>")
 as.map("n", "<leader>fb", ":Telescope current_buffer_fuzzy_find theme=get_ivy<CR>")
 as.map("n", "<leader>fC", ":Telescope command_history<CR>")
 as.map("n", "<leader>fc", ":Telescope commands<CR>")
 as.map("n", "<leader>fs", ":Telescope search_history<CR>")
+as.map("n", "<leader>fq", ":Telescope quickfix<CR>")
+as.map("n", "<leader>fl", ":Telescope loclist<CR>")
 as.map("n", "<leader>fn", ":Telescope fd cwd=$HOME/.config/nvim/<CR>")
 
 -----------------------------------------------------------------------------//
@@ -169,12 +194,17 @@ as.map("n", "<leader>sr", ":lua require('utils.extra').Reload()<CR>")
 -----------------------------------------------------------------------------//
 -- Open/Run
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>o,", ":Startify<CR>")
-as.map("n", "<leader>ot", ":ToggleTerm<CR>")
-as.map("n", "<leader>ob", ":Telescope file_browser<CR>")
-as.map("n", "<leader>of", ":NvimTreeFindFile<CR>")
-as.map("n", "<leader>oe", ":NvimTreetoggle<CR>")
-as.map("n", "<leader>ou", ":UndotreeToggle<CR>")
-as.map("n", "<leader>on", ":vsp ~/.config/nvim/lua/config.lua<CR>")
-as.map("n", "<leader>oca", ":ColorizerAttachToBuffer<CR>")
-as.map("n", "<leader>oct", ":ColorizerToggle<CR>")
+as.map("n", "<leader>r|", [[:execute "set colorcolumn=" . (&colorcolumn == "0" ? "81" : "")<CR>]])
+as.map("n", "<leader>rr", "@:<CR>")
+as.map("n", "<leader>r'", ":Startify<CR>")
+as.map("n", "<leader>ri", ":IndentBlanklineToggle<CR>")
+as.map("n", "<leader>rt", ":ToggleTerm<CR>")
+as.map("n", "<leader>rb", ":Telescope file_browser<CR>")
+as.map("n", "<leader>rf", ":NvimTreeFindFile<CR>")
+as.map("n", "<leader>re", ":NvimTreetoggle<CR>")
+as.map("n", "<leader>ru", ":UndotreeToggle<CR>")
+as.map("n", "<leader>rn", ":vsp ~/.config/nvim/lua/config.lua<CR>")
+as.map("n", "<leader>rca", ":ColorizerAttachToBuffer<CR>")
+as.map("n", "<leader>rct", ":ColorizerToggle<CR>")
+as.map("n", "<leader>rJ", [[:<C-u>call append(line("."), repeat([""], v:count1))<CR>]]) -- append line down without insert mode
+as.map("n", "<leader>rK", [[:<C-u>call append(line(".")-1, repeat([""], v:count1))<CR>]]) -- append line up without insert mode
