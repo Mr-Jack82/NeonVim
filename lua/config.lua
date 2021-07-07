@@ -58,7 +58,7 @@ g.neon_compe_sources_blacklist = {}
 --- Treesitter
 -----------------------------------------------------------------------------//
 g.neon_treesitter_enabled = true
-g.neon_treesitter_parsers = "all"
+g.neon_treesitter_parsers = "maintained"
 
 -----------------------------------------------------------------------------//
 -- Startify

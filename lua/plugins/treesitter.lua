@@ -1,6 +1,6 @@
 if as._default(vim.g.neon_treesitter_enabled) then
     require("nvim-treesitter.configs").setup {
-        ensure_installed = vim.g.neon_treesitter_parsers or "all",
+        ensure_installed = vim.g.neon_treesitter_parsers or "maintained",
         highlight = {
             enable = true, -- false will disable the whole extension
             use_languagetree = true,
