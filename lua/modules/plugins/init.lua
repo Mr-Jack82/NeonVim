@@ -271,19 +271,17 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- my plugins
     -----------------------------------------------------------------------------//
+    use "tpope/vim-surround"
+    use "tpope/vim-repeat"
+    use "tpope/vim-fugitive"
+    use "junegunn/vim-easy-align"
+    use "editorconfig/editorconfig-vim"
+    use "tpope/vim-unimpaired"
+    use "easymotion/vim-easymotion"
+    use "907th/vim-auto-save"
     use {
-        "tpope/vim-surround",
-        "tpope/vim-repeat",
-        "tpope/vim-fugitive",
-        "junegunn/vim-easy-align",
-        "editorconfig/editorconfig-vim",
-        "tpope/vim-unimpaired",
-        "easymotion/vim-easymotion",
-        "907th/vim-auto-save",
-        {
         "andymass/vim-matchup",
         ft = {'html', 'javascript', 'json', 'xml'}
-        }
     }
 
     use {
