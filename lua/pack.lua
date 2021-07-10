@@ -83,6 +83,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use {
         "kyazdani42/nvim-tree.lua",
+        commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
         wants = "nvim-web-devicons",
         cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
         config = function()
@@ -173,7 +174,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- General plugins {{{1
     -----------------------------------------------------------------------------//
-    use "~/code/themes.nvim"
+    use "rafamadriz/themes.nvim"
     use { "sbdchd/neoformat", event = "BufEnter" }
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
