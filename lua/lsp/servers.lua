@@ -32,7 +32,7 @@ local function common_on_attach(client, bufnr)
         documentHighlight(client, bufnr)
     end
     if as._default(vim.g.neon_lsp_signature_help) then
-        require("lsp_signature").on_attach { max_width = 100 }
+        require("lsp_signature").on_attach { max_width = 90, fix_pos = true, hint_prefix = " " }
     end
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     -- mappings
