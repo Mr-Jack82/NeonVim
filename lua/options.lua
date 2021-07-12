@@ -208,6 +208,6 @@ as.check_and_set(
     "*",
     [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
 )
-as.check_and_set(vim.g.neon_format_on_save, "BufWritePre", "*", "undojoin | Neoformat")
+as.check_and_set(vim.g.neon_format_on_save, "BufWritePre", "*", "silent undojoin | Neoformat")
 -- }}}
 -- vim:foldmethod=marker:foldlevel=0
