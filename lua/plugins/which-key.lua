@@ -50,14 +50,7 @@ require("which-key").setup {
     -- triggers = {"<leader>"} -- or specifiy a list manually
 }
 
-local opts = {
-    mode = "n", -- NORMAL mode
-    buffer = nil, -- Global mappings. Specify a buffer number for buffer local mappings
-    silent = true, -- use `silent` when creating keymaps
-    noremap = true, -- use `noremap` when creating keymaps
-    nowait = false, -- use `nowait` when creating keymaps
-}
-
+-- Normal Mode {{{1
 local mappings = {
     ["<leader>"] = {
         ["<space>"] = "file in project",
@@ -225,6 +218,15 @@ local mappings = {
         Q = "quickfix last",
     },
 }
+-- Visual Mode {{{1
+local visual = {
+    ["<leader>"] = {
+        ["b"] = { name = "buffers", s = "save buffer" },
+    },
+}
+-- }}}
 
 local wk = require "which-key"
-wk.register(mappings, opts)
+wk.register(mappings, { mode = "n" })
+wk.register(visual, { mode = "v" })
+-- vim:foldmethod=marker:foldlevel=0

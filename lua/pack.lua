@@ -1,7 +1,6 @@
 local pack_use = function()
     local use = require("packer").use
     use "wbthomason/packer.nvim"
-    use { "dstein64/vim-startuptime", cmd = "StartupTime" }
     -----------------------------------------------------------------------------//
     -- Required by others {{{1
     -----------------------------------------------------------------------------//
@@ -53,7 +52,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use {
         "nvim-telescope/telescope.nvim",
-        wants = { "plenary.nvim", "popup.nvim", "telescope-fzf-native.nvim" },
+        requires = { "plenary.nvim", "popup.nvim", "telescope-fzf-native.nvim" },
         cmd = "Telescope",
         requires = {
             {
@@ -69,7 +68,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- Treesitter {{{1
     -----------------------------------------------------------------------------//
-    use { "nvim-treesitter/playground", after = "nvim-treesitter" }
+    use { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" }
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
@@ -83,8 +82,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use {
         "kyazdani42/nvim-tree.lua",
-        commit = "fd7f60e242205ea9efc9649101c81a07d5f458bb",
-        wants = "nvim-web-devicons",
+        requires = "nvim-web-devicons",
         cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
         config = function()
             require "plugins.tree"
@@ -92,6 +90,7 @@ local pack_use = function()
     }
     use {
         "folke/which-key.nvim",
+        event = "BufWinEnter",
         config = function()
             require "plugins.which-key"
         end,
@@ -130,7 +129,7 @@ local pack_use = function()
     use {
         "TimUntersberger/neogit",
         cmd = "Neogit",
-        wants = { "plenary.nvim", "diffview.nvim" },
+        requires = { "plenary.nvim", "diffview.nvim" },
         config = function()
             require("neogit").setup {
                 disable_context_highlighting = false,
@@ -148,7 +147,7 @@ local pack_use = function()
     use {
         "lewis6991/gitsigns.nvim",
         event = "BufRead",
-        wants = "plenary.nvim",
+        requires = "plenary.nvim",
         config = function()
             require("gitsigns").setup {
                 signs = {
@@ -165,7 +164,7 @@ local pack_use = function()
     use {
         "ruifm/gitlinker.nvim",
         opt = true,
-        wants = "plenary.nvim",
+        requires = "plenary.nvim",
         keys = { "<leader>gy" },
         config = function()
             require("gitlinker").setup()
@@ -175,8 +174,12 @@ local pack_use = function()
     -- General plugins {{{1
     -----------------------------------------------------------------------------//
     use "rafamadriz/themes.nvim"
-    use { "sbdchd/neoformat", event = "BufEnter" }
+    use { "sbdchd/neoformat", cmd = "Neoformat" }
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
+    use {
+        "airblade/vim-rooter",
+        config = "vim.g.rooter_silent_chdir = 1",
+    }
     use {
         "mhinz/vim-startify",
         event = "VimEnter",
@@ -206,7 +209,9 @@ local pack_use = function()
     }
     use {
         "lukas-reineke/indent-blankline.nvim",
-        event = "BufReadPre",
+        cond = function()
+            return as._default(vim.g.neon_indent_guides)
+        end,
         config = function()
             require "plugins.indent-guides"
         end,

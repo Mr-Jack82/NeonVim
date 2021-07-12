@@ -2,7 +2,7 @@ local g = vim.g
 -----------------------------------------------------------------------------//
 --- General Settings
 -----------------------------------------------------------------------------//
-g.neon_timeoutlen = 400
+g.neon_timeoutlen = 300
 g.neon_colorcolumn = 0
 g.neon_cmdheight = 1
 g.neon_updatetime = 300
