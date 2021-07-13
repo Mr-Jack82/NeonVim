@@ -173,8 +173,14 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- General plugins {{{1
     -----------------------------------------------------------------------------//
+    use {
+        "mhartington/formatter.nvim",
+        cmd = { "Format", "FormatWrite" },
+        config = function()
+            require "plugins.formatter"
+        end,
+    }
     use "rafamadriz/themes.nvim"
-    use { "sbdchd/neoformat", cmd = "Neoformat" }
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
         "airblade/vim-rooter",

@@ -173,7 +173,8 @@ local mappings = {
             t = "open terminal",
             g = "gitsigns refresh",
             b = "open file browser",
-            f = "find current file",
+            ["."] = "find current file",
+            f = "format",
             e = "open explorer",
             u = "open undotree",
             n = "open neovim config",
@@ -222,6 +223,8 @@ local mappings = {
 local visual = {
     ["<leader>"] = {
         ["b"] = { name = "buffers", s = "save buffer" },
+        ["g"] = { name = "git link", y = "copy permalink selection" },
+        ["f"] = { "format selection" },
     },
 }
 -- }}}
