@@ -1,21 +1,20 @@
 vim.g.startify_lists = {
     { type = "sessions", header = { "   Sessions" } },
+    { type = "commands", header = { "   " } },
     { type = "files", header = { "   Recent Files" } },
-    { type = "commands", header = { "   Commands" } },
     { type = "bookmarks", header = { "   Bookmarks" } },
 }
 vim.g.startify_bookmarks = {
     { i = "~/.config/nvim/init.lua" },
     { c = "~/.config/nvim/lua/config.lua" },
     { p = "~/.config/nvim/lua/pack.lua" },
-    { z = "~/.config/zsh/.zshrc" },
-    { E = "~/.zshenv" },
 }
 vim.g.startify_commands = {
     { "Find files", ":Telescope fd" },
+    { "Recent files", ":Telescope oldfiles" },
     { "Execute command", ":Telescope commands" },
-    { "Sync Plugins", ":PackerSync" },
     { "Help Tags", ":Telescope help_tags" },
+    { "Sync Plugins", ":PackerSync" },
     { "Planets", ":Telescope planets" },
 }
 
