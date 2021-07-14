@@ -184,6 +184,7 @@ local pack_use = function()
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
         "airblade/vim-rooter",
+        event = "BufRead",
         config = "vim.g.rooter_silent_chdir = 1",
     }
     use {

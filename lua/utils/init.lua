@@ -26,6 +26,13 @@ function as.check_and_set(option, au_type, where, dispatch, boolean)
     end
 end
 
+-- inspect
+function as.dump(...)
+    local objects = vim.tbl_map(vim.inspect, { ... })
+    print(unpack(objects))
+    return ...
+end
+
 -- default option
 function as._default(option, boolean)
     if option == true or option == nil and boolean == nil then
