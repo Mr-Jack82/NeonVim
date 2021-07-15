@@ -3,8 +3,8 @@ local map = vim.api.nvim_set_keymap
 
 M.compe = function()
     require("compe").setup {
-        enabled = as._default(vim.g.neon_compe_enabled),
-        autocomplete = as._default(vim.g.neon_compe_autocomplete),
+        enabled = true,
+        autocomplete = as._default(vim.g.code_compe_autocomplete),
         debug = false,
         min_length = 2,
         preselect = "always",
@@ -15,7 +15,7 @@ M.compe = function()
         max_kind_width = 100,
         max_menu_width = 100,
         documentation = {
-            border = as._lsp_borders(vim.g.neon_compe_doc_window_border), -- the border option is the same as `|help nvim_open_win|`
+            border = as._lsp_borders(vim.g.code_compe_doc_window_border), -- the border option is the same as `|help nvim_open_win|`
             max_width = 60,
             min_width = 60,
         },
@@ -95,7 +95,7 @@ M.compe = function()
 end
 
 M.autopairs = function()
-    if as._default(vim.g.neon_compe_autopairs) then
+    if as._default(vim.g.code_compe_autopairs) then
         require("nvim-autopairs").setup { check_ts = true }
         require("nvim-autopairs.completion.compe").setup {
             map_cr = true, --  map <CR> on insert mode

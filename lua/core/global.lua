@@ -51,7 +51,7 @@ function as._default_num(option, int)
 end
 
 function as._lsp_auto(server)
-    local blacklist = vim.g.neon_lsp_autostart_blacklist
+    local blacklist = vim.g.code_lsp_autostart_blacklist
     if blacklist == nil or #blacklist < 1 then
         return true
     end
@@ -76,7 +76,7 @@ function as._lsp_borders(value)
 end
 
 function as._compe(source, component)
-    local blacklist = vim.g.neon_compe_sources_blacklist
+    local blacklist = vim.g.code_compe_sources_blacklist
     if blacklist ~= nil then
         for _, v in pairs(blacklist) do
             if source == v then

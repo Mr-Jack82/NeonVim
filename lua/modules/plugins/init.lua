@@ -12,16 +12,16 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use { "ray-x/lsp_signature.nvim" }
     use {
+        "neovim/nvim-lspconfig",
+        config = function()
+            require "modules.lsp"
+        end,
+    }
+    use {
         "kabouzeid/nvim-lspinstall",
         after = "nvim-lspconfig",
         config = function()
             require "modules.lsp.servers"
-        end,
-    }
-    use {
-        "neovim/nvim-lspconfig",
-        config = function()
-            require "modules.lsp"
         end,
     }
     -----------------------------------------------------------------------------//
@@ -40,13 +40,13 @@ local pack_use = function()
     -- Telescope {{{1
     -----------------------------------------------------------------------------//
     use {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        opt = true,
+        run = "make",
+    }
+    use {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
-        requires = {
-            "nvim-telescope/telescope-fzf-native.nvim",
-            opt = true,
-            run = "make",
-        },
         config = function()
             require("modules.plugins.telescope").config()
         end,
@@ -55,7 +55,6 @@ local pack_use = function()
     -- Treesitter {{{1
     -----------------------------------------------------------------------------//
     use { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" }
-    use { "nvim-treesitter/nvim-treesitter-textobjects", after = "nvim-treesitter" }
     use {
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
@@ -164,23 +163,23 @@ local pack_use = function()
     use {
         "rafamadriz/statusline",
         config = function()
-            require "modules.plugins.statusline"
+            require("modules.plugins.statusline").config()
         end,
     }
     use {
         "mhinz/vim-startify",
-        event = "VimEnter",
+        event = "BufWinEnter",
         config = function()
-            require "modules.plugins.startify"
+            require("modules.plugins.startify").config()
         end,
     }
     use {
         "lukas-reineke/indent-blankline.nvim",
         cond = function()
-            return as._default(vim.g.neon_indent_guides)
+            return as._default(vim.g.code_indent_guides)
         end,
         config = function()
-            require "modules.plugins.indent-guides"
+            require("modules.plugins.indent-guides").config()
         end,
     }
     -----------------------------------------------------------------------------//
@@ -223,13 +222,13 @@ local pack_use = function()
         ft = { "html", "css", "javascript" },
         cmd = { "ColorizerToggle", "ColorizerAttachToBuffer" },
         config = function()
-            require("colorizer").setup {
+            require("colorizer").setup({ "html", "javascript", "css" }, {
                 RRGGBBAA = true,
                 rgb_fn = true,
                 hsl_fn = true,
                 css = true,
                 css_fn = true,
-            }
+            })
         end,
     }
 end

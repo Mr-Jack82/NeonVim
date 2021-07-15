@@ -8,14 +8,14 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     vim.lsp.diagnostic.on_publish_diagnostics,
     {
-        virtual_text = as._default(vim.g.neon_lsp_virtual_text, false),
-        underline = as._default(vim.g.neon_lsp_diagnostic_underline),
-        signs = as._default(vim.g.neon_lsp_diagnostic_signs),
+        virtual_text = as._default(vim.g.code_lsp_virtual_text, false),
+        underline = as._default(vim.g.code_lsp_diagnostic_underline),
+        signs = as._default(vim.g.code_lsp_diagnostic_signs_enabled),
         update_in_insert = false,
     }
 )
 
-local borders = as._lsp_borders(vim.g.neon_lsp_window_borders)
+local borders = as._lsp_borders(vim.g.code_lsp_window_borders)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borders })
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
     vim.lsp.handlers.signature_help,
@@ -104,7 +104,7 @@ function M.preview_location(location, context, before_context)
     if not vim.api.nvim_buf_is_loaded(bufnr) then
         fn.bufload(bufnr)
     end
-    local borders = as._lsp_borders(vim.g.neon_lsp_window_borders)
+    local borders = as._lsp_borders(vim.g.code_lsp_window_borders)
     local range = location.targetRange or location.range
     local contents = vim.api.nvim_buf_get_lines(
         bufnr,
