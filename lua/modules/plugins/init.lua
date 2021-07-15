@@ -1,6 +1,6 @@
 local pack_use = function()
     local use = require("packer").use
-    use "wbthomason/packer.nvim"
+    use { "wbthomason/packer.nvim", branch = "fix/no-overwrite-commands" }
     -----------------------------------------------------------------------------//
     -- Required by others {{{1
     -----------------------------------------------------------------------------//
@@ -17,17 +17,24 @@ local pack_use = function()
     -- LSP, Autocomplete and snippets {{{1
     -----------------------------------------------------------------------------//
     use {
-        "neovim/nvim-lspconfig",
-        requires = { "kabouzeid/nvim-lspinstall", "ray-x/lsp_signature.nvim" },
+        "kabouzeid/nvim-lspinstall",
+        after = "nvim-lspconfig",
         config = function()
-            require "lsp"
+            require "modules.lsp.servers"
+        end,
+    }
+    use {
+        "neovim/nvim-lspconfig",
+        requires = { "ray-x/lsp_signature.nvim" },
+        config = function()
+            require "modules.lsp"
         end,
     }
     use {
         "hrsh7th/nvim-compe",
         event = "InsertEnter",
         config = function()
-            require "plugins.completion"
+            require "modules.plugins.completion"
         end,
     }
     use {
@@ -62,7 +69,7 @@ local pack_use = function()
             },
         },
         config = function()
-            require "plugins.telescope"
+            require "modules.plugins.telescope"
         end,
     }
     -----------------------------------------------------------------------------//
@@ -74,7 +81,7 @@ local pack_use = function()
         run = ":TSUpdate",
         event = "BufRead",
         config = function()
-            require "plugins.treesitter"
+            require "modules.plugins.treesitter"
         end,
     }
     -----------------------------------------------------------------------------//
@@ -85,20 +92,20 @@ local pack_use = function()
         requires = "nvim-web-devicons",
         cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
         config = function()
-            require "plugins.tree"
+            require "modules.plugins.filetree"
         end,
     }
     use {
         "folke/which-key.nvim",
         event = "BufWinEnter",
         config = function()
-            require "plugins.which-key"
+            require "modules.plugins.which-key"
         end,
     }
     -----------------------------------------------------------------------------//
     -- Text Objects and Editing {{{1
     -----------------------------------------------------------------------------//
-    use { "machakann/vim-sandwich", keys = { { "n", "s" }, { "v", "s" } } }
+    use { "machakann/vim-sandwich", event = "BufRead" }
     use {
         "b3nj5m1n/kommentary",
         keys = { "gcc", "gc" },
@@ -177,7 +184,7 @@ local pack_use = function()
         "mhartington/formatter.nvim",
         cmd = { "Format", "FormatWrite" },
         config = function()
-            require "plugins.formatter"
+            require "modules.plugins.formatter"
         end,
     }
     use "rafamadriz/themes.nvim"
@@ -191,13 +198,13 @@ local pack_use = function()
         "mhinz/vim-startify",
         event = "VimEnter",
         config = function()
-            require "plugins.startify"
+            require "modules.plugins.startify"
         end,
     }
     use {
         "rafamadriz/statusline",
         config = function()
-            require "plugins.statusline"
+            require "modules.plugins.statusline"
         end,
     }
     use {
@@ -220,7 +227,7 @@ local pack_use = function()
             return as._default(vim.g.neon_indent_guides)
         end,
         config = function()
-            require "plugins.indent-guides"
+            require "modules.plugins.indent-guides"
         end,
     }
     use {
@@ -285,4 +292,4 @@ if fn.empty(fn.glob(install_path)) > 0 then
 else
     load_plugins()
 end
--- vim:foldmethod=marker:foldlevel=0
+-- vim:foldmethod=marker

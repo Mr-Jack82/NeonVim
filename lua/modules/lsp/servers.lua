@@ -1,35 +1,10 @@
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-        "documentation",
-        "detail",
-        "additionalTextEdits",
-    },
-}
-
-local function documentHighlight(client, bufnr)
-    -- Set autocommands conditional on server_capabilities
-    if client.resolved_capabilities.document_highlight then
-        vim.api.nvim_exec(
-            [[
-      hi LspReferenceRead cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceText cterm=bold ctermbg=red guibg=#464646
-      hi LspReferenceWrite cterm=bold ctermbg=red guibg=#464646
-      augroup lsp_document_highlight
-        autocmd! * <buffer>
-        autocmd CursorHold <buffer> lua vim.lsp.buf.document_highlight()
-        autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()
-      augroup END
-    ]],
-            false
-        )
-    end
+if not as._default(vim.g.neon_lsp_enabled) then
+    return
 end
 
 local function common_on_attach(client, bufnr)
     if as._default(vim.g.neon_lsp_document_highlight) then
-        documentHighlight(client, bufnr)
+        require("modules.lsp").documentHighlight(client, bufnr)
     end
     if as._default(vim.g.neon_lsp_signature_help) then
         require("lsp_signature").on_attach { max_width = 90, fix_pos = true, hint_prefix = " " }
@@ -59,7 +34,7 @@ local function common_on_attach(client, bufnr)
     as.map("n", "<leader>ls", ":Telescope lsp_document_symbols<CR>")
     as.map("n", "<leader>lS", ":Telescope lsp_workspace_symbols<CR>")
     as.map("n", "<leader>lf", ":lua vim.lsp.buf.formatting()<CR>")
-    as.map("n", "<leader>lp", ":lua require('utils.extra').PeekDefinition()<CR>")
+    as.map("n", "<leader>lp", ":lua require('modules.lsp').PeekDefinition()<CR>")
     as.map(
         "n",
         "<leader>ll",
@@ -166,7 +141,7 @@ local lua_settings = {
 local function make_config()
     return {
         -- enable snippet support
-        capabilities = capabilities,
+        capabilities = require("modules.lsp").capabilities,
         -- map buffer local keybindings when the language server attaches
         on_attach = common_on_attach,
         flags = { debounce_text_changes = 150 },

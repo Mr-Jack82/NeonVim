@@ -77,7 +77,7 @@ as.map("n", "<leader>hph", ":help packer.txt<CR>")
 -----------------------------------------------------------------------------//
 as.map("n", "<TAB>", ":bnext<CR>") -- buffer next
 as.map("n", "<S-TAB>", ":bprevious<CR>") -- buffer previous
-as.map("n", "<leader>b<C-t>", ":lua require'utils.extra'.buf_to_tab()<CR>") -- focus in new tab
+as.map("n", "<leader>b<C-t>", ":lua require'core.util'.buf_to_tab()<CR>") -- focus in new tab
 as.map("n", "<leader>bb", ":Telescope buffers theme=get_dropdown<CR>") -- all buffers
 as.map("n", "<leader>bs", ":update<CR>") -- save buffer
 as.map("v", "<leader>bs", "<ESC>:update<CR>") -- save buffer
@@ -108,10 +108,10 @@ as.map("n", "<C-h>", "<C-w>h")
 as.map("n", "<C-j>", "<C-w>j")
 as.map("n", "<C-k>", "<C-w>k")
 as.map("n", "<C-l>", "<C-w>l")
-as.map("n", "<S-Up>", ":lua require'utils.extra'.resize(false, -2)<CR>")
-as.map("n", "<S-Down>", ":lua require'utils.extra'.resize(false, 2)<CR>")
-as.map("n", "<S-Left>", ":lua require'utils.extra'.resize(true, -2)<CR>")
-as.map("n", "<S-Right>", ":lua require'utils.extra'.resize(true, 2)<CR>")
+as.map("n", "<S-Up>", ":lua require'core.util'.resize(false, -2)<CR>")
+as.map("n", "<S-Down>", ":lua require'core.util'.resize(false, 2)<CR>")
+as.map("n", "<S-Left>", ":lua require'core.util'.resize(true, -2)<CR>")
+as.map("n", "<S-Right>", ":lua require'core.util'.resize(true, 2)<CR>")
 as.map("n", "<leader>ww", "<C-w>q") -- cycle through window
 as.map("n", "<leader>wq", "<C-w>q") -- quit window
 as.map("n", "<leader>ws", "<C-w>s") -- split window
@@ -182,10 +182,10 @@ as.map("n", "<leader>fn", ":Telescope fd cwd=$HOME/.config/nvim/<CR>")
 -----------------------------------------------------------------------------//
 -- Zen Mode
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>zf", [[:lua require("utils.extra").focus()<CR>]])
-as.map("n", "<leader>zc", [[:lua require("utils.extra").centered()<CR>]])
-as.map("n", "<leader>zm", [[:lua require('utils.extra').minimal()<CR>]])
-as.map("n", "<leader>za", [[:lua require('utils.extra').ataraxis()<CR>]])
+as.map("n", "<leader>zf", [[:lua require("modules.plugins.zen").focus()<CR>]])
+as.map("n", "<leader>zc", [[:lua require("modules.plugins.zen").centered()<CR>]])
+as.map("n", "<leader>zm", [[:lua require('modules.plugins.zen').minimal()<CR>]])
+as.map("n", "<leader>za", [[:lua require('modules.plugins.zen').ataraxis()<CR>]])
 as.map("n", "<leader>zq", ":close<CR>")
 
 -----------------------------------------------------------------------------//
@@ -195,7 +195,7 @@ as.map("n", "<leader>ss", ":SSave<CR>")
 as.map("n", "<leader>sq", ":SClose<CR>")
 as.map("n", "<leader>sd", ":SDelete<CR>")
 as.map("n", "<leader>sl", ":SLoad<CR>")
-as.map("n", "<leader>sr", ":lua require('utils.extra').Reload()<CR>")
+as.map("n", "<leader>sr", ":lua require('core.util').Reload()<CR>")
 
 -----------------------------------------------------------------------------//
 -- Open/Run

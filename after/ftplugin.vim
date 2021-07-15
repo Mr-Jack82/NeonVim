@@ -22,7 +22,7 @@ augroup END
 " Create missing directories when saving file
 augroup Mkdir
     au!
-    au BufWritePre * lua require'utils.extra'.mkdir()
+    au BufWritePre * lua require'core.util'.mkdir()
 augroup END
 
 " exit LspInfo window with q"
