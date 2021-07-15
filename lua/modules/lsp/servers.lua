@@ -203,7 +203,7 @@ if not lspconfig.emmet_ls then
         },
     }
 end
-lspconfig.emmet_ls.setup { capabilities = capabilities }
+lspconfig.emmet_ls.setup { capabilities = require("modules.lsp").capabilities }
 
 -- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
 require("lspinstall").post_install_hook = function()

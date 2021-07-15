@@ -74,28 +74,32 @@ M.latex = fmt {
     stdin = true,
 }
 
-require("formatter").setup {
-    logging = false,
-    filetype = {
-        sh = { M.sh },
-        zsh = { M.sh },
-        c = { M.clang },
-        cs = { M.clang },
-        cpp = { M.clang },
-        lua = { M.stylua },
-        tex = { M.latex },
-        python = { M.black },
-        go = { M.goimports },
-        rust = { M.rustfmt },
-        css = { M.prettier() },
-        xml = { M.prettier() },
-        json = { M.prettier() },
-        html = { M.prettier() },
-        scss = { M.prettier() },
-        markdown = { M.prettier() },
-        javascript = { M.prettier { "--single-quote" } },
-        typescript = { M.prettier { "--single-quote" } },
-        javascriptreact = { M.prettier { "--single-quote" } },
-        typescriptreact = { M.prettier { "--single-quote" } },
-    },
-}
+M.config = function()
+    require("formatter").setup {
+        logging = false,
+        filetype = {
+            sh = { M.sh },
+            zsh = { M.sh },
+            c = { M.clang },
+            cs = { M.clang },
+            cpp = { M.clang },
+            lua = { M.stylua },
+            tex = { M.latex },
+            python = { M.black },
+            go = { M.goimports },
+            rust = { M.rustfmt },
+            css = { M.prettier() },
+            xml = { M.prettier() },
+            json = { M.prettier() },
+            html = { M.prettier() },
+            scss = { M.prettier() },
+            markdown = { M.prettier() },
+            javascript = { M.prettier { "--single-quote" } },
+            typescript = { M.prettier { "--single-quote" } },
+            javascriptreact = { M.prettier { "--single-quote" } },
+            typescriptreact = { M.prettier { "--single-quote" } },
+        },
+    }
+end
+
+return M

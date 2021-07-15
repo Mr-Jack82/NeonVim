@@ -1,6 +1,6 @@
 vim.g.startify_lists = {
     { type = "sessions", header = { "   Sessions" } },
-    { type = "commands", header = { "   " } },
+    { type = "commands", header = { "   Commands" } },
     { type = "files", header = { "   Recent Files" } },
     { type = "bookmarks", header = { "   Bookmarks" } },
 }
