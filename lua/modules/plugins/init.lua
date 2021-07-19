@@ -169,7 +169,8 @@ local pack_use = function()
     }
     use {
         "mhinz/vim-startify",
-        event = "BufWinEnter",
+        opt = true,
+        cmd = "Startify",
         config = function()
             require("modules.plugins.startify").config()
         end,
@@ -237,11 +238,13 @@ end
 
 local fn, execute = vim.fn, vim.api.nvim_command
 local install_path = DATA_PATH .. "/site/pack/packer/start/packer.nvim"
-local compile_path = install_path .. "/plugin/packer_compiled.lua"
 
 local function load_plugins()
     local pack = require "packer"
-    pack.init { compile_path = compile_path }
+    pack.init {
+        compile_path = install_path .. "/plugin/packer_compiled.lua",
+        git = { clone_timeout = 600 },
+    }
     pack.startup {
         function()
             pack_use()
