@@ -6,6 +6,15 @@ _G.as = {
     _store = _AsGlobalCallbacks,
 }
 
+-- create global variables for config file
+local config = require "config"
+for opt, val in pairs(config) do
+    local key = "code_" .. opt
+    if not vim.g[key] then
+        vim.g[key] = val
+    end
+end
+
 -- mappings
 function as.map(mode, key, result, opts)
     local options = { noremap = true, silent = true }

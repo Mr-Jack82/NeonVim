@@ -10,7 +10,7 @@ M.config = function()
     vim.g.startify_bookmarks = {
         { i = "~/.config/nvim/init.lua" },
         { c = "~/.config/nvim/lua/config.lua" },
-        { p = "~/.config/nvim/lua/pack.lua" },
+        { p = "~/.config/nvim/lua/modules/plugins/init.lua" },
     }
     vim.g.startify_commands = {
         { "Find files", ":Telescope fd" },

@@ -51,10 +51,10 @@ M.config = function()
                 i = {
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous,
-                    ["<esc>"] = actions.close,
                     ["<CR>"] = actions.select_default + actions.center,
                 },
                 n = {
+                    ["<C-c>"] = actions.close,
                     ["<C-j>"] = actions.move_selection_next,
                     ["<C-k>"] = actions.move_selection_previous,
                 },
@@ -69,7 +69,7 @@ M.config = function()
             },
         },
     }
-    pcall(require("telescope").load_extension, "fzf")
+    pcall(require("telescope").load_extension, "fzf") -- NOTE: not sure if this actually loads the extension.
 end
 
 return M

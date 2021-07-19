@@ -15,6 +15,10 @@ local M = {
     -- @value: number
     colorcolumn = 0,
 
+    -- Keep the cursor as a block in insert mode.
+    -- @value: boolean
+    cursor_block = false,
+
     -- Number of screen lines to use for the command-line.
     -- @value: number
     cmdheight = 1,
@@ -184,12 +188,8 @@ local M = {
         "8b Y88b  888   , Y888 888P 888 888    Y8b Y    888 888 888 888",
         "88b Y88b  'YeeP'  '88 88'  888 888     Y8P     888 888 888 888",
     },
+    -- }}}
 }
 
-for opt, val in pairs(M) do
-    local key = "code_" .. opt
-    if not vim.g[key] then
-        vim.g[key] = val
-    end
-end
+return M
 -- vim:foldmethod=marker

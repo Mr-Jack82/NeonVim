@@ -80,7 +80,7 @@ end
 -----------------------------------------------------------------------------//
 -- Indentation {{{1
 -----------------------------------------------------------------------------//
-local indent = as._default_num(vim.g.code_indent_size, 2)
+local indent = as._default_num(vim.g.code_indent_size, 4)
 vim.opt.wrap = as._default(vim.g.code_word_wrap, false)
 vim.opt.tabstop = 8
 vim.opt.softtabstop = indent
@@ -101,6 +101,9 @@ vim.opt.completeopt = "menuone,noinsert,noselect"
 -----------------------------------------------------------------------------//
 -- Utils {{{1
 -----------------------------------------------------------------------------//
+if as._default(vim.g.code_cursor_block, false) then
+    vim.opt.guicursor = ""
+end
 vim.opt.shortmess:append "c"
 vim.opt.iskeyword:append "-"
 vim.opt.path:append ".,**"

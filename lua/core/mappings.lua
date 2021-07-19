@@ -82,7 +82,7 @@ as.map("n", "<leader>bb", ":Telescope buffers theme=get_dropdown<CR>") -- all bu
 as.map("n", "<leader>bs", ":update<CR>") -- save buffer
 as.map("v", "<leader>bs", "<ESC>:update<CR>") -- save buffer
 as.map("n", "<leader>bS", ":silent! wa<CR>") -- save all buffers
-as.map("n", "<leader>bq", ":update | bdelete<CR>") -- quit buffer
+as.map("n", "<leader>bq", ":lua require'core.util'.delete_buffer()<CR>") -- quit buffer
 as.map("n", "<leader>bQ", [[<cmd>w <bar> %bd <bar> e#<CR>]]) -- quit all buffers but current
 as.map("n", "<leader>b%", ":luafile %<CR>", { silent = false }) -- source buffer
 as.map("n", "<leader>bh", ":noh<CR>") -- No highlight

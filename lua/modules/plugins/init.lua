@@ -1,6 +1,6 @@
 local pack_use = function()
     local use = require("packer").use
-    use { "wbthomason/packer.nvim", branch = "fix/no-overwrite-commands" }
+    use { "wbthomason/packer.nvim" }
     -----------------------------------------------------------------------------//
     -- Required by others {{{1
     -----------------------------------------------------------------------------//
@@ -51,6 +51,7 @@ local pack_use = function()
             require("modules.plugins.telescope").config()
         end,
     }
+    -- use { { "junegunn/fzf", run = "./install --bin" }, "junegunn/fzf.vim" } -- just in case
     -----------------------------------------------------------------------------//
     -- Treesitter {{{1
     -----------------------------------------------------------------------------//

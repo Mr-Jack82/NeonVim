@@ -61,6 +61,7 @@ for kind, symbol in pairs(lsp_symbols) do
 end
 
 local M = {}
+local fn = vim.fn
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
