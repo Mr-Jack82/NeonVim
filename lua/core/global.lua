@@ -7,11 +7,13 @@ _G.as = {
 }
 
 -- create global variables for config file
-local config = require "config"
-for opt, val in pairs(config) do
-    local key = "code_" .. opt
-    if not vim.g[key] then
-        vim.g[key] = val
+local ok, config = pcall(require, "config")
+if ok then
+    for opt, val in pairs(config) do
+        local key = "code_" .. opt
+        if not vim.g[key] then
+            vim.g[key] = val
+        end
     end
 end
 

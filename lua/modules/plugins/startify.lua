@@ -40,12 +40,16 @@ M.config = function()
     -- Sort sessions by modification time
     vim.g.startify_session_sort = 1
     -- Header and footer
-    vim.g.startify_custom_footer = "startify#center([g:code_startify_footer])"
+    if vim.g.code_startify_footer ~= nil then
+        vim.g.startify_custom_footer = "startify#center([g:code_startify_footer])"
+    end
     local posi = vim.g.startify_header_position or "center"
-    if vim.g.startify_header_ascii == "cowsay" then
-        vim.g.startify_custom_header = "startify#" .. posi .. "(startify#fortune#cowsay())"
-    else
-        vim.g.startify_custom_header = "startify#" .. posi .. "(g:code_startify_header_ascii)"
+    if vim.g.code_startify_header_ascii ~= nil then
+        if vim.g.startify_header_ascii == "cowsay" then
+            vim.g.startify_custom_header = "startify#" .. posi .. "(startify#fortune#cowsay())"
+        else
+            vim.g.startify_custom_header = "startify#" .. posi .. "(g:code_startify_header_ascii)"
+        end
     end
 end
 
