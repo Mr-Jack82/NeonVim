@@ -14,6 +14,14 @@ M.prettier = function(opts)
     }
 end
 
+-- npm install -g @fsouza/prettierd
+-- run `prettierd start`
+M.prettierd = fmt {
+    exe = "prettierd",
+    args = { vim.api.nvim_buf_get_name(0) },
+    stdin = true,
+}
+
 M.clang = fmt {
     exe = "clang-format",
     args = {

@@ -60,6 +60,62 @@ M.config = function()
                 },
             },
         },
+        pickers = {
+            -- Your special builtin config goes in here
+            buffers = {
+                sort_lastused = true,
+                ignore_current_buffer = true,
+                layout_strategy = "horizontal",
+                layout_config = { height = 20, preview_width = 0.6 },
+                show_all_buffers = true,
+                mappings = {
+                    i = {
+                        ["<c-d>"] = actions.delete_buffer,
+                    },
+                    n = {
+                        ["<c-d>"] = actions.delete_buffer,
+                    },
+                },
+            },
+            live_grep = {
+                theme = "ivy",
+                layout_config = { height = 15 },
+            },
+            current_buffer_fuzzy_find = {
+                theme = "ivy",
+                layout_config = { height = 15 },
+            },
+            lsp_code_actions = {
+                layout_strategy = "horizontal",
+                layout_config = { height = 10, width = 0.5 },
+            },
+            lsp_range_code_actions = {
+                layout_strategy = "horizontal",
+                layout_config = { height = 10, width = 0.5 },
+            },
+            lsp_document_diagnostics = {
+                layout_config = { width = 0.7 },
+                layout_strategy = "vertical",
+            },
+            lsp_workspace_diagnostics = {
+                layout_config = { width = 0.7 },
+                layout_strategy = "vertical",
+            },
+            find_files = {
+                layout_config = { height = 30, preview_width = 0.55 },
+            },
+            git_files = {
+                layout_config = { height = 30, preview_width = 0.55 },
+            },
+            fd = {
+                layout_config = { height = 30, preview_width = 0.55 },
+            },
+            file_browser = {
+                layout_config = { height = 30, preview_width = 0.65 },
+            },
+            lsp_document_symbols = { previewer = false },
+            lsp_workspace_symbols = { previewer = false },
+        },
         extensions = {
             fzf = {
                 fuzzy = true, -- false will only do exact matching
