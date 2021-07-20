@@ -81,7 +81,7 @@ vim.opt.listchars = {
 -----------------------------------------------------------------------------//
 -- Indentation {{{1
 -----------------------------------------------------------------------------//
-local indent = as._default_num(vim.g.code_indent_size, 4)
+local indent = as._default_num(vim.g.code_indent_size, 2)
 vim.opt.wrap = false
 vim.opt.tabstop = 8
 vim.opt.softtabstop = indent

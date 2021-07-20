@@ -26,7 +26,7 @@ local M = {
     -- Number of spaces to use for each step of (auto)indent and number
     -- of spaces that a <Tab> counts for.
     -- @value: number
-    indent_size = 4,
+    indent_size = 2,
 
     -- Show the line number relative to the line with the cursor in front of
     -- each line.
