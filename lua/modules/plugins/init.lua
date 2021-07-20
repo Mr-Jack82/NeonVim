@@ -260,32 +260,6 @@ local pack_use = function()
         end,
     }
     use {
-        "lukas-reineke/indent-blankline.nvim",
-        cond = function()
-            return as._default(vim.g.neon_indent_guides)
-        end,
-        config = function()
-            require "plugins.indent-guides"
-        end,
-    }
-    -----------------------------------------------------------------------------//
-    -- my plugins
-    -----------------------------------------------------------------------------//
-    use "tpope/vim-surround"
-    use "tpope/vim-repeat"
-    use "tpope/vim-fugitive"
-    use "junegunn/vim-easy-align"
-    use "editorconfig/editorconfig-vim"
-    use "tpope/vim-unimpaired"
-    use "easymotion/vim-easymotion"
-    use "tommcdo/vim-exchange"
-    use "907th/vim-auto-save"
-    use {
-        "andymass/vim-matchup",
-        ft = {'html', 'javascript', 'json', 'xml'}
-    }
-
-    use {
         "mbbill/undotree",
         cmd = "UndotreeToggle",
         config = "vim.g.undotree_WindowLayout = 2",
@@ -310,6 +284,22 @@ local pack_use = function()
                 css_fn = true,
             })
         end,
+    }
+    -----------------------------------------------------------------------------//
+    -- my plugins
+    -----------------------------------------------------------------------------//
+    use "tpope/vim-surround"
+    use "tpope/vim-repeat"
+    use "tpope/vim-fugitive"
+    use "junegunn/vim-easy-align"
+    use "editorconfig/editorconfig-vim"
+    use "tpope/vim-unimpaired"
+    use "easymotion/vim-easymotion"
+    use "tommcdo/vim-exchange"
+    use "907th/vim-auto-save"
+    use {
+        "andymass/vim-matchup",
+        ft = {'html', 'javascript', 'json', 'xml'}
     }
 end
 -- }}}
