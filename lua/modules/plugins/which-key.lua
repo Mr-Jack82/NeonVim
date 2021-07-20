@@ -208,7 +208,7 @@ M.config = function()
             },
         },
         ["g"] = {
-            ["p"] = "select last pasted text",
+            ["V"] = "select last pasted text",
             ["c"] = "comment text",
             ["cc"] = "comment line",
         },
