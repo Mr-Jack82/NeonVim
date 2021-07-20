@@ -43,7 +43,7 @@ local M = {
 
     -- File explorer side.
     -- @value: string (left or right)
-    explorer_side = "right",
+    explorer_side = "left",
     -----------------------------------------------------------------------------//
     --- Colors/Style {{{1
     -----------------------------------------------------------------------------//
