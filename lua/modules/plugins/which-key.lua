@@ -59,6 +59,7 @@ M.config = function()
             ["<space>"] = "file in project",
             ["/"] = "search in project",
             ["n"] = "explorer",
+            ["u"] = "open undotree",
             h = {
                 name = "help",
                 h = "help tags",
