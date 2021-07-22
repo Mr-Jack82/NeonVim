@@ -68,7 +68,7 @@ local M = {
 
     -- Format on save.
     -- @value: boolean
-    format_on_save = true,
+    format_on_save = false,
 
     -- File explorer side.
     -- @value: string (left or right)
