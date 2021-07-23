@@ -13,7 +13,6 @@ local pack_use = function()
     use { "ray-x/lsp_signature.nvim" }
     use {
         "neovim/nvim-lspconfig",
-        event = "ColorScheme",
         config = function()
             require "modules.lsp"
         end,
@@ -104,7 +103,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- Improve Editing {{{1
     -----------------------------------------------------------------------------//
-    use { "machakann/vim-sandwich", event = "ColorScheme" }
+    use { "machakann/vim-sandwich", event = "BufRead" }
     use {
         "windwp/nvim-autopairs",
         after = "nvim-compe",
@@ -163,7 +162,6 @@ local pack_use = function()
     use "rafamadriz/themes.nvim"
     use {
         "rafamadriz/statusline",
-        event = "ColorScheme",
         config = function()
             require("modules.plugins.statusline").config()
         end,
