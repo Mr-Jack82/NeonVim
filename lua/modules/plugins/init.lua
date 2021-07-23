@@ -94,7 +94,7 @@ local pack_use = function()
         cmd = "ToggleTerm",
         config = function()
             require("toggleterm").setup {
-                size = 12,
+                size = 20,
                 direction = "horizontal",
                 open_mapping = [[<a-t>]],
             }
