@@ -106,11 +106,6 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use { "machakann/vim-sandwich", event = "ColorScheme" }
     use {
-        "andymass/vim-matchup",
-        event = "ColorScheme",
-        config = "vim.g.matchup_matchparen_offscreen = { method = 'popup' }",
-    }
-    use {
         "windwp/nvim-autopairs",
         after = "nvim-compe",
         config = function()
