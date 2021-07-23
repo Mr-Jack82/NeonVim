@@ -9,8 +9,6 @@ async = vim.loop.new_async(vim.schedule_wrap(function()
         .. "/site/pack/packer/start/packer.nvim/plugin/packer_compiled.lua"
     if vim.fn.filereadable(compiled) > 0 then
         if vim.api.nvim_buf_get_name(0):len() == 0 then
-            vim.opt.shadafile = ""
-            vim.cmd "rshada"
             vim.cmd "Startify"
         end
     end

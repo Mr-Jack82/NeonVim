@@ -109,7 +109,6 @@ vim.opt.iskeyword:append "-"
 vim.opt.path:append ".,**"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mouse = "a"
-vim.opt.shadafile = "NONE"
 -----------------------------------------------------------------------------//
 -- Folds {{{1
 -----------------------------------------------------------------------------//
@@ -200,6 +199,9 @@ vim.opt.wildignore = {
 -----------------------------------------------------------------------------//
 -- Autocommands {{{1
 -----------------------------------------------------------------------------//
+-- TODO: refactor when autocmd API is merged:
+-- https://github.com/neovim/neovim/pull/12378
+-- https://github.com/neovim/neovim/pull/14661
 as.check_and_set(vim.g.code_trim_trailing_space, "BufWritePre", "*", [[%s/\s\+$//e]])
 as.check_and_set(vim.g.code_trim_trailing_space, "BufWritePre", "*", [[%s/\n\+\%$//e]])
 as.check_and_set(
