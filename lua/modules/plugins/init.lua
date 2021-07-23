@@ -13,7 +13,7 @@ local pack_use = function()
     use { "ray-x/lsp_signature.nvim" }
     use {
         "neovim/nvim-lspconfig",
-        event = "BufRead",
+        event = "ColorScheme",
         config = function()
             require "modules.lsp"
         end,
@@ -52,7 +52,6 @@ local pack_use = function()
             require("modules.plugins.telescope").config()
         end,
     }
-    -- use { { "junegunn/fzf", run = "./install --bin" }, "junegunn/fzf.vim" } -- just in case
     -----------------------------------------------------------------------------//
     -- Treesitter {{{1
     -----------------------------------------------------------------------------//
@@ -176,8 +175,7 @@ local pack_use = function()
     }
     use {
         "mhinz/vim-startify",
-        opt = true,
-        cmd = "Startify",
+        event = "VimEnter",
         config = function()
             require("modules.plugins.startify").config()
         end,
