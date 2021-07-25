@@ -176,7 +176,7 @@ local pack_use = function()
     use {
         "lukas-reineke/indent-blankline.nvim",
         cond = function()
-            return as._default(vim.g.code_indent_guides)
+            return as._default(vim.g.code_indent_guides, false)
         end,
         config = function()
             require("modules.plugins.indent-guides").config()
