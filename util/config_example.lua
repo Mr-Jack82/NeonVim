@@ -160,6 +160,10 @@ local M = {
     -- @value: boolean
     treesitter_enabled = true,
 
+    -- Enable or disable treesitter syntax highlighting.
+    -- @value: boolean
+    treesitter_highlight = false,
+
     -- Parsers to install.
     -- @options: string or a table of parsers.
     treesitter_parsers_install = "maintained",
