@@ -21,7 +21,7 @@ local M = {
 
     -- Number of screen lines to use for the command-line.
     -- @value: number
-    cmdheight = 1,
+    cmdheight = 2,
 
     -- Minimal number of screen lines to keep above and below the cursor.
     -- @value: number
@@ -141,6 +141,10 @@ local M = {
     -- @value: string
     -- @options: single, double, none
     compe_doc_window_border = "single",
+
+    -- Add description text to the suggested items in the completion menu.
+    -- @value: boolean
+    compe_item_with_text = true,
 
     -- Autocomplete pairs.
     -- @value: boolean
