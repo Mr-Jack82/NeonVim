@@ -104,7 +104,11 @@ end
 
 M.autopairs = function()
     if as._default(vim.g.code_compe_autopairs) then
-        require("nvim-autopairs").setup { check_ts = true }
+        require("nvim-autopairs").setup {
+            disable_filetype = { "TelescopePrompt", "vim" },
+            check_ts = true,
+            fast_wrap = {},
+        }
         require("nvim-autopairs.completion.compe").setup {
             map_cr = true, --  map <CR> on insert mode
             map_complete = true, -- it will auto insert `(` after select function or method item
