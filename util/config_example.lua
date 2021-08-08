@@ -50,14 +50,6 @@ local M = {
     -- @value: boolean
     preserve_cursor = true,
 
-    -- Hightlight text when yanked.
-    -- @value: boolean
-    highlight_yank = true,
-
-    -- Chars for trailing space, eol, tab, etc.
-    -- @value: boolean
-    listchars = false,
-
     -- Adds indentation guides to all lines .
     -- @value: boolean
     indent_guides = false,
