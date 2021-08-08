@@ -107,7 +107,7 @@ local M = {
 
     -- Borders for the floating windows of LSP (e. diagnostics).
     -- @value: string
-    -- @options: single, double, none
+    -- @options: single, double, rounded, none
     lsp_window_borders = "single",
 
     -- Show function signature when you type.
@@ -135,7 +135,7 @@ local M = {
     -- Show autocomplete suggestions as you type. If diasble, the completion
     -- menu has to trigger manually with <C-Space> or <Tab>
     -- @value: boolean
-    compe_autocomplete = false,
+    compe_autocomplete = true,
 
     -- Borders for documentation in completion menu.
     -- @value: string

@@ -75,7 +75,7 @@ function as._lsp_auto(server)
 end
 
 function as._lsp_borders(value)
-    local opt = { "single", "double" }
+    local opt = { "single", "double", "rounded" }
     if value ~= nil then
         for _, v in pairs(opt) do
             if value == v then
