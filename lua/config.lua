@@ -107,7 +107,7 @@ local M = {
 
     -- Borders for the floating windows of LSP (e. diagnostics).
     -- @value: string
-    -- @options: single, double, none
+    -- @options: single, double, rounded, none
     lsp_window_borders = "single",
 
     -- Show function signature when you type.
