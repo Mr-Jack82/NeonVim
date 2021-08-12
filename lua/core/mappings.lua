@@ -188,7 +188,6 @@ as.map("n", "<leader>qq", ":SClose<CR>")
 as.map("n", "<leader>qQ", ":quitall<CR>")
 as.map("n", "<leader>qd", ":SDelete<CR>")
 as.map("n", "<leader>ql", ":SLoad<CR>")
-as.map("n", "<leader>qr", ":lua require('core.util').Reload()<CR>")
 -----------------------------------------------------------------------------//
 -- Open/Run {{{1
 -----------------------------------------------------------------------------//

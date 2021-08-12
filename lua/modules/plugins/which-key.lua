@@ -165,7 +165,6 @@ M.config = function()
                 d = "session delete",
                 l = "session load",
                 q = "session quit",
-                r = "session reload",
                 s = "session save",
             },
             r = {
