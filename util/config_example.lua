@@ -145,10 +145,6 @@ local M = {
     -- Number of items to show in the completion menu.
     -- @value: number
     compe_items = 10,
-
-    -- Sources that you don't want in the completin menu.
-    -- @options: lsp, buffer, snippets, path, calc, spell, emoji.
-    compe_sources_blacklist = {},
     -----------------------------------------------------------------------------//
     --- Treesitter {{{1
     -----------------------------------------------------------------------------//

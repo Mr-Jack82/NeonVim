@@ -86,18 +86,6 @@ function as._lsp_borders(value)
     return nil
 end
 
-function as._compe(source, component)
-    local blacklist = vim.g.code_compe_sources_blacklist
-    if blacklist ~= nil then
-        for _, v in pairs(blacklist) do
-            if source == v then
-                return false
-            end
-        end
-    end
-    return component
-end
-
 function as.select_theme(theme)
     local all_colors = vim.fn.getcompletion("", "color")
     local default = "neon"

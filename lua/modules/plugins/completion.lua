@@ -14,7 +14,7 @@ M.compe = function()
         enabled = true,
         autocomplete = as._default(vim.g.code_compe_autocomplete),
         debug = false,
-        min_length = 2,
+        min_length = 3,
         preselect = "always",
         throttle_time = 80,
         source_timeout = 200,
@@ -28,32 +28,32 @@ M.compe = function()
             min_width = 60,
         },
         source = {
-            path = as._compe("path", {
+            path = {
                 menu = "[P]",
                 kind = with_text("  Path", ""),
-            }),
-            buffer = as._compe("buffer", {
+            },
+            buffer = {
                 menu = "[B]",
                 kind = with_text("   Buffer", " "),
-            }),
-            calc = as._compe("calc", {
+            },
+            calc = {
                 menu = "[C]",
                 kind = with_text("   Calc", ""),
-            }),
-            vsnip = as._compe("snippets", {
+            },
+            vsnip = {
                 menu = "[S]",
                 priority = 1500,
                 kind = with_text("   Snippet", " "),
-            }),
-            spell = as._compe("spell", {
+            },
+            spell = {
                 menu = "[E]",
                 kind = with_text("   Spell", ""),
-            }),
-            emoji = as._compe("emoji", {
+            },
+            emoji = {
                 menu = "[ ﲃ ]",
                 filetypes = { "markdown", "text" },
-            }),
-            nvim_lsp = as._compe("lsp", { menu = "[L]" }),
+            },
+            nvim_lsp = { menu = "[L]" },
             nvim_lua = { menu = "[]" },
         },
     }
