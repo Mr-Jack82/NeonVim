@@ -43,7 +43,7 @@ M.config = function()
     if vim.g.code_startify_footer ~= nil then
         vim.g.startify_custom_footer = "startify#center([g:code_startify_footer])"
     end
-    local posi = vim.g.startify_header_position or "center"
+    local posi = vim.g.code_startify_header_position or "center"
     if vim.g.code_startify_header_ascii ~= nil then
         if vim.g.startify_header_ascii == "cowsay" then
             vim.g.startify_custom_header = "startify#" .. posi .. "(startify#fortune#cowsay())"
