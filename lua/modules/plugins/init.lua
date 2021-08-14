@@ -197,9 +197,12 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
-        "airblade/vim-rooter",
+        "ahmedkhalf/project.nvim",
         event = "BufRead",
-        config = [[vim.g.rooter_silent_chdir = 1]],
+        ft = "startify",
+        config = function()
+            require("project_nvim").setup {}
+        end,
     }
     use {
         "turbio/bracey.vim",

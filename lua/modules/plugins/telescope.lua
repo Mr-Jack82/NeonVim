@@ -47,6 +47,7 @@ M.config = function()
                 ".dll",
                 ".kdbx",
                 ".exe",
+                ".iso",
             },
             mappings = {
                 i = {
@@ -131,7 +132,8 @@ M.config = function()
             },
         },
     }
-    pcall(require("telescope").load_extension, "fzf") -- NOTE: not sure if this actually loads the extension.
+    pcall(require("telescope").load_extension, "fzf")
+    pcall(require("telescope").load_extension, "projects")
 end
 
 return M
