@@ -54,10 +54,6 @@ local M = {
     -- @value: boolean
     indent_guides = false,
 
-    -- Basic trim of trailing white space.
-    -- @value: boolean
-    trim_trailing_space = true,
-
     -- Format on save.
     -- @value: boolean
     format_on_save = true,

@@ -36,13 +36,11 @@ augroup LspInfo
 augroup END
 
 " trim trailing white space
-if g:code_trim_trailing_space == v:true
-    augroup TrimTrailing
-        au!
-        au BufWritePre * %s/\s\+$//e
-        au BufWritePre * %s/\n\+\%$//e
-    augroup END
-endif
+augroup TrimTrailing
+    au!
+    au BufWritePre * %s/\s\+$//e
+    au BufWritePre * %s/\n\+\%$//e
+augroup END
 
 lua << EOF
 function _G.webDevIcons(path)
