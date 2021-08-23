@@ -90,6 +90,12 @@ M.compe = function()
             return t "<S-Tab>"
         end
     end
+    map(
+        "i",
+        "<CR>",
+        [[compe#confirm({ 'keys': "\<Plug>delimitMateCR", 'mode': '' })]],
+        { expr = true }
+    )
     map("i", "<Tab>", "v:lua.tab_complete()", { expr = true })
     map("s", "<Tab>", "v:lua.tab_complete()", { expr = true })
     map("i", "<S-Tab>", "v:lua.s_tab_complete()", { expr = true })
@@ -100,20 +106,6 @@ M.compe = function()
     map("i", "<C-f>", "compe#scroll({ 'delta': -4 })", { expr = true })
     map("i", "<C-l>", [[vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-l>']], { expr = true })
     map("s", "<C-l>", [[vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-l>']], { expr = true })
-end
-
-M.autopairs = function()
-    if as._default(vim.g.code_compe_autopairs) then
-        require("nvim-autopairs").setup {
-            disable_filetype = { "TelescopePrompt", "vim" },
-            check_ts = true,
-            fast_wrap = {},
-        }
-        require("nvim-autopairs.completion.compe").setup {
-            map_cr = true, --  map <CR> on insert mode
-            map_complete = true, -- it will auto insert `(` after select function or method item
-        }
-    end
 end
 
 return M

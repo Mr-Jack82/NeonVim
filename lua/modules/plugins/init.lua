@@ -66,7 +66,6 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- Utils {{{1
     -----------------------------------------------------------------------------//
-    use { "haya14busa/is.vim", keys = { "/", "*", "#" } }
     use {
         "rhysd/clever-f.vim",
         keys = { "f", "F", "t", "T" },
@@ -113,14 +112,8 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- Improve Editing {{{1
     -----------------------------------------------------------------------------//
-    use { "machakann/vim-sandwich", event = "BufRead" }
-    use {
-        "windwp/nvim-autopairs",
-        after = "nvim-compe",
-        config = function()
-            require("modules.plugins.completion").autopairs()
-        end,
-    }
+    use { "machakann/vim-sandwich", event = { "BufRead", "InsertLeave" } }
+    use { "Raimondi/delimitMate", event = "InsertEnter" }
     use {
         "b3nj5m1n/kommentary",
         keys = { "gcc", "gc" },
