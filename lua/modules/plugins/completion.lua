@@ -104,8 +104,18 @@ M.compe = function()
     map("i", "<C-Space>", "compe#complete()", { expr = true })
     map("i", "<C-d>", "compe#scroll({ 'delta': +4 })", { expr = true })
     map("i", "<C-f>", "compe#scroll({ 'delta': -4 })", { expr = true })
-    map("i", "<C-l>", [[vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-l>']], { expr = true })
-    map("s", "<C-l>", [[vsnip#jumpable(1) ? '<Plug>(vsnip-jump-next)' : '<C-l>']], { expr = true })
+    map(
+        "i",
+        "<C-l>",
+        [[vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']],
+        { expr = true }
+    )
+    map(
+        "s",
+        "<C-l>",
+        [[vsnip#available(1)  ? '<Plug>(vsnip-expand-or-jump)' : '<C-l>']],
+        { expr = true }
+    )
 end
 
 return M
