@@ -6,9 +6,7 @@ local function common_on_attach(client, bufnr)
     if as._default(vim.g.code_lsp_document_highlight) then
         require("modules.lsp").documentHighlight(client, bufnr)
     end
-    if as._default(vim.g.code_lsp_signature_help) then
-        require("lsp_signature").on_attach { max_width = 90, fix_pos = true, hint_prefix = " " }
-    end
+    require("lsp_signature").on_attach { max_width = 90, fix_pos = true, hint_prefix = " " }
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     -- mappings
     as.map("n", "gd", ":lua vim.lsp.buf.definition()<CR>")

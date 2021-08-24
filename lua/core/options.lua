@@ -47,7 +47,7 @@ end
 -----------------------------------------------------------------------------//
 vim.opt.colorcolumn = { as._default_num(vim.g.code_colorcolumn, 0) }
 vim.opt.cmdheight = as._default_num(vim.g.code_cmdheight, 2)
-vim.opt.scrolloff = as._default_num(vim.g.code_scrolloff, 10)
+vim.opt.scrolloff = 10
 vim.opt.conceallevel = 0
 vim.opt.signcolumn = "yes:1"
 vim.opt.showbreak = [[↪ ]] -- Options include -> '…', '↳ ', '→','↪ '
@@ -55,7 +55,7 @@ vim.opt.showtabline = 2
 vim.opt.termguicolors = true
 vim.opt.guifont = "JetBrainsMono Nerd Font:h14"
 vim.opt.relativenumber = as._default(vim.g.code_relativenumber)
-vim.opt.cursorline = as._default(vim.g.code_cursorline)
+vim.opt.cursorline = true
 vim.opt.title = true
 vim.opt.number = true
 vim.opt.numberwidth = 1
@@ -79,7 +79,7 @@ vim.opt.listchars = {
 -- Indentation {{{1
 -----------------------------------------------------------------------------//
 local indent = as._default_num(vim.g.code_indent_size, 4)
-vim.opt.wrap = as._default(vim.g.code_word_wrap, false)
+vim.opt.wrap = false
 vim.opt.tabstop = 8
 vim.opt.softtabstop = indent
 vim.opt.shiftwidth = indent
@@ -201,8 +201,7 @@ vim.opt.wildignore = {
 -- https://github.com/neovim/neovim/pull/12378
 -- https://github.com/neovim/neovim/pull/14661
 as.nvim_set_au("TextYankPost", "*", 'lua require"vim.highlight".on_yank{timeout = 250}')
-as.check_and_set(
-    vim.g.code_preserve_cursor,
+as.nvim_set_au(
     "BufReadPost",
     "*",
     [[if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif]]
