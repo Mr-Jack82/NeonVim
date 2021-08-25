@@ -27,13 +27,29 @@ local pack_use = function()
     -- Completion and snippets {{{1
     -----------------------------------------------------------------------------//
     use {
-        "hrsh7th/nvim-compe",
+        "hrsh7th/nvim-cmp",
         event = "InsertEnter",
+        requires = {
+            { "hrsh7th/cmp-path", after = "nvim-cmp" },
+            { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
+            { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+            { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
+        },
         config = function()
-            require("modules.plugins.completion").compe()
+            require("modules.plugins.completion").setup()
         end,
     }
-    use { "hrsh7th/vim-vsnip", after = "nvim-compe" }
+    use {
+        "L3MON4D3/LuaSnip",
+        after = "nvim-cmp",
+        config = function()
+            require("luasnip").config.set_config {
+                history = true,
+            }
+            require("luasnip.loaders.from_vscode").load {}
+        end,
+    }
     use { "rafamadriz/friendly-snippets" }
     -----------------------------------------------------------------------------//
     -- Telescope {{{1
@@ -259,7 +275,7 @@ local function load_plugins()
 end
 
 if fn.empty(fn.glob(install_path)) > 0 then
-    execute("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
+    vim.cmd("!git clone https://github.com/wbthomason/packer.nvim " .. install_path)
     load_plugins()
     require("packer").sync()
 else
