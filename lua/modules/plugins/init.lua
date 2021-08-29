@@ -108,7 +108,6 @@ local pack_use = function()
     use {
         "kyazdani42/nvim-tree.lua",
         requires = "nvim-web-devicons",
-        cmd = { "NvimTreeToggle", "NvimTreeFindFile" },
         config = function()
             require("modules.plugins.filetree").config()
         end,
