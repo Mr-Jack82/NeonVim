@@ -118,6 +118,7 @@ M.config = function()
                 layout_config = { height = 35, preview_width = 0.55 },
             },
             file_browser = {
+                hidden = true,
                 layout_config = { height = 35, preview_width = 0.65 },
             },
             lsp_document_symbols = { previewer = false },
