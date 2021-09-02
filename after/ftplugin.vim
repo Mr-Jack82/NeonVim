@@ -17,7 +17,7 @@ augroup END
 augroup Terminal
     au!
     au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
-    au TermOpen * tnoremap <buffer> <C-c> <c-\><c-n>
+    au TermOpen * tnoremap <buffer> <C-o> <c-\><c-n>
     au TermOpen * tnoremap <buffer> <silent> <C-j> <c-\><c-n>:wincmd j<CR>
     au TermOpen * tnoremap <buffer> <silent> <C-k> <c-\><c-n>:wincmd k<CR>
     au TermOpen * startinsert
