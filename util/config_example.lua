@@ -33,10 +33,6 @@ local M = {
     -- @value: boolean
     relativenumber = true,
 
-    -- Adds indentation guides to all lines .
-    -- @value: boolean
-    indent_guides = false,
-
     -- Format on save.
     -- @value: boolean
     format_on_save = true,

@@ -191,15 +191,6 @@ local pack_use = function()
             require("modules.plugins.startify").config()
         end,
     }
-    use {
-        "lukas-reineke/indent-blankline.nvim",
-        cond = function()
-            return as._default(vim.g.code_indent_guides, false)
-        end,
-        config = function()
-            require("modules.plugins.indent-guides").config()
-        end,
-    }
     -----------------------------------------------------------------------------//
     -- General plugins {{{1
     -----------------------------------------------------------------------------//
