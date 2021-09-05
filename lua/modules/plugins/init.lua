@@ -34,6 +34,7 @@ local pack_use = function()
             { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
             { "hrsh7th/cmp-nvim-lsp", after = "nvim-cmp" },
             { "hrsh7th/cmp-nvim-lua", after = "nvim-cmp" },
+            { "f3fora/cmp-spell", after = "nvim-cmp" },
             { "saadparwaiz1/cmp_luasnip", after = "LuaSnip" },
         },
         config = function()
@@ -175,7 +176,7 @@ local pack_use = function()
         end,
     }
     -----------------------------------------------------------------------------//
-    -- UI
+    -- UI {{{1
     -----------------------------------------------------------------------------//
     use "rafamadriz/themes.nvim"
     use {

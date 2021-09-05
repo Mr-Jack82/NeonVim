@@ -43,6 +43,35 @@ local function shift_tab(fallback)
     end
 end
 
+-- symbols for autocomplete
+local lsp_symbols = {
+    Class = "   Class",
+    Color = "   Color",
+    Constant = "   Constant",
+    Constructor = "   Constructor",
+    Enum = " ❐  Enum",
+    EnumMember = "   EnumMember",
+    Event = "   Event",
+    Field = " ﴲ  Field",
+    File = "   File",
+    Folder = "   Folder",
+    Function = "   Function",
+    Interface = " ﰮ  Interface",
+    Keyword = "   Keyword",
+    Method = "   Method",
+    Module = "   Module",
+    Operator = "   Operator",
+    Property = "   Property",
+    Reference = "   Reference",
+    Snippet = " ﬌  Snippet",
+    Struct = " ﳤ  Struct",
+    Text = "   Text",
+    TypeParameter = "   TypeParameter",
+    Unit = "   Unit",
+    Value = "   Value",
+    Variable = "[] Variable",
+}
+
 M.setup = function()
     local fmt = string.format
     local cmp = require "cmp"
@@ -73,17 +102,17 @@ M.setup = function()
             },
         },
         formatting = {
-            format = function(entry, vim_item)
-                -- vim_item.kind = fmt("%s %s", as.style.lsp.kinds[vim_item.kind], vim_item.kind)
-                vim_item.menu = ({
+            format = function(entry, item)
+                item.kind = lsp_symbols[item.kind]
+                item.menu = ({
                     nvim_lsp = "[L]",
-                    emoji = "[Emoji]",
                     path = "[P]",
                     calc = "[C]",
                     luasnip = "[S]",
                     buffer = "[B]",
+                    spell = "[Spell]",
                 })[entry.source.name]
-                return vim_item
+                return item
             end,
         },
         documentation = {
@@ -95,8 +124,17 @@ M.setup = function()
             { name = "buffer" },
             { name = "path" },
             { name = "nvim_lua" },
+            { name = "spell" },
         },
     }
+
+    vim.api.nvim_set_keymap("i", "<C-j>", "<Plug>luasnip-expand-or-jump", { silent = true })
+    vim.api.nvim_set_keymap(
+        "i",
+        "<C-k>",
+        "<cmd>lua require('luasnip').jump(-1)<Cr>",
+        { silent = true }
+    )
 end
 
 return M
