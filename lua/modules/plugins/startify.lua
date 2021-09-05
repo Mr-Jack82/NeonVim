@@ -15,10 +15,8 @@ M.config = function()
     vim.g.startify_commands = {
         { "Find files", ":Telescope fd" },
         { "Recent files", ":Telescope oldfiles" },
-        { "Execute command", ":Telescope commands" },
+        { "Projects", ":Telescope projects" },
         { "Help Tags", ":Telescope help_tags" },
-        { "Sync Plugins", ":PackerSync" },
-        { "Planets", ":Telescope planets" },
     }
 
     -- if start neovim in a directory that contains a Session.vim, that session will be loaded automatically

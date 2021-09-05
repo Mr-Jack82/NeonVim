@@ -199,6 +199,7 @@ local pack_use = function()
     use {
         "ahmedkhalf/project.nvim",
         event = "BufRead",
+        ft = "startify",
         config = function()
             require("project_nvim").setup {
                 detection_methods = { "pattern", "lsp" },
