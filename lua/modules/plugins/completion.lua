@@ -2,14 +2,6 @@ local M = {}
 local map = vim.api.nvim_set_keymap
 local fn = vim.fn
 
-local with_text = function(text, icon)
-    if as._default(vim.g.code_compe_item_with_text) then
-        return text
-    else
-        return icon
-    end
-end
-
 local function t(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
