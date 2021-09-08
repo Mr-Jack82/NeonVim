@@ -40,7 +40,7 @@ function as.check_and_set(option, au_type, where, dispatch, boolean)
 end
 
 -- inspect
-function as.dump(...)
+function D(...)
     local objects = vim.tbl_map(vim.inspect, { ... })
     print(unpack(objects))
     return ...
