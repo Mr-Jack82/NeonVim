@@ -100,10 +100,6 @@ local M = {
     -- @value: boolean
     compe_autocomplete = true,
 
-    -- Add description text to the suggested items in the completion menu.
-    -- @value: boolean
-    compe_item_with_text = true,
-
     -- Autocomplete pairs.
     -- @value: boolean
     compe_autopairs = true,
