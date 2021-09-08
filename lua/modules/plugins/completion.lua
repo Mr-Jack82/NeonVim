@@ -13,12 +13,12 @@ end
 
 local function tab(fallback)
     local luasnip = require "luasnip"
-    if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t "<C-n>", "n")
+    if fn.pumvisible() == 1 then
+        fn.feedkeys(t "<C-n>", "n")
     elseif luasnip.expand_or_jumpable() then
-        vim.fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
+        fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
     elseif check_back_space() then
-        vim.fn.feedkeys(t "<tab>", "n")
+        fn.feedkeys(t "<tab>", "n")
     else
         fallback()
     end
@@ -26,10 +26,10 @@ end
 
 local function shift_tab(fallback)
     local luasnip = require "luasnip"
-    if vim.fn.pumvisible() == 1 then
-        vim.fn.feedkeys(t "<C-p>", "n")
+    if fn.pumvisible() == 1 then
+        fn.feedkeys(t "<C-p>", "n")
     elseif luasnip.jumpable(-1) then
-        vim.fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
+        fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
     else
         fallback()
     end
@@ -65,7 +65,6 @@ local lsp_symbols = {
 }
 
 M.setup = function()
-    local fmt = string.format
     local cmp = require "cmp"
 
     -- require("cmp_nvim_lsp").setup()
