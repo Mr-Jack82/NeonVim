@@ -100,21 +100,17 @@ local M = {
     --- Completion {{{1
     -----------------------------------------------------------------------------//
     -- Show autocomplete suggestions as you type. If diasble, the completion
-    -- menu has to trigger manually with <C-Space> or <Tab>
+    -- menu has to be trigger manually with <C-Space> or <Tab>
     -- @value: boolean
-    compe_autocomplete = true,
-
-    -- Add description text to the suggested items in the completion menu.
-    -- @value: boolean
-    compe_item_with_text = true,
+    autocomplete = true,
 
     -- Autocomplete pairs.
     -- @value: boolean
-    compe_autopairs = true,
+    autopairs = true,
 
     -- Number of items to show in the completion menu.
     -- @value: number
-    compe_items = 10,
+    complete_menu_items = 10,
     -----------------------------------------------------------------------------//
     --- Treesitter {{{1
     -----------------------------------------------------------------------------//
