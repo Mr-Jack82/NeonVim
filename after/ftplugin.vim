@@ -1,9 +1,6 @@
 let delimitMate_matchpairs = "(:),{:},[:]"
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
-imap <expr> <CR> pumvisible()
-                 \ ? "\<C-Y>"
-                 \ : "<Plug>delimitMateCR"
 
 " Set filetypes
 augroup Filetypes

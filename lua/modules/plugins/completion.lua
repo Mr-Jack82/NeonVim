@@ -72,7 +72,7 @@ M.setup = function()
 
     cmp.setup {
         completion = {
-            autocomplete = as._default(vim.g.code_compe_autocomplete),
+            autocomplete = as._default(vim.g.code_autocomplete),
             completeopt = "menu,menuone,noinsert",
             keyword_length = 3,
         },

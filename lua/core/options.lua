@@ -94,13 +94,24 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.inccommand = "nosplit"
-vim.opt.pumheight = as._default_num(vim.g.code_compe_items, 10)
+vim.opt.pumheight = as._default_num(vim.g.complete_menu_items, 10)
 vim.opt.completeopt = "menuone,noinsert,noselect"
 -----------------------------------------------------------------------------//
 -- Utils {{{1
 -----------------------------------------------------------------------------//
 if as._default(vim.g.code_cursor_block, false) then
     vim.opt.guicursor = ""
+end
+-- autopairs
+if as._default(vim.g.code_autopairs) == false then
+    vim.g.loaded_delimitMate = 1
+elseif as._default(vim.g.code_autopairs) == true then
+    as.map(
+        "i",
+        "<CR>",
+        [[pumvisible() ? "<C-Y>" : "<Plug>delimitMateCR"]],
+        { expr = true, noremap = false }
+    )
 end
 vim.opt.shortmess:append "c"
 vim.opt.iskeyword:append "-"
