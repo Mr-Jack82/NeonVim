@@ -84,6 +84,13 @@ local pack_use = function()
     -- Utils {{{1
     -----------------------------------------------------------------------------//
     use {
+        "phaazon/hop.nvim",
+        cmd = { "HopChar2" },
+        config = function()
+            require("hop").setup()
+        end,
+    }
+    use {
         "rhysd/clever-f.vim",
         keys = { "f", "F", "t", "T" },
         config = function()
