@@ -114,7 +114,7 @@ local pack_use = function()
         end,
     }
     use {
-        "akinsho/nvim-toggleterm.lua",
+        "akinsho/toggleterm.nvim",
         keys = "<A-t>",
         cmd = "ToggleTerm",
         config = function()
