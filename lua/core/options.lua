@@ -94,7 +94,7 @@ vim.opt.incsearch = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.inccommand = "nosplit"
-vim.opt.pumheight = as._default_num(vim.g.complete_menu_items, 10)
+vim.opt.pumheight = as._default_num(vim.g.code_complete_menu_items, 10)
 vim.opt.completeopt = "menuone,noinsert,noselect"
 -----------------------------------------------------------------------------//
 -- Utils {{{1

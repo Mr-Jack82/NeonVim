@@ -96,7 +96,7 @@ local M = {
     --- Completion {{{1
     -----------------------------------------------------------------------------//
     -- Show autocomplete suggestions as you type. If diasble, the completion
-    -- menu has to trigger manually with <C-Space> or <Tab>
+    -- menu has to be trigger manually with <C-Space> or <Tab>
     -- @value: boolean
     autocomplete = true,
 
