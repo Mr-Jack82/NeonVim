@@ -198,7 +198,7 @@ local pack_use = function()
         end,
     }
     use {
-        "~/repos/alpha-nvim",
+        "goolord/alpha-nvim",
         config = function()
             require("modules.plugins.alpha").config()
         end,
