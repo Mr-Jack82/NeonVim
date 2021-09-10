@@ -21,6 +21,7 @@ as.map("n", "N", "Nzzzv")
 as.map("n", "J", "mzJ`z")
 as.map("i", "jk", "<ESC>", { noremap = false })
 as.map("n", "<BS>", "<C-^>")
+as.map("i", "<C-H>", "<BS>", { noremap = false })
 as.map("c", "Q", "q", { silent = false })
 as.map("c", "W", "w", { silent = false })
 -- Move selected line / block of text in visual mode
