@@ -74,7 +74,10 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- Treesitter {{{1
     -----------------------------------------------------------------------------//
-    use { "nvim-treesitter/playground", cmd = "TSHighlightCapturesUnderCursor" }
+    use {
+        "nvim-treesitter/playground",
+        cmd = { "TSHighlightCapturesUnderCursor", "TSPlaygroundToggle" },
+    }
     use {
         "nvim-treesitter/nvim-treesitter",
         branch = "0.5-compat",
