@@ -1,6 +1,9 @@
+require "impatient" -- Improve startup a little.
 local pack_use = function()
     local use = require("packer").use
     use { "wbthomason/packer.nvim" }
+    -- NOTE: this is plugin is unnecessary once https://github.com/neovim/neovim/pull/15436 is merged
+    use { "lewis6991/impatient.nvim" }
     -----------------------------------------------------------------------------//
     -- Required by others {{{1
     -----------------------------------------------------------------------------//
@@ -12,6 +15,7 @@ local pack_use = function()
     use { "ray-x/lsp_signature.nvim" }
     use {
         "neovim/nvim-lspconfig",
+        event = "BufReadPre",
         config = function()
             require "modules.lsp"
         end,
