@@ -184,17 +184,15 @@ as.map("n", "<leader>zq", ":close<CR>")
 -----------------------------------------------------------------------------//
 -- Quit/Session {{{1
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>qs", ":SSave<CR>")
-as.map("n", "<leader>qq", ":SClose<CR>")
 as.map("n", "<leader>qQ", ":quitall<CR>")
-as.map("n", "<leader>qd", ":SDelete<CR>")
-as.map("n", "<leader>ql", ":SLoad<CR>")
+as.map("n", "<leader>qc", ":lua require'persistence'.load()<CR>")
+as.map("n", "<leader>ql", ":lua require'persistence'.load({last = true})<CR>")
+as.map("n", "<leader>qq", ":Alpha<CR>")
 -----------------------------------------------------------------------------//
 -- Open/Run {{{1
 -----------------------------------------------------------------------------//
 as.map("n", "<leader>r|", [[:execute "set colorcolumn=" . (&colorcolumn == "0" ? "81" : "")<CR>]])
 as.map("n", "<leader>rr", "@:<CR>")
-as.map("n", "<leader>r'", ":Startify<CR>")
 as.map("n", "<leader>ri", ":IndentBlanklineToggle<CR>")
 as.map("n", "<leader>rt", ":ToggleTerm<CR>")
 as.map("n", "<leader>rb", ":Telescope file_browser<CR>")

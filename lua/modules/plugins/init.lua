@@ -198,10 +198,9 @@ local pack_use = function()
         end,
     }
     use {
-        "mhinz/vim-startify",
-        event = "VimEnter",
+        "~/repos/alpha-nvim",
         config = function()
-            require("modules.plugins.startify").config()
+            require("modules.plugins.alpha").config()
         end,
     }
     -----------------------------------------------------------------------------//
@@ -209,9 +208,19 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
+        "folke/persistence.nvim",
+        module = "persistence",
+        event = "BufReadPre",
+        config = function()
+            require("persistence").setup {
+                dir = vim.fn.expand(vim.fn.stdpath "cache" .. "/sessions/"),
+            }
+        end,
+    }
+    use {
         "ahmedkhalf/project.nvim",
         event = "BufRead",
-        ft = "startify",
+        ft = "alpha",
         config = function()
             require("project_nvim").setup {
                 detection_methods = { "pattern", "lsp" },
