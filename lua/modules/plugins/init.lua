@@ -135,6 +135,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     -- Improve Editing {{{1
     -----------------------------------------------------------------------------//
+    use { "tommcdo/vim-exchange", keys = { { "n", "cx" }, { "v", "X" } } }
     use { "machakann/vim-sandwich", event = { "BufRead", "InsertLeave" } }
     use { "Raimondi/delimitMate", event = "InsertEnter" }
     use {
