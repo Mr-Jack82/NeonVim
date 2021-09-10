@@ -141,7 +141,13 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use { "tommcdo/vim-exchange", keys = { { "n", "cx" }, { "v", "X" } } }
     use { "machakann/vim-sandwich", event = { "BufRead", "InsertLeave" } }
-    use { "Raimondi/delimitMate", event = "InsertEnter" }
+    use {
+        "windwp/nvim-autopairs",
+        event = "InsertEnter",
+        config = function()
+            require("modules.plugins.completion").autopairs()
+        end,
+    }
     use {
         "b3nj5m1n/kommentary",
         keys = { "gcc", "gc" },
