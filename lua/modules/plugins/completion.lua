@@ -1,39 +1,6 @@
 local M = {}
-local map = vim.api.nvim_set_keymap
-local fn = vim.fn
-
-local function t(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
-local check_back_space = function()
-    local col = vim.fn.col "." - 1
-    return col == 0 or vim.fn.getline("."):sub(col, col):match "%s" ~= nil
-end
-
-local function tab(fallback)
-    local luasnip = require "luasnip"
-    if fn.pumvisible() == 1 then
-        fn.feedkeys(t "<C-n>", "n")
-    elseif luasnip.expand_or_jumpable() then
-        fn.feedkeys(t "<Plug>luasnip-expand-or-jump", "")
-    elseif check_back_space() then
-        fn.feedkeys(t "<tab>", "n")
-    else
-        fallback()
-    end
-end
-
-local function shift_tab(fallback)
-    local luasnip = require "luasnip"
-    if fn.pumvisible() == 1 then
-        fn.feedkeys(t "<C-p>", "n")
-    elseif luasnip.jumpable(-1) then
-        fn.feedkeys(t "<Plug>luasnip-jump-prev", "")
-    else
-        fallback()
-    end
-end
+local api = vim.api
+local feedkeys = api.nvim_feedkeys
 
 -- symbols for autocomplete
 local lsp_symbols = {
@@ -64,6 +31,15 @@ local lsp_symbols = {
     Variable = "[] Variable",
 }
 
+local function t(str)
+    return api.nvim_replace_termcodes(str, true, true, true)
+end
+
+local has_words_before = function()
+    local cursor = api.nvim_win_get_cursor(0)
+    return not api.nvim_get_current_line():sub(1, cursor[2]):match "^%s$"
+end
+
 M.setup = function()
     local cmp = require "cmp"
 
@@ -81,8 +57,30 @@ M.setup = function()
             end,
         },
         mapping = {
-            ["<Tab>"] = cmp.mapping(tab, { "i", "s" }),
-            ["<S-Tab>"] = cmp.mapping(shift_tab, { "i", "s" }),
+            ["<Tab>"] = cmp.mapping(function(fallback)
+                local luasnip = require "luasnip"
+                if vim.fn.pumvisible() == 1 then
+                    feedkeys(t "<C-n>", "n", true)
+                elseif has_words_before() and luasnip.expand_or_jumpable() then
+                    feedkeys(t "<Plug>luasnip-expand-or-jump", "", true)
+                else
+                    fallback()
+                end
+            end, {
+                "i",
+                "s",
+            }),
+            ["<S-Tab>"] = cmp.mapping(function()
+                local luasnip = require "luasnip"
+                if vim.fn.pumvisible() == 1 then
+                    feedkeys(t "<C-p>", "n", true)
+                elseif luasnip.jumpable(-1) then
+                    feedkeys(t "<Plug>luasnip-jump-prev", "", true)
+                end
+            end, {
+                "i",
+                "s",
+            }),
             ["<C-d>"] = cmp.mapping.scroll_docs(-4),
             ["<C-f>"] = cmp.mapping.scroll_docs(4),
             ["<C-Space>"] = cmp.mapping.complete(),
@@ -119,13 +117,9 @@ M.setup = function()
         },
     }
 
-    vim.api.nvim_set_keymap("i", "<C-j>", "<Plug>luasnip-expand-or-jump", { silent = true })
-    vim.api.nvim_set_keymap(
-        "i",
-        "<C-k>",
-        "<cmd>lua require('luasnip').jump(-1)<Cr>",
-        { silent = true }
-    )
+    local map = api.nvim_set_keymap
+    map("i", "<C-j>", "<Plug>luasnip-expand-or-jump", { silent = true })
+    map("i", "<C-k>", "<cmd>lua require('luasnip').jump(-1)<Cr>", { silent = true })
 end
 
 return M
