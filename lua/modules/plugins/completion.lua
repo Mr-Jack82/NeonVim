@@ -183,9 +183,10 @@ M.autopairs = function()
                 " {}",
                 { "typescript", "typescriptreact", "javascript", "javascriptreact" }
             ):use_regex(true):set_end_pair_length(1),
-            -- and `end` keys in lua
+            -- endwise
             endwise("then$", "end", "lua", nil),
-            endwise("function%(.*%)%s*$", "end", "lua", nil),
+            endwise("function%(.*%)$", "end", "lua", nil),
+            endwise("do$", "end", "lua", nil),
         }
     end
 end
