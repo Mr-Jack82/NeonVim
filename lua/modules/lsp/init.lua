@@ -6,33 +6,33 @@ for type, icon in pairs(signs) do
 end
 
 -- display diagnostics with its source
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _)
+vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, context, _)
     local config = {
         underline = as._default(vim.g.code_lsp_diagnostic_underline),
         virtual_text = as._default(vim.g.code_lsp_virtual_text, false),
         signs = as._default(vim.g.code_lsp_diagnostic_signs_enabled),
         update_in_insert = false,
     }
-    local uri = params.uri
-    local bufnr = vim.uri_to_bufnr(uri)
+
+    local bufnr = vim.uri_to_bufnr(result.uri)
 
     if not bufnr then
         return
     end
 
-    local diagnostics = params.diagnostics
+    local diagnostics = result.diagnostics
 
     for i, v in ipairs(diagnostics) do
         diagnostics[i].message = string.format("%s: %s", v.source, v.message)
     end
 
-    vim.lsp.diagnostic.save(diagnostics, bufnr, client_id)
+    vim.lsp.diagnostic.save(diagnostics, bufnr, context.client_id)
 
     if not vim.api.nvim_buf_is_loaded(bufnr) then
         return
     end
 
-    vim.lsp.diagnostic.display(diagnostics, bufnr, client_id, config)
+    vim.lsp.diagnostic.display(diagnostics, bufnr, context.client_id, config)
 end
 
 local borders = as._lsp_borders(vim.g.code_lsp_window_borders)
