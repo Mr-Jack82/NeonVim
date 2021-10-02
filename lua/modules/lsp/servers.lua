@@ -136,54 +136,30 @@ local lua_settings = {
     },
 }
 
-local function make_config()
-    return {
+require("nvim-lsp-installer").on_server_ready(function(server)
+    local opts = {
         -- enable snippet support
         capabilities = require("modules.lsp").capabilities,
         -- map buffer local keybindings when the language server attaches
         on_attach = common_on_attach,
         flags = { debounce_text_changes = 150 },
+        autostart = as._lsp_auto(server.name),
     }
-end
 
--- lsp-install
-local function setup_servers()
-    require("lspinstall").setup()
-
-    -- get all installed servers
-    local servers = require("lspinstall").installed_servers()
-
-    for _, server in pairs(servers) do
-        local config = make_config()
-
-        config.autostart = as._lsp_auto(server)
-
-        -- language specific config
-        if server == "typescript" then
-            config.filetypes = {
-                "javascript",
-                "javascriptreact",
-                "javascript.jsx",
-                "typescript",
-                "typescriptreact",
-                "typescript.tsx",
-            }
-        end
-        if server == "bash" then
-            config.filetypes = { "sh", "zsh" }
-        end
-        if server == "lua" then
-            config.settings = lua_settings
-        end
-        if server == "cpp" then
-            config.filetypes = { "c", "cpp" }
-        end
-
-        require("lspconfig")[server].setup(config)
+    -- language specific config
+    if server.name == "bashls" then
+        opts.filetypes = { "sh", "zsh" }
     end
-end
+    if server.name == "sumneko_lua" then
+        opts.settings = lua_settings
+    end
+    if server.name == "clangd" then
+        opts.filetypes = { "c", "cpp" }
+    end
 
-setup_servers()
+    server:setup(opts)
+    vim.cmd [[ do User LspAttachBuffers ]]
+end)
 
 -- npm i -g emmet-ls
 local lspconfig = require "lspconfig"
@@ -202,9 +178,3 @@ if not lspconfig.emmet_ls then
     }
 end
 lspconfig.emmet_ls.setup { capabilities = require("modules.lsp").capabilities }
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require("lspinstall").post_install_hook = function()
-    setup_servers() -- reload installed servers
-    vim.cmd "bufdo e"
-end
