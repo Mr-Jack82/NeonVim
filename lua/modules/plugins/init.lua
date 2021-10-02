@@ -32,7 +32,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use {
         "hrsh7th/nvim-cmp",
-        -- event = "InsertEnter",
+        event = "InsertEnter",
         requires = {
             { "hrsh7th/cmp-path", after = "nvim-cmp" },
             { "hrsh7th/cmp-buffer", after = "nvim-cmp" },
@@ -146,7 +146,7 @@ local pack_use = function()
     use { "machakann/vim-sandwich", event = { "BufRead", "InsertLeave" } }
     use {
         "windwp/nvim-autopairs",
-        event = "InsertEnter",
+        after = "nvim-cmp",
         config = function()
             require("modules.plugins.completion").autopairs()
         end,
