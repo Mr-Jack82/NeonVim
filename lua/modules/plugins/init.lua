@@ -297,7 +297,6 @@ local pack_use = function()
     use "editorconfig/editorconfig-vim"
     use "tpope/vim-unimpaired"
     use "easymotion/vim-easymotion"
-    use "tommcdo/vim-exchange"
     use "907th/vim-auto-save"
     use {
         "andymass/vim-matchup",
