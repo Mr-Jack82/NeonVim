@@ -160,21 +160,3 @@ require("nvim-lsp-installer").on_server_ready(function(server)
     server:setup(opts)
     vim.cmd [[ do User LspAttachBuffers ]]
 end)
-
--- npm i -g emmet-ls
-local lspconfig = require "lspconfig"
-local configs = require "lspconfig/configs"
-if not lspconfig.emmet_ls then
-    configs.emmet_ls = {
-        default_config = {
-            autostart = as._lsp_auto "emmet",
-            cmd = { "emmet-ls", "--stdio" },
-            filetypes = { "html", "css" },
-            root_dir = function()
-                return vim.loop.cwd()
-            end,
-            settings = {},
-        },
-    }
-end
-lspconfig.emmet_ls.setup { capabilities = require("modules.lsp").capabilities }
