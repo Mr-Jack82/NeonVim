@@ -32,8 +32,10 @@ local lsp_symbols = {
 }
 
 local has_words_before = function()
-    local cursor = api.nvim_win_get_cursor(0)
-    return not api.nvim_get_current_line():sub(1, cursor[2]):match "^%s$"
+    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    return col ~= 0
+        and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s"
+            == nil
 end
 
 M.setup = function()
