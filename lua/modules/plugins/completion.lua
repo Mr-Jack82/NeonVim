@@ -31,10 +31,6 @@ local lsp_symbols = {
     Variable = "[] Variable",
 }
 
-local function t(str)
-    return api.nvim_replace_termcodes(str, true, true, true)
-end
-
 local has_words_before = function()
     local cursor = api.nvim_win_get_cursor(0)
     return not api.nvim_get_current_line():sub(1, cursor[2]):match "^%s$"
@@ -47,7 +43,7 @@ M.setup = function()
 
     cmp.setup {
         completion = {
-            autocomplete = as._default(vim.g.code_autocomplete),
+            -- autocomplete = as._default(vim.g.code_autocomplete),
             completeopt = "menu,menuone,noinsert",
             keyword_length = 3,
         },
@@ -59,10 +55,12 @@ M.setup = function()
         mapping = {
             ["<Tab>"] = cmp.mapping(function(fallback)
                 local luasnip = require "luasnip"
-                if vim.fn.pumvisible() == 1 then
-                    feedkeys(t "<C-n>", "n", true)
-                elseif has_words_before() and luasnip.expand_or_jumpable() then
-                    feedkeys(t "<Plug>luasnip-expand-or-jump", "", true)
+                if cmp.visible() then
+                    cmp.select_next_item()
+                elseif luasnip.expand_or_jumpable() then
+                    luasnip.expand_or_jump()
+                elseif has_words_before() then
+                    cmp.complete()
                 else
                     fallback()
                 end
@@ -72,10 +70,12 @@ M.setup = function()
             }),
             ["<S-Tab>"] = cmp.mapping(function()
                 local luasnip = require "luasnip"
-                if vim.fn.pumvisible() == 1 then
-                    feedkeys(t "<C-p>", "n", true)
+                if cmp.visible() then
+                    cmp.select_prev_item()
                 elseif luasnip.jumpable(-1) then
-                    feedkeys(t "<Plug>luasnip-jump-prev", "", true)
+                    luasnip.jump(-1)
+                else
+                    fallback()
                 end
             end, {
                 "i",
