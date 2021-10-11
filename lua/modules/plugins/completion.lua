@@ -50,7 +50,7 @@ M.setup = function()
     cmp.setup {
         completion = {
             completeopt = "menu,menuone,noinsert",
-            keyword_length = 3,
+            keyword_length = 2,
         },
         snippet = {
             expand = function(args)
