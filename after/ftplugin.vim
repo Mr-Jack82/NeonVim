@@ -4,6 +4,7 @@ augroup Filetypes
   au BufNewFile,BufRead *.ejs,*.hbs set filetype=html
   au BufNewFile,BufRead *.nix set filetype=nix
   au BufWritePost config.lua PackerCompile
+  au FileType NeogitCommitMessage set spell
 augroup END
 
 " Terminal
