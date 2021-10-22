@@ -61,7 +61,7 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use {
         "nvim-telescope/telescope-fzf-native.nvim",
-        opt = true,
+        cmd = "Telescope",
         run = "make",
     }
     use {
