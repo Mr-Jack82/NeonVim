@@ -45,7 +45,7 @@ as.map("x", "j", '(v:count == 0 && mode() !=# "V") ? "gj" : "j"', { expr = true 
 vim.cmd[[command! PU PackerUpdate]]
 
 -- Select last pasted text
-as.map("n", "gp", "'`[' . strpart(getregtype(), 0, 1) . '`]'", { expr = true })
+as.map("n", "gV", "'`[' . strpart(getregtype(), 0, 1) . '`]'", { expr = true })
 -- Beginning and end of line in `:` command mode
 as.map("c", "<C-a>", "<home>")
 as.map("c", "<C-e>", "<end>")
