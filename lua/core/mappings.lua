@@ -70,10 +70,6 @@ as.map("", "<leader>es", ":sp %%", {noremap = false, silent = false})
 as.map("", "<leader>ev", ":vsp %%", {noremap = false, silent = false})
 as.map("", "<leader>et", ":tabe %%", {noremap = false, silent = false})
 
--- Set working directory to the current buffer's directory
-as.map("n", "cd", ":lcd %:p:h<bar>pwd<CR>", {silent = false})
-as.map("n", "cu", "..<bar>pwd<CR>", {silent = false})
-
 -- Make {motion} text uppercase in INSERT mode.
 as.map("!", "<C-f>", "<Esc>gUiw`]a", {noremap = false})
 
@@ -104,6 +100,8 @@ as.map(
     ":lcd %:p:h<bar>lua print('current direcotry is ' .. vim.fn.getcwd())<CR>",
     { silent = false }
 )
+
+as.map("n", "cu", "..<bar>pwd<CR>", {silent = false})
 -----------------------------------------------------------------------------//
 -- help {{{1
 -----------------------------------------------------------------------------//
