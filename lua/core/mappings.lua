@@ -194,6 +194,7 @@ as.map("n", "<leader>qq", ":Alpha<CR>")
 -----------------------------------------------------------------------------//
 as.map("n", "<leader>r|", [[:execute "set colorcolumn=" . (&colorcolumn == "0" ? "81" : "")<CR>]])
 as.map("n", "<leader>rr", "@:<CR>")
+as.map("n", "<leader>rs", ":noautocmd w<CR>")
 as.map("n", "<leader>ri", ":IndentBlanklineToggle<CR>")
 as.map("n", "<leader>rt", ":ToggleTerm<CR>")
 as.map("n", "<leader>rb", ":Telescope file_browser<CR>")
