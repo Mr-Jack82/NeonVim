@@ -181,6 +181,7 @@ M.config = function()
                 n = "open neovim config",
                 q = "open quickfix window",
                 r = "repeat last command",
+                s = "save without formatting",
                 t = "open terminal",
                 u = "open undotree",
                 c = {
