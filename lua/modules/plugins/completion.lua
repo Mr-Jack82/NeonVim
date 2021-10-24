@@ -43,9 +43,12 @@ M.setup = function()
 
     -- require("cmp_nvim_lsp").setup()
 
+    if not as._default(vim.g.code_autocomplete) then
+        cmp.setup { completion = { autocomplete = false } }
+    end
+
     cmp.setup {
         completion = {
-            -- autocomplete = as._default(vim.g.code_autocomplete),
             completeopt = "menu,menuone,noinsert",
             keyword_length = 3,
         },
