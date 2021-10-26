@@ -68,7 +68,7 @@ M.config = function()
                     { key = "<", cb = tree_cb "prev_sibling" },
                     { key = ">", cb = tree_cb "next_sibling" },
                     { key = "P", cb = tree_cb "parent_node" },
-                    { key = "<BS>", cb = tree_cb "close_node" },
+                    { key = { "<BS>", "h" }, cb = tree_cb "close_node" },
                     { key = "<S-CR>", cb = tree_cb "close_node" },
                     { key = "<Tab>", cb = tree_cb "preview" },
                     { key = "K", cb = tree_cb "first_sibling" },
