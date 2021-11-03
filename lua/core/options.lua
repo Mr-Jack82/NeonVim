@@ -112,7 +112,7 @@ vim.opt.mouse = "a"
 -----------------------------------------------------------------------------//
 vim.opt.foldlevelstart = 3
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-vim.opt.foldmethod = "marker"
+-- vim.opt.foldmethod = "marker"
 -- vim.opt.foldmethod = "expr" -- This is kinda buggy
 -----------------------------------------------------------------------------//
 -- Disable some builtin plugins {{{1
