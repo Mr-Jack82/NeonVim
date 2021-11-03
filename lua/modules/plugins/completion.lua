@@ -135,12 +135,7 @@ M.autopairs = function()
         local endwise = require("nvim-autopairs.ts-rule").endwise
 
         pairs.setup {
-            check_ts = true,
-        }
-        require("nvim-autopairs.completion.cmp").setup {
-            map_cr = true, --  map <CR> on insert mode
-            map_complete = false, -- it will auto insert `(` after select function or method item
-            auto_select = false, -- automatically select the first item
+            check_ts = false,
         }
 
         -- Custom rules
