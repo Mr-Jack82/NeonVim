@@ -7,7 +7,7 @@ _G.as = {
 }
 
 -- create global variables for config file
--- TODO: themes options are not working beacuse the proper global variable
+-- FIXME: themes options are not working beacuse the proper global variable
 -- are not being created.
 local ok, config = pcall(require, "config")
 if ok then
