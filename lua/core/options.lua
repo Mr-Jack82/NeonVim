@@ -110,10 +110,13 @@ vim.opt.mouse = "a"
 -----------------------------------------------------------------------------//
 -- Folds {{{1
 -----------------------------------------------------------------------------//
-vim.opt.foldlevelstart = 3
+vim.opt.foldlevelstart = 5
 vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
 -- vim.opt.foldmethod = "marker"
--- vim.opt.foldmethod = "expr" -- This is kinda buggy
+vim.opt.foldmethod = "expr" -- This is kinda buggy
+vim.opt.foldnestmax = 3
+vim.opt.foldtext =
+    [[substitute(getline(v:foldstart),'\\t',repeat('\ ',&tabstop),'g').'...'.trim(getline(v:foldend)) . ' (' . (v:foldend - v:foldstart + 1) . ' lines)']]
 -----------------------------------------------------------------------------//
 -- Disable some builtin plugins {{{1
 -----------------------------------------------------------------------------//
@@ -135,6 +138,7 @@ vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_man = 1
 vim.g.loaded_remote_plugins = 1
+-- vim.g.did_load_filetypes = 1
 -- vim.g.loaded_matchit = 1
 -- vim.g.loaded_matchparen = 1
 -----------------------------------------------------------------------------//
