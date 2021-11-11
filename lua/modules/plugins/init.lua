@@ -154,9 +154,9 @@ local pack_use = function()
         "numToStr/Comment.nvim",
         keys = { "gcc", "gc" },
         config = function()
-            require("Comment").setup {
+            require("Comment").setup({
                 ignore = "^$",
-            }
+            })
         end,
     }
     -----------------------------------------------------------------------------//
