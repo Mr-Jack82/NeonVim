@@ -298,6 +298,7 @@ local pack_use = function()
     use "tpope/vim-unimpaired"
     use "easymotion/vim-easymotion"
     use "907th/vim-auto-save"
+    use "christoomey/vim-tmux-navigator"
     use {
         "andymass/vim-matchup",
         ft = {'html', 'javascript', 'json', 'xml'}
