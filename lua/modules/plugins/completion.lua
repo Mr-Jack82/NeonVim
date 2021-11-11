@@ -49,7 +49,7 @@ M.setup = function()
 
     cmp.setup {
         completion = {
-            completeopt = "menu,menuone,noinsert",
+            completeopt = "menuone,noselect",
             keyword_length = 2,
         },
         snippet = {
