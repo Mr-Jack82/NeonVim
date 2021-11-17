@@ -55,7 +55,30 @@ as.map("v", ">", ">gv")
 -- Search and replace
 as.map("n", "c.", [[:%s/\<<C-r><C-w>\>//g<Left><Left>]])
 -- Hop
-as.map("n", "S", ":HopChar2<CR>", { noremap = false, silent = false })
+as.map("n", "s", "<cmd>HopChar1<CR>", { noremap = false, silent = false })
+as.map("", "<leader>/", "<cmd>HopPattern<CR>")
+
+as.map(
+    "o",
+    "f",
+    "<cmd>lua require'hop'.hint_char1({ current_line_only = true, inclusive_jump = true })<CR>",
+    { noremap = true }
+)
+
+as.map(
+    "o",
+    "t",
+    "<cmd>lua require'hop'.hint_char1({ current_line_only = true })<CR>",
+    { noremap = true }
+)
+
+as.map(
+    "o",
+    "z",
+    "<cmd>lua require'hop'.hint_char1()<CR>",
+    { noremap = true }
+)
+
 
 -- Allows you to save files you opened without write permissions via sudo
 vim.cmd[[cabbrev w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!]]

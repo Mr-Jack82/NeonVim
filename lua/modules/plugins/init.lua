@@ -91,18 +91,10 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use {
         "phaazon/hop.nvim",
-        cmd = { "HopChar2" },
         config = function()
-            require("hop").setup()
-        end,
-    }
-    use {
-        "rhysd/clever-f.vim",
-        keys = { "f", "F", "t", "T" },
-        config = function()
-            vim.g.clever_f_across_no_line = 1
-            vim.cmd "map ; <Plug>(clever-f-repeat-forward)"
-            vim.cmd "map , <Plug>(clever-f-repeat-back)"
+            require("hop").setup({
+                uppercase_labels = true,
+            })
         end,
     }
     use {
@@ -296,7 +288,6 @@ local pack_use = function()
     use "junegunn/vim-easy-align"
     use "editorconfig/editorconfig-vim"
     use "tpope/vim-unimpaired"
-    use "easymotion/vim-easymotion"
     use "907th/vim-auto-save"
     use "christoomey/vim-tmux-navigator"
     use {
