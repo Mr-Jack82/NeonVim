@@ -33,21 +33,20 @@ local function common_on_attach(client, bufnr)
     as.map("n", "<leader>lS", ":Telescope lsp_workspace_symbols<CR>")
     as.map("n", "<leader>lf", ":lua vim.lsp.buf.formatting()<CR>")
     as.map("n", "<leader>lp", ":lua require('modules.lsp').PeekDefinition()<CR>")
-    -- TODO: figure out how to pass boder options to the new `diagnostic.open_float` and `diagnostic.goto`
     as.map(
         "n",
         "<leader>ll",
-        ":lua vim.diagnostic.open_float(0, {float = {border = as._lsp_borders(vim.g.code_lsp_window_borders)}})<CR>"
+        ":lua vim.diagnostic.open_float(0, {border = as._lsp_borders(vim.g.code_lsp_window_borders)})<CR>"
     )
     as.map(
         "n",
         "<c-p>",
-        ":lua vim.lsp.diagnostic.goto_prev({popup_opts = {border = as._lsp_borders(vim.g.code_lsp_window_borders)}})<CR>"
+        ":lua vim.diagnostic.goto_prev({float = {border = as._lsp_borders(vim.g.code_lsp_window_borders)}})<CR>"
     )
     as.map(
         "n",
         "<c-n>",
-        ":lua vim.lsp.diagnostic.goto_next({popup_opts = {border = as._lsp_borders(vim.g.code_lsp_window_borders)}})<CR>"
+        ":lua vim.diagnostic.goto_next({float = {border = as._lsp_borders(vim.g.code_lsp_window_borders)}})<CR>"
     )
     as.map("n", "<leader>l,s", [[:LspStop <C-R>=<CR>]], { silent = false })
 
