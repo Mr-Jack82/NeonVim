@@ -33,10 +33,11 @@ local function common_on_attach(client, bufnr)
     as.map("n", "<leader>lS", ":Telescope lsp_workspace_symbols<CR>")
     as.map("n", "<leader>lf", ":lua vim.lsp.buf.formatting()<CR>")
     as.map("n", "<leader>lp", ":lua require('modules.lsp').PeekDefinition()<CR>")
+    -- TODO: figure out how to pass boder options to the new `diagnostic.open_float` and `diagnostic.goto`
     as.map(
         "n",
         "<leader>ll",
-        ":lua vim.lsp.diagnostic.show_line_diagnostics({border = as._lsp_borders(vim.g.code_lsp_window_borders)})<CR>"
+        ":lua vim.diagnostic.open_float(0, {float = {border = as._lsp_borders(vim.g.code_lsp_window_borders)}})<CR>"
     )
     as.map(
         "n",
@@ -53,7 +54,7 @@ local function common_on_attach(client, bufnr)
     as.nvim_set_au(
         "InsertLeave,BufWrite,BufEnter",
         "<buffer>",
-        "lua vim.lsp.diagnostic.set_loclist({open_loclist = false})"
+        "lua vim.diagnostic.setloclist({open = false})"
     )
 
     local mappings = {

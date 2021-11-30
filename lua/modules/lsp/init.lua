@@ -1,39 +1,16 @@
-local signs = { Error = " ", Warning = " ", Hint = " ", Information = " " }
-
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
-    local hl = "LspDiagnosticsSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
 
--- display diagnostics with its source
-vim.lsp.handlers["textDocument/publishDiagnostics"] = function(_, result, context, _)
-    local config = {
-        underline = as._default(vim.g.code_lsp_diagnostic_underline),
-        virtual_text = as._default(vim.g.code_lsp_virtual_text, false),
-        signs = as._default(vim.g.code_lsp_diagnostic_signs_enabled),
-        update_in_insert = false,
-    }
-
-    local bufnr = vim.uri_to_bufnr(result.uri)
-
-    if not bufnr then
-        return
-    end
-
-    local diagnostics = result.diagnostics
-
-    for i, v in ipairs(diagnostics) do
-        diagnostics[i].message = string.format("%s: %s", v.source, v.message)
-    end
-
-    vim.lsp.diagnostic.save(diagnostics, bufnr, context.client_id)
-
-    if not vim.api.nvim_buf_is_loaded(bufnr) then
-        return
-    end
-
-    vim.lsp.diagnostic.display(diagnostics, bufnr, context.client_id, config)
-end
+vim.diagnostic.config {
+    underline = as._default(vim.g.code_lsp_diagnostic_underline),
+    virtual_text = as._default(vim.g.code_lsp_virtual_text, false),
+    signs = as._default(vim.g.code_lsp_diagnostic_signs_enabled),
+    update_in_insert = false,
+    float = { source = "always" },
+}
 
 local borders = as._lsp_borders(vim.g.code_lsp_window_borders)
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = borders })
@@ -80,55 +57,16 @@ function M.documentHighlight(client, bufnr)
     end
 end
 
--- Taken from https://www.reddit.com/r/neovim/comments/gyb077/nvimlsp_peek_defination_javascript_ttserver/
-function M.preview_location(location, context, before_context)
-    -- location may be LocationLink or Location (more useful for the former)
-    context = context or 15
-    before_context = before_context or 0
-    local uri = location.targetUri or location.uri
-    if uri == nil then
-        return
-    end
-    local bufnr = vim.uri_to_bufnr(uri)
-    if not vim.api.nvim_buf_is_loaded(bufnr) then
-        fn.bufload(bufnr)
-    end
-    local range = location.targetRange or location.range
-    local contents = vim.api.nvim_buf_get_lines(
-        bufnr,
-        range.start.line - before_context,
-        range["end"].line + 1 + context,
-        false
-    )
-    local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
-    return vim.lsp.util.open_floating_preview(contents, filetype, { border = borders })
-end
-
-function M.preview_location_callback(_, method, result)
-    local context = 15
+local function preview_location_callback(_, result)
     if result == nil or vim.tbl_isempty(result) then
-        print("No location found: " .. method)
         return nil
     end
-    if vim.tbl_islist(result) then
-        M.floating_buf, M.floating_win = M.preview_location(result[1], context)
-    else
-        M.floating_buf, M.floating_win = M.preview_location(result, context)
-    end
+    vim.lsp.util.preview_location(result[1], { border = borders })
 end
 
 function M.PeekDefinition()
-    if vim.tbl_contains(vim.api.nvim_list_wins(), M.floating_win) then
-        vim.api.nvim_set_current_win(M.floating_win)
-    else
-        local params = vim.lsp.util.make_position_params()
-        return vim.lsp.buf_request(
-            0,
-            "textDocument/definition",
-            params,
-            M.preview_location_callback
-        )
-    end
+    local params = vim.lsp.util.make_position_params()
+    return vim.lsp.buf_request(0, "textDocument/definition", params, preview_location_callback)
 end
 
 return M
