@@ -23,7 +23,7 @@ M.config = function()
             auto_open = true,
         },
         -- hijack the cursor in the tree to put it at the start of the filename
-        hijack_cursor = true,
+        hijack_cursor = false,
         -- updates the root directory of the tree on `DirChanged` (when your run `:cd` usually)
         update_cwd = true,
         -- show lsp diagnostics in the signcolumn
