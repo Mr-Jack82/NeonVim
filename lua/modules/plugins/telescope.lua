@@ -107,6 +107,8 @@ M.config = function()
             },
             find_files = {
                 layout_config = { height = 35, preview_width = 0.55 },
+                hidden = true,
+                no_ignore = true,
             },
             help_tags = {
                 layout_config = { height = 35, preview_width = 0.65 },
