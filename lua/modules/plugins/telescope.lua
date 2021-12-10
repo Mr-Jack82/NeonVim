@@ -97,11 +97,7 @@ M.config = function()
                 layout_strategy = "horizontal",
                 layout_config = { height = 10, width = 0.5 },
             },
-            lsp_document_diagnostics = {
-                layout_config = { width = 0.7 },
-                layout_strategy = "vertical",
-            },
-            lsp_workspace_diagnostics = {
+            diagnostics = {
                 layout_config = { width = 0.7 },
                 layout_strategy = "vertical",
             },
