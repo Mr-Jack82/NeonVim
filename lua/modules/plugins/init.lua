@@ -286,7 +286,7 @@ local pack_use = function()
 end
 -- }}}
 
-local fn, execute = vim.fn, vim.api.nvim_command
+local fn = vim.fn
 local install_path = DATA_PATH .. "/site/pack/packer/start/packer.nvim"
 
 local function load_plugins()
