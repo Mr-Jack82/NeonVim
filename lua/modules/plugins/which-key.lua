@@ -178,7 +178,6 @@ M.config = function()
             },
             r = {
                 name = "run/open",
-                ["|"] = "toggle color column",
                 ["."] = "find current file",
                 J = "append line down",
                 K = "append line up",
@@ -186,7 +185,6 @@ M.config = function()
                 e = "open explorer",
                 f = "format",
                 g = "gitsigns refresh",
-                i = "indent guides toggle",
                 l = "open loclist window",
                 n = "open neovim config",
                 q = "open quickfix window",
