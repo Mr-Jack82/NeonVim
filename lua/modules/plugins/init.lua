@@ -217,6 +217,12 @@ local pack_use = function()
     -----------------------------------------------------------------------------//
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
     use {
+        "mickael-menu/zk-nvim",
+        config = function()
+            require("zk").setup()
+        end,
+    }
+    use {
         "folke/persistence.nvim",
         module = "persistence",
         event = "BufReadPre",

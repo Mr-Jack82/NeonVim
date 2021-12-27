@@ -92,6 +92,16 @@ M.config = function()
                 s = "save buffer",
                 v = "new file in split",
             },
+            n = {
+                name = "notes",
+                L = "new link",
+                b = "zk backlinks",
+                f = "find notes",
+                l = "zk links",
+                n = "new note",
+                o = "zk orphans",
+                t = "find tags",
+            },
             t = {
                 name = "tabs",
                 ["["] = "previous tab",
