@@ -244,12 +244,6 @@ local pack_use = function()
         end,
     }
     use {
-        "turbio/bracey.vim",
-        opt = true,
-        ft = "html",
-        run = "npm install --prefix server",
-    }
-    use {
         "iamcco/markdown-preview.nvim",
         opt = true,
         ft = "markdown",
