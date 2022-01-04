@@ -94,13 +94,14 @@ as.map("n", "<leader>bv", [[:vsp <C-R>=expand("%:p:h") . "/" <CR>]], { silent = 
 -----------------------------------------------------------------------------//
 -- notes {{{1
 -----------------------------------------------------------------------------//
-as.map("n", "<leader>nf", ":Telescope zk notes<CR>")
-as.map("n", "<leader>nt", ":Telescope zk tags<CR>")
-as.map("n", "<leader>nl", ":Telescope zk links<CR>")
-as.map("n", "<leader>nb", ":Telescope zk backlinks<CR>")
-as.map("n", "<leader>no", ":Telescope zk orphans<CR>")
+as.map("n", "<leader>nf", ":ZkNotes<CR>")
+as.map("n", "<leader>nr", ":ZkNotes {createdAfter= '3 days ago'}<CR>")
+as.map("n", "<leader>nt", ":ZkTags<CR>")
+as.map("n", "<leader>nl", ":ZkLinks<CR>")
+as.map("n", "<leader>nb", ":ZkBacklinks<CR>")
 as.map("n", "<leader>nn", ':ZkNew {dir = "", title = ""}<Left><Left>', { silent = false })
-as.map("v", "<leader>nL", ":ZkNewLink<CR>")
+as.map("v", "<leader>nL", ":ZkNewFromTitleSelection<CR>")
+as.map("v", "<leader>nm", ":ZkMatch<CR>")
 -----------------------------------------------------------------------------//
 -- tabs {{{1
 -----------------------------------------------------------------------------//
